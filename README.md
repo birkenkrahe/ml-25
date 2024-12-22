@@ -1,12 +1,12 @@
 ![img](./img/cover.jpg)
 
 
-# Introduction to Programming in C++p
+# Machine Learning
 
 
 # What's in this repo?
 
--   Repository for CSC 100 - Introduction to Programming in C++
+-   Repository for DSC 305 - Machine Learning
 -   Emacs Org-mode files( `.org`) are rendered as Markdown (not on
     mobile app but works well in mobile browser).
 -   Reference links in the files lead to a 404 error. You always find
@@ -33,5 +33,5 @@
 
 # History
 
--   First offered @Lyon: Spring 2022.
+-   First offered @Lyon: Spring 2023.
 
