@@ -1,0 +1,145 @@
+#+TITLE:DSC 305.01/CSC 482.01 - Machine Learning - Spring 2023 Syllabus
+#+AUTHOR: Marcus Birkenkrahe
+#+options: toc:nil
+#+startup: overview indent
+* General Course Information
+
+- Meeting Times: Tuesday/Thursday, 13:00-13:50 hrs
+- Meeting place: Lyon Building Computer Lab 104
+- Professor: Marcus Birkenkrahe
+- Office: Derby Science Building 210
+- Phone: (870) 307-7254 (Office) / (501 422-4725 (Private)
+- Office Hours: Mon/Wed/Fri 16:15-16:45, Tue/Thu 16:00-16:30
+- Textbook: Machine Learning With R (3e) by Brett Lantz, Packt
+  Publishing ([[https://www.packtpub.com/product/machine-learning-with-r-third-edition/9781788295864][Online: packtpub.com, ebook US$5]])
+
+* Standard and course policies
+
+- *Standard Lyon College Policies* are incorporated into this syllabus
+  and can be found at: [[http://www.lyon.edu/standard-course-policies][lyon.edu/standard-course-policies]].
+
+- The *Assignments and Honor Code* and the *Attendance Policy* are
+  incorporated into this syllabus also and can be found at:
+  [[https://tinyurl.com/LyonPolicy][tinyurl.com/LyonPolicy]].
+
+* Objectives
+
+This course is concerned with algorithms that transform information
+into actionable intelligence using present-day computers and big
+data. We use R, a cross-platform, zero-cost statistical programming
+environment that combines a wide range of functions, interfaces to
+common machine learning packages, and best-in-class visualization.
+
+* Student learning outcomes
+
+Students who complete DSC 305, "Machine Learning" (ML), can:
+
+- Apply un/supervised learning models to big data problems
+- Understand neural networks and Support Vector Machine algorithms
+- Distinguish different methods to make predictions with ML
+- Work with open source libraries like ~Keras~ and ~TensorFlow~ by Google
+- Master the whole infrastructure for advanced statistical computing
+- Know how to effectively present assignment results
+- Improve data literacy, research and present a project as a team
+
+* Course requirements
+
+- Basic proficiency with R is useful (as taught in DSC 105 or obtained
+  independently on DataCamp "Introduction to R", GitHub's "fasteR", or
+  Part I of the Book of R by Davies)
+- Imagination, creativity and a visual mind, enjoying finding patterns
+  and spotting correlations
+- Basic understanding of algorithms and data structures (in any
+  programming language)
+- Basic understanding of data science infrastructure especially
+  literate programming methods
+
+* Grading system
+
+| REQUIREMENT               | UNITS | PPU | TOTAL | % of TOTAL |
+|---------------------------+-------+-----+-------+------------|
+| Final exam                |     1 | 100 |   100 |        20. |
+| DataCamp home assignments |    10 |  10 |   100 |        20. |
+| Class practice            |    10 |  10 |   100 |        20. |
+| Project sprint reviews    |     5 |  20 |   100 |        20. |
+| Multiple-choice tests     |    10 |  10 |   100 |        20. |
+|---------------------------+-------+-----+-------+------------|
+| TOTAL                     |       |     |   500 |       100. |
+|---------------------------+-------+-----+-------+------------|
+#+TBLFM: @2$4=$2*$3::@2$5=(@2$4/@7$4)*100::@3$4=$2*$3::@3$5=(@3$4/@7$4)*100::@4$4=$2*$3::@4$5=(@4$4/@7$4)*100::@5$4=$2*$3::@5$5=(@5$4/@7$4)*100::@6$5=(@6$4/@7$4)*100::@7$4=vsum(@2..@6)::@7$5=vsum(@2..@6)
+
+You should be able to see your current grade at any time using the
+Canvas gradebook for the course.
+
+* Grading table
+
+This table is used to convert completion rates into letter
+grades. for the midterm results, letter grades still carry signs,
+while for the term results, only straight letters are given (by
+rounding up).
+
+|--------+---------------+---------------|
+|      *%* | *MIDTERM GRADE* | *FINAL GRADE*   |
+|--------+---------------+---------------|
+| 100-98 | A+            |               |
+|  97-96 | A             | A (PASSED -   |
+|  95-90 | A-            | VERY GOOD)    |
+|--------+---------------+---------------|
+|  89-86 | B+            |               |
+|  85-80 | B             | B (PASSED -   |
+|  79-76 | B-            | GOOD)         |
+|--------+---------------+---------------|
+|  75-70 | C+            |               |
+|  69-66 | C             | C (PASSED -   |
+|  65-60 | C-            | SATISFACTORY) |
+|--------+---------------+---------------|
+|  59-56 | D+            |               |
+|  55-50 | D             | D (PASSED)    |
+|--------+---------------+---------------|
+|   49-0 | F             | F (FAILED)    |
+|--------+---------------+---------------|
+
+* Schedule and session content
+
+For *important dates*, see the 2022-2023 Academic Calendar at:
+[[https://catalog.lyon.edu/202223-academic-calendar][catalog.lyon.edu/202223-academic-calendar]]
+
+Lectures and lab sessions are aligned with the content of the 10
+*DataCamp lessons* that need to be completed in the course of the
+term. The last four sessions are devoted to deep learning without
+(graded) assignments.
+
+| WEEK | DATE          | TOPICS and *ASSIGNMENTS*     | TEST    |
+|------+---------------+----------------------------+---------|
+|    1 | Jan 10,12     | Introduction & R Review    |         |
+|------+---------------+----------------------------+---------|
+|    2 | Jan 17,19     | *What is Machine Learning?*  | Test 1  |
+|------+---------------+----------------------------+---------|
+|    3 | Jan 24,26     | *Machine Learning Models*    | Test 2  |
+|------+---------------+----------------------------+---------|
+|    4 | Jan 31, Feb 2 | *k-Nearest Neighbors (kNN)*  | Test 3  |
+|------+---------------+----------------------------+---------|
+|    5 | Feb 7,9       | *Naive Bayes*                |         |
+|------+---------------+----------------------------+---------|
+|    6 | Feb 14,16     | *Logistic Regression*        | Test 4  |
+|------+---------------+----------------------------+---------|
+|    7 | Feb 21,23     | *Classification Trees*       | Test 5  |
+|------+---------------+----------------------------+---------|
+|    8 | Mar 2         | *k-means clustering*         | Test 6  |
+|------+---------------+----------------------------+---------|
+|    9 | Mar 7,9       | *Hierarchical clustering*    |         |
+|------+---------------+----------------------------+---------|
+|   10 | Mar 14,16     | *Dimensionality reduction*   | Test 7  |
+|------+---------------+----------------------------+---------|
+|   11 | Mar 28,30     | *Cancer data case study*     | Test 8  |
+|------+---------------+----------------------------+---------|
+|   12 | Apr 4,6       | Artificial Neural Networks | Test 9  |
+|------+---------------+----------------------------+---------|
+|   13 | Apr 11,13     | Modeling with ANNs         |         |
+|------+---------------+----------------------------+---------|
+|   14 | Apr 18,20     | Support Vector Machines    | Test 10 |
+|------+---------------+----------------------------+---------|
+|   15 | Apr 25,27     | Performing OCR with SVMs   |         |
+|------+---------------+----------------------------+---------|
+|   16 | May 2         | Review and projects        |         |
+|------+---------------+----------------------------+---------|
