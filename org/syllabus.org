@@ -1,17 +1,17 @@
-#+TITLE:DSC 305.01/CSC 482.01 - Machine Learning - Spring 2023 Syllabus
+#+TITLE:DSC 305.01/CSC 482.01 - Machine Learning - Spring 2025 Syllabus
 #+AUTHOR: Marcus Birkenkrahe
 #+options: toc:nil
 #+startup: overview indent
 * General Course Information
 
-- Meeting Times: Tuesday/Thursday, 13:00-13:50 hrs
+- Meeting Times: Tuesday/Thursday, 14:30-15:45 hrs
 - Meeting place: Lyon Building Computer Lab 104
-- Professor: Marcus Birkenkrahe
+- Professor: Dr. Marcus Birkenkrahe
 - Office: Derby Science Building 210
-- Phone: (870) 307-7254 (Office) / (501 422-4725 (Private)
+- Phone: (870) 307-7254 
 - Office Hours: Mon/Wed/Fri 16:15-16:45, Tue/Thu 16:00-16:30
 - Textbook: Machine Learning With R (3e) by Brett Lantz, Packt
-  Publishing ([[https://www.packtpub.com/product/machine-learning-with-r-third-edition/9781788295864][Online: packtpub.com, ebook US$5]])
+  Publishing, 2019 ([[https://www.packtpub.com/product/machine-learning-with-r-third-edition/9781788295864][Online: packtpub.com, ebook]])
 
 * Standard and course policies
 
@@ -21,6 +21,10 @@
 - The *Assignments and Honor Code* and the *Attendance Policy* are
   incorporated into this syllabus also and can be found at:
   [[https://tinyurl.com/LyonPolicy][tinyurl.com/LyonPolicy]].
+
+- In addition to these rules, please read and observe my guide to
+  Using AI to code (written in Fall 2024):
+  [[https://tinyurl.com/Using-AI-to-code][tinyurl.com/Using-AI-to-code]].
 
 * Objectives
 
@@ -33,43 +37,62 @@ common machine learning packages, and best-in-class visualization.
 * Student learning outcomes
 
 Students who complete DSC 305, "Machine Learning" (ML), can:
-
-- Apply un/supervised learning models to big data problems
-- Understand neural networks and Support Vector Machine algorithms
-- Distinguish different methods to make predictions with ML
-- Work with open source libraries like ~Keras~ and ~TensorFlow~ by Google
-- Master the whole infrastructure for advanced statistical computing
-- Know how to effectively present assignment results
-- Improve data literacy, research and present a project as a team
+- *Understand core machine learning concepts* including data
+  exploration, classification, regression, and clustering techniques.
+- *Apply machine learning algorithms* such as k-NN, Naive Bayes,
+  decision trees, regression, neural networks, and support vector
+  machines using R.
+- *Evaluate and improve model performance* using appropriate metrics and
+  strategies to optimize predictive accuracy.
+- *Analyze real-world datasets* by implementing machine learning
+  solutions to classification, regression, and clustering problems.
+- *Interpret patterns and insights* from data through methods like
+  market basket analysis and k-means clustering.
+- *Manage and preprocess data* to ensure accuracy and relevance for
+  machine learning models.
+- Know how to effectively *present assignment and project results*
 
 * Course requirements
 
-- Basic proficiency with R is useful (as taught in DSC 105 or obtained
+- *Basic proficiency with R* is useful (as taught in DSC 105 or obtained
   independently on DataCamp "Introduction to R", GitHub's "fasteR", or
-  Part I of the Book of R by Davies)
+  Part I of Book of R by Davies, NoStarch 2016).
 - Imagination, creativity and a visual mind, enjoying finding patterns
-  and spotting correlations
+  and spotting correlations.
 - Basic understanding of algorithms and data structures (in any
-  programming language)
+  programming language).
 - Basic understanding of data science infrastructure especially
-  literate programming methods
+  literate programming methods.
 
 * Grading system
 
-| REQUIREMENT               | UNITS | PPU | TOTAL | % of TOTAL |
-|---------------------------+-------+-----+-------+------------|
-| Final exam                |     1 | 100 |   100 |        20. |
-| DataCamp home assignments |    10 |  10 |   100 |        20. |
-| Class practice            |    10 |  10 |   100 |        20. |
-| Project sprint reviews    |     5 |  20 |   100 |        20. |
-| Multiple-choice tests     |    10 |  10 |   100 |        20. |
-|---------------------------+-------+-----+-------+------------|
-| TOTAL                     |       |     |   500 |       100. |
-|---------------------------+-------+-----+-------+------------|
-#+TBLFM: @2$4=$2*$3::@2$5=(@2$4/@7$4)*100::@3$4=$2*$3::@3$5=(@3$4/@7$4)*100::@4$4=$2*$3::@4$5=(@4$4/@7$4)*100::@5$4=$2*$3::@5$5=(@5$4/@7$4)*100::@6$5=(@6$4/@7$4)*100::@7$4=vsum(@2..@6)::@7$5=vsum(@2..@6)
-
 You should be able to see your current grade at any time using the
 Canvas gradebook for the course.
+
+| WHEN    | DESCRIPTION            | IMPACT |
+|---------+------------------------+--------|
+| Weekly  | Assignments            |    25% |
+| Weekly  | Multiple choice tests  |    25% |
+| Monthly | Project Sprint Reviews |    25% |
+| TBD     | Final exam (optional)  |    25% |
+
+Notes:
+- *To pass:* 60% of all available points.
+- *Tests:* weekly online quizzes based on classroom lectures and
+  practice.
+- *Final exam:* random selection of the known test questions. *Note:* You
+  only have to write the final exam if you want to improve your grade
+  at the end of the course. If the final exam result is below your
+  final grade average up to this point, it will be ignored.
+
+* Rubric
+
+| Component                    | Weight | Excellent                                                                              | Good                                                            | Satisfactory                                                         | Needs Improvement                                                             | Unsatisfactory                                                        |
+|------------------------------+--------+----------------------------------------------------------------------------------------+-----------------------------------------------------------------+----------------------------------------------------------------------+-------------------------------------------------------------------------------+-----------------------------------------------------------------------|
+| Participation and Attendance |     0% | Consistently attends and actively participates in all classes.                         | Attends most classes and participates in discussions.           | Attends classes but participation is minimal.                        | Frequently absent and rarely participates.                                    | Rarely attends classes and does not participate.                      |
+| Programming assignments      |    50% | Completes all assignments on time with high accuracy (90-100%).                        | Completes most assignments on time with good accuracy (80-89%). | Completes assignments but with some inaccuracies or delays (70-79%). | Frequently late or incomplete assignments with several inaccuracies (60-69%). | Rarely completes assignments and shows minimal understanding (0-59%). |
+| Tests                        |    25% | Demonstrates thorough understanding and application of concepts (90-100%).             | Shows good understanding with minor errors (80-89%).            | Displays basic understanding with some errors (70-79%).              | Limited understanding with several errors (60-69%).                           | Minimal understanding and many errors (0-59%).                        |
+| Final Exam (Optional)        |    25% | Demonstrates comprehensive understanding and application of course concepts (90-100%). | Shows strong understanding with minor errors (80-89%).          | Displays adequate understanding with some errors (70-79%).           | Limited understanding with several errors (60-69%).                           | Minimal understanding and many errors (0-59%).                        |
 
 * Grading table
 
@@ -78,68 +101,40 @@ grades. for the midterm results, letter grades still carry signs,
 while for the term results, only straight letters are given (by
 rounding up).
 
-|--------+---------------+---------------|
-|      *%* | *MIDTERM GRADE* | *FINAL GRADE*   |
-|--------+---------------+---------------|
-| 100-98 | A+            |               |
-|  97-96 | A             | A (PASSED -   |
-|  95-90 | A-            | VERY GOOD)    |
-|--------+---------------+---------------|
-|  89-86 | B+            |               |
-|  85-80 | B             | B (PASSED -   |
-|  79-76 | B-            | GOOD)         |
-|--------+---------------+---------------|
-|  75-70 | C+            |               |
-|  69-66 | C             | C (PASSED -   |
-|  65-60 | C-            | SATISFACTORY) |
-|--------+---------------+---------------|
-|  59-56 | D+            |               |
-|  55-50 | D             | D (PASSED)    |
-|--------+---------------+---------------|
-|   49-0 | F             | F (FAILED)    |
-|--------+---------------+---------------|
+|------------------+------------------|
+| Percentage       | LETTER GRADE     |
+|------------------+------------------|
+| 100% to 89.5%    | A (very good)    |
+|------------------+------------------|
+| < 89.5% to 79.5% | B (good)         |
+|------------------+------------------|
+| < 79.5% to 69.5% | C (satisfactory) |
+|------------------+------------------|
+| < 69.5% to 59.5% | D (passed)       |
+|------------------+------------------|
+| < 59.5% to 0%    | F (FAILED)       |
+|------------------+------------------|
 
 * Schedule and session content
 
-For *important dates*, see the 2022-2023 Academic Calendar at:
-[[https://catalog.lyon.edu/202223-academic-calendar][catalog.lyon.edu/202223-academic-calendar]]
+For *important dates*, see the 2024-2025 Academic Calendar at:
+[[https://catalog.lyon.edu/202425-academic-calendar][catalog.lyon.edu/202425-academic-calendar]]
 
-Lectures and lab sessions are aligned with the content of the 10
-*DataCamp lessons* that need to be completed in the course of the
-term. The last four sessions are devoted to deep learning without
-(graded) assignments.
-
-| WEEK | DATE          | TOPICS and *ASSIGNMENTS*     | TEST    |
-|------+---------------+----------------------------+---------|
-|    1 | Jan 10,12     | Introduction & R Review    |         |
-|------+---------------+----------------------------+---------|
-|    2 | Jan 17,19     | *What is Machine Learning?*  | Test 1  |
-|------+---------------+----------------------------+---------|
-|    3 | Jan 24,26     | *Machine Learning Models*    | Test 2  |
-|------+---------------+----------------------------+---------|
-|    4 | Jan 31, Feb 2 | *k-Nearest Neighbors (kNN)*  | Test 3  |
-|------+---------------+----------------------------+---------|
-|    5 | Feb 7,9       | *Naive Bayes*                |         |
-|------+---------------+----------------------------+---------|
-|    6 | Feb 14,16     | *Logistic Regression*        | Test 4  |
-|------+---------------+----------------------------+---------|
-|    7 | Feb 21,23     | *Classification Trees*       | Test 5  |
-|------+---------------+----------------------------+---------|
-|    8 | Mar 2         | *k-means clustering*         | Test 6  |
-|------+---------------+----------------------------+---------|
-|    9 | Mar 7,9       | *Hierarchical clustering*    |         |
-|------+---------------+----------------------------+---------|
-|   10 | Mar 14,16     | *Dimensionality reduction*   | Test 7  |
-|------+---------------+----------------------------+---------|
-|   11 | Mar 28,30     | *Cancer data case study*     | Test 8  |
-|------+---------------+----------------------------+---------|
-|   12 | Apr 4,6       | Artificial Neural Networks | Test 9  |
-|------+---------------+----------------------------+---------|
-|   13 | Apr 11,13     | Modeling with ANNs         |         |
-|------+---------------+----------------------------+---------|
-|   14 | Apr 18,20     | Support Vector Machines    | Test 10 |
-|------+---------------+----------------------------+---------|
-|   15 | Apr 25,27     | Performing OCR with SVMs   |         |
-|------+---------------+----------------------------+---------|
-|   16 | May 2         | Review and projects        |         |
-|------+---------------+----------------------------+---------|
+| Week | Topic                                                     |
+|------+-----------------------------------------------------------|
+|    1 | What is Machine Learning?                                 |
+|    2 | Machine Learning Models                                   |
+|    3 | Lazy Learning – Classification Using Nearest Neighbors    |
+|    4 | Probabilistic Learning – Classification Using Naive Bayes |
+|    5 | Divide and Conquer – Classification Using Decision Trees  |
+|    6 | Divide and Conquer – Classification Using Rules           |
+|    7 | Forecasting Numeric Data – Regression Methods             |
+|    8 | Regression Trees and Model Trees                          |
+|    9 | Finding Patterns – Market Basket Analysis                 |
+|   10 | Finding Groups of Data – Clustering with k-means          |
+|   11 | Unsupervised Learning                                     |
+|   12 | Hierarchical Clustering                                   |
+|   13 | Dimensionality reduction with PCA                         |
+|   14 | Case studies and course review                            |
+|   15 | Project Presentations                                     |
+|   16 | Final exam week                                           |
