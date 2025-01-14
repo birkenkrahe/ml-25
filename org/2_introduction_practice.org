@@ -1,0 +1,83 @@
+#+TITLE:Exercise: Testing and Improving a Classification Model
+#+AUTHOR:Marcus Birkenkrahe
+#+SUBTITLE:Machine Learning (DSC 305) Lyon College, Spring 25
+#+STARTUP: overview hideblocks indent
+#+OPTIONS: toc:nil num:nil ^:nil
+* Instructions
+
+This exercise consists of four parts:
+1. Testing the model on new patients (table)
+2. Modifying the production rules (pseudocode)
+3. Draw the new decision tree model (inline image)
+5. Submit all deliverables as ZIP file to Canvas
+
+** *Test the model on new patients*
+
+Use the provided decision tree to classify the following
+patients. Write the diagnosis based on the tree’s production rules
+as shown [[https://github.com/birkenkrahe/ml-25/blob/main/img/1_decision_tree.png][in this diagram]].
+
+#+name: diagnostic_table
+#+caption: Predictive diagnosis
+| Patient | Swollen Glands | Fever | Diagnosis (using the model) |
+|---------+----------------+-------+-----------------------------|
+| 14      | Yes            | No    |                             |
+| 15      | No             | No    |                             |
+| 16      | No             | Yes   |                             |
+| 17      | Yes            | Yes   |                             |
+
+** Modify the production rules
+
+Imagine you want to improve the decision tree by adding a new
+attribute: *duration of symptoms* (short = less than 3 days, long =
+more than 3 days). Update the production rules to incorporate this
+new attribute. Duration of symptoms could for example lead to the
+condition begin considered *acute* (short duration) or *chronic* (long
+duration).
+
+Original production rules:
+#+begin_example
+ IF swollen glands = YES
+ THEN diagnosis = strep throat
+
+ IF swollen glands = No & Fever = Yes
+ THEN diagnosis = cold
+
+ IF swollen glands = No & Fever = No
+ THEN diagnosis = allergy
+#+end_example
+
+For example, if the glands are swollen and the duration of the
+symptom is 3 days or more, then the diagnosis is chronic strep
+throat.
+
+Or if the patient has no fever and no swollen glands for fewer than
+3 days then he is considered to have an acute allergy.
+
+Updated production rules:
+#+begin_example
+...
+#+end_example
+
+** Draw the new decision tree model
+
+*Draw* the new decision tree using =draw.io= or another free drawing
+program. You can find the original production rules diagram here:
+tinyurl.com/production-rule-diagnostic. Save it as a PNG file and
+attach the solution here (using the =[[...]]= command for inline
+Org-mode images):
+
+#+attr_html: :width 600px:
+[[../img/solution.png]]
+
+** *Submission*
+
+Submit this Org-mode file with the completed diagnostic table, with
+the updated production rules, and with the updated diagram as a ZIP
+file to Canvas.
+
+Make sure that the ZIP file contains the =.org= file as well as the
+=.png= file. To test this, you can open ZIP files in Emacs, see, open
+and modify the content.
+
+For example, my ZIP solution file [[https://github.com/birkenkrahe/ml-25/blob/main/img/submission.png][looks like this]].

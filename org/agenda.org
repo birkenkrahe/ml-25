@@ -36,10 +36,11 @@ influences the prediction? Can the prediction be validated, and how?
 #+end_quote
 
 - [ ] Overview: Course content, grading, tools, book, etc.
-- [ ] Introduction to Machine Learning: With and without R.
-- [ ] DataCamp assignments
+- [ ] Introduction to Machine Learning (no code)
+- [ ] Updating a decision tree model (no code)
+- [ ] On completing DataCamp assignments
 
-** TODO On DataCamp assignments
+** TODO On completing DataCamp assignments
 
 1. Watch the video first with full attention.
 2. Write down immediate questions for later.
