@@ -1,0 +1,437 @@
+#+TITLE:COURSE OVERVIEW DSC 305
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: MACHINE LEARNING - LYON COLLEGE - SPRING 2025
+#+STARTUP: overview hideblocks indent
+#+OPTIONS: toc:nil num:nil ^:nil
+#+attr_html: float:nil
+#+attr_html: :width 500px
+#+caption: Photo by Andy Kelly on Unsplash.com
+[[../img/cover1.jpg]]
+* What is "machine learning" about?
+#+attr_latex: :width 400px
+#+caption: xkcd, https://xkcd.com/1838/, Machine Learning
+[[../img/0_machine_learning.png]]
+
+*What do you think "machine learning" is about?*
+
+Answers:
+- ...
+
+* Why is machine learning important?
+#+attr_latex: :width 200px
+#+caption: xkcd, https://xkcd.com/2228/, Machine Learning Captcha
+[[../img/0_machine_learning_captcha.png]]
+
+What do you think - is machine learning important? Why or why not?
+
+- *Automate* human jobs with speed and accuracy - not "normal robots"
+  that perform rote processes repeatedly, reliably, and fast.
+
+- Double-edge sword for *security*, for example, threat detection and
+  prevention (learning from attack patterns).
+
+- Use for *problem-solving,* for example, teaching a car how to park.
+
+- *Decision-making* independent of simple (computational) problem
+  solving, for example /"What should my next career step be?"/
+
+- Niche applications, like *automated theorem proving*, *particle physics*
+  (identify rare particles), *astrobiology* (search for extraterrestrial
+  life), *extreme environments* (predictions in harsh conditions -
+  deserts, Mars etc.)
+
+* What will we do in this course?
+
+Topics:
+- Part 1: Understanding machine learning (without code) (3 weeks)
+- Part 2: Supervised learning methods (8 weeks)
+- Part 3: Unsupervised learning methods (4 weeks)
+- Part 4: Agile projects: From exploration to prediction (15 weeks)
+
+Process:
+- Most of the topics are supported by a DataCamp lesson
+- Much of the lecture & practice material comes from textbooks.
+- You will mostly work with R and its ML packages.
+
+* What will we not do in this course?
+
+#+name: not_course_topics_table
+#+Caption: Data Science topics that are not part of this course
+| Topic                        | Course     | See also    |
+|------------------------------+------------+-------------|
+| Advanced graphics and EDA    | DSC 302    |             |
+| Statistics and probability   | DSC 482.01 | MTH/BUS 230 |
+| Testing and modeling         | DSC 482.02 |             |
+| Deep learning (neural nets)  | DSC 482.03 | CSC 482     |
+| Field theory for neural nets | DSC 482.04 |             |
+
+The 482 courses are special topics offered at our whim.
+
+* How will you be evaluated?
+#+Caption: Course evaluation (see Syllabus)
+| When    | Description            | Impact |
+|---------+------------------------+--------|
+| Weekly  | Assignments            |    25% |
+| Weekly  | Multiple choice tests  |    25% |
+| Monthly | Project sprint reviews |    25% |
+| TBD     | Final exam (optional)  |    25% |
+
+- All course requirements have deadlines
+- Late submissions will be penalized (loss of points)
+- Final exam will be sourced by term test questions (graded)
+- Home assignments: 15 DataCamp lessons (ungraded)
+- Class practice: in-class interactive notebooks (ungraded)
+- The project can come from any of the course sub-topics (see below).
+- All tests are multiple choice quizzes (graded).
+
+* How much work will you have to put in?
+
+*Workload* (estimated):
+- Time in class: 48 hrs.
+- Time outside of class: 42 hrs.
+- Time for tests [1 hrs/test]: 14 hrs.
+- Time for home assignments [2 hrs/pgm]: 28 hrs.
+- Total number of hrs in term: 90.
+- Weekly workload (outside of class): 5-6 (2-3) hrs
+- Daily workload outside of class in minutes: approx. 25
+- Grade expectations: A-B (> 2 hrs/week), C-D (1-2 hr/week)
+
+* What are "sprint reviews"?
+#+attr_latex: :width 600px
+#+caption: Scrum sprint review and IMRaD publishing framework
+[[../img/0_scrum.png]]
+
+
+- Scrum is an important software engineering technique.
+
+- IMRaD is an important framework to publish scientific papers.
+
+- DevOps relate to the interface between software development and IT
+  operations as data projects scale and become more complex.
+
+- MLOps requires improved project management and reading papers.
+
+- Modern ML workflows are highly layered and infrastructure-heavy
+  (cp. the editorial by Andrew Ng [[https://chat.google.com/room/AAAAo6qpNb8/PkE1K5P34lg/PkE1K5P34lg?cls=10][shared in the Google Chat]]).
+
+* Scrum Project Structure (Monthly assignments)
+
+*** Sprint 1: Introduction (Project Proposal)
+
+- Students present the problem they want to solve, dataset
+  description, and potential impact.
+
+*** Sprint 2: Literature Review (Methods)
+
+- Research appropriate methods, justify the choice, and plan
+  implementation.
+
+*** Sprint 3: Abstract (Results)
+
+- Summarize progress, present preliminary results, and discuss
+  challenges.
+
+*** Sprint 4: Final Presentation
+
+- Deliver a polished presentation, including project outcomes, lessons
+  learned, and future directions.
+
+* What should we do as a project?
+
+- For your project, pick a solved or unsolved *predictive problem*.
+
+- The application exploration should include *examples and tests*
+
+- Your final deliverable should be a *literate program* (notebook).
+
+- You use the notebook to present in class in the last week.
+
+- All teams should consist of 2 members with clear responsibilities.
+
+- Deliverables: proposal, literature review, abstract, presentation.
+
+* Example projects from the Spring 22 class
+#+attr_html: :width 600px:
+#+caption: Slide from "Cer-AI-mics" by Ho, Banag & Harrod (2022)
+[[../img/cer-ai-mics.png]]
+
+- "Cer-AI-mics - Stable-Diffusion generated Cyanotype on Clay Tablets"
+
+- "Genetic algorithms & Neural Nets: Snake Game implementation"
+
+- "Legality and morality of AI in creating artwork"
+
+- "Regression models using Twitter Data"
+
+- "The use of Lagrangian Interpolation in Regression"
+
+* 20 Beginner to Intermediate Machine Learning Projects
+** Supervised Learning Projects
+*** Predicting House Prices
+
+- Objective: Use regression techniques to predict house prices based
+  on features like square footage, number of bedrooms, and location.
+
+- Scrum Focus: Students can start with basic data exploration,
+  identify potential methods during the literature review, and refine
+  results progressively.
+
+*** Classifying Iris Flowers
+
+- Objective: Use classification methods to identify iris flower
+  species based on petal and sepal dimensions.
+
+- Scrum Focus: Focus on simple datasets and iterative development of
+  models for better understanding.
+
+*** Loan Approval Prediction
+
+- Objective: Predict loan approval outcomes based on applicant
+  information such as income, credit history, and education.
+
+- Scrum Focus: Initial dataset exploration can lead to method
+  selection (e.g., logistic regression or decision trees) in later
+  sprints.
+
+*** Detecting Faulty Equipment in Factories
+
+- Objective: Use sensor data to predict when equipment is likely to
+  fail.
+
+- Scrum Focus: A practical project with room for creativity in feature
+  engineering and problem framing.
+
+** Unsupervised Learning Projects
+*** Customer Segmentation
+
+- Objective: Segment customers based on income, spending habits, or
+  behavior using clustering techniques.
+
+- Scrum Focus: Students can focus on feature engineering in early
+  sprints and refine clusters in later stages.
+
+*** Identifying Topics in Text Data
+
+- Objective: Use topic modeling to categorize articles or tweets into
+  different themes.
+
+- Scrum Focus: Early sprints can focus on text preprocessing (e.g.,
+  tokenization), with method exploration in later stages.
+
+*** Grouping Products Based on Sales Data
+
+- Objective: Use clustering to group products with similar sales
+  patterns, helping businesses with inventory decisions.
+
+- Scrum Focus: From initial dataset analysis to progressively
+  exploring clustering and its business implications.
+
+*** Anomaly Detection in Financial Transactions
+
+- Objective: Identify potentially fraudulent transactions using
+  unsupervised methods like isolation forests or DBSCAN.
+
+- Scrum Focus: Students can iteratively build features and refine
+  anomaly detection techniques.
+
+** Combined or Advanced Topics for Beginners
+*** Movie Recommendation System
+
+- Objective: Recommend movies to users based on collaborative
+  filtering or clustering techniques.
+
+- Scrum Focus: Early stages focus on dataset familiarity, with method
+  implementation in subsequent sprints.
+
+*** Wildlife Species Identification
+
+- Objective: Classify or group species based on habitat, diet, and
+  other attributes.
+
+- Scrum Focus: Focus on creative applications of both supervised and
+  unsupervised learning.
+
+*** Predicting Game Outcomes
+
+- Objective: Predict the outcome of sports or board games based on
+  historical data.
+
+- Scrum Focus: Introduce domain-specific features and iteratively
+  improve model performance.
+
+*** Time Series Forecasting for Energy Consumption
+
+- Objective: Predict electricity usage patterns using regression and
+  time series analysis.
+
+- Scrum Focus: Students work on understanding trends and building
+  predictive pipelines over sprints.
+
+** Platforms and packages
+*** [[https://wandb.ai/site][Weights & Biases MLOps platform]]
+*** [[https://teachablemachine.withgoogle.com/][Teachable Machine]]
+*** [[https://machinelearningforkids.co.uk/][Machine Learning for Kids]]
+*** [[https://ecraft2learn.github.io/ai/][ML with Snap!]]
+*** [[https://magenta.tensorflow.org/demos][Magenta TensorFlow]]
+*** ML with Tensorflow ([[https://www.tensorflow.org/tutorials/quickstart/beginner][quickstart]])
+*** [[https://theconversation.com/twenty-years-on-from-deep-blue-vs-kasparov-how-a-chess-match-started-the-big-data-revolution-76882][DeepBlue defeats Gary Kasparov]] ([[https://youtu.be/hbtuHtrViPo][Fridman interview]], 1998)
+*** AlphaGo wins Go against human ([[https://youtu.be/WXuK6gekU1Y][documentary, 2017]])
+
+* Which tools are you going to use?
+
+- [[https://app.datacamp.com/groups/lyon-college-data-science-spring-2023/assignments][DataCamp courses]] (15 weekly home assignments)
+
+- [[https://github.com/birkenkrahe/ml][GitHub repository]] (all course materials except tests)
+
+- [[https://github.com/birkenkrahe/org/blob/master/FAQ.org][GNU Emacs + ESS + R]] (literate programming environment)
+
+- DataCamp's DataLab and Google Colaboratory notebooks (sometimes).
+
+- [[https://lyon.instructure.com/courses/1021/pages/course-links][Canvas]] (learning management system) see also [[https://lyon.instructure.com/courses/3401/pages/course-links][Course Links]]
+
+* How can you register at DataCamp?
+
+- You find the invitation link for Spring 25 [[https://lyon.instructure.com/courses/3401/pages/datacamp-invitation-link][in Canvas]].
+
+- You will automatically be subscribed to the ML (DSC 305) team
+
+- If you are in more than one course, I will add you later manually
+
+- These accounts will be valid until June 23, 2025 only
+
+* When is the first assignment due?
+
+- The first DataCamp home assignment is due on January 21. For late
+  submissions, you lose 1 point per day (out of 10 possible points)
+
+- You will make the most of these online courses if you work through
+  each lesson and exercise on your own using an interactive
+  computational notebook.
+
+- Whatever you do, don't leave the assignments to the last minute no
+  matter how tempted you are to do that.
+
+* What else could you do for a good start?
+#+attr_latex: :width 700px
+#+caption: M.C. Escher - Stairs
+[[../img/escher_stairs.png]]
+
+- Realize that "learning" as the university presents it is an illusion
+  ("a mocking", a play on your mind), a fantasy of standardization.
+
+- Everybody's learning path is painfully individual and
+  original. There is actually very little you can learn from anyone
+  else (other than perhaps your parents).
+
+- The best you can hope for is:
+  1) Not to be lied to (too much)
+  2) Not to be hindered too much by the system
+  3) To enjoy learning with if not from a good teacher.
+
+- What is a good teacher? 
+  #+begin_quote
+  To me that's someone who is helpful and encouraging above all, does
+  not hide uncomfortable truths, shares his passion and is
+  occasionally inspired by your and by his own work.
+  #+end_quote
+
+* R proficiency
+#+attr_latex: :width 300px
+#+caption: DataCamp course dashboard banner
+[[../img/0_Rlogo.png]]
+
+Complete/review  introductory R or statistics courses:
+- [[https://app.datacamp.com/learn/courses/free-introduction-to-r][Introduction to R" in DataCamp]] (data structures)
+- [[https://app.datacamp.com/learn/courses/intermediate-r][Intermediate R]] (conditionals, functions, loops, utilities)
+- [[https://app.datacamp.com/learn/courses/introduction-to-statistics][Introduction to statistics]] (no code)
+- [[https://github.com/matloff/fasteR][fasteR by Norman Matloff (GitHub)]] - fast lane to R
+- [[https://github.com/matloff/fastStat][fastStat by Norman Matloff (GitHub)]] - fast lane to statistics (*new!*)
+
+* Literate Programming
+#+attr_latex: :width 400px
+#+caption: Literate Programming with GNU Emacs (illustration)
+[[../img/0_gnuemacs1.png]]
+
+If you do not have any experience with Emacs, work through the *online
+tutorial* (open it in Emacs with ~CTRL + h t~) - ca. 1 hour.
+- Learn to open/close the editor
+- Learn basic cursor control (moving around)
+- Learn basic file management (open/close/find/save files)
+- Learn basic windows (buffer) management
+
+*Visit me during office hours to get a personal introduction to Emacs.*
+
+* Course textbook
+#+attr_latex: :width 200px
+#+caption: Book cover, ML with R 3rd ed. by Brett Lantz (Packt, 2019)
+[[../img/0_lantz.png]]
+
+#+attr_latex: :width 200px
+#+caption: Book cover, ML with R 4th ed. by Brett Lantz (Packt, 2023)
+[[../img/0_lantz2.png]]
+
+- The textbook [[https://www.packtpub.com/en-us/product/machine-learning-with-r-9781801076050][Lantz, Machine Learning with R (4e)]] is on sale this
+  week as an ebook for US$ 9.99. This is one of the best books for
+  beginners.
+
+- One assigned DataCamp course is by the same author, who is now
+  senior data scientist at SONY Playstation.
+
+- "Cookbook" machine learning books present only the recipes but
+  offer no serious explanation. Same for many Kaggle projects -
+  code only.
+
+- I usually work with 3-10 different books but I keep coming back
+  to the best ones that I have really worked through. Another good
+  idea: pick a mathematical text on machine learning.
+
+- A new book for undergraduates: Mathematics for Machine Learning
+  (Deisenroth/Faisal/Ong, Cambridge Univ Press 2023) - [[https://mml-book.github.io/][free PDF]].
+
+* Linux
+#+attr_latex: :width 600px
+#+caption: Conversation with ChatGPT by OpenAI (2023)
+[[../img/0_ml_chatgpt_3.png]]
+
+- The Linux VMs from last term should all work with the same access
+  data as before. Remember to shut down Emacs when you're done.
+
+- First thing: Run =update= and =upgrade=:
+  #+begin_example sh
+    sudo apt update -y && sudo apt upgrade -y
+  #+end_example
+
+- Install WSL (Windows Subsystem for Linux) on your PC, then learn the
+  command line with [[https://linuxcommand.org/tlcl.php][Shotts' book (5e, 2023)]].
+
+- Caveat: several ML packages did not install under WSL Ubuntu 22 -
+  however, they do install in Google Colaboratory for R
+  (https://colab.to/r or https://colab.research.google.com).
+
+* What am I looking forward to in this class?
+#+attr_html: :width 600px: 
+#+caption: ChatGPT photo: Melting Blackboard (Salvador-Dali style)
+[[../img/melting_blackboard.png]]
+
+- Prepare transitioning to *Python* (bigger in ML than in analytics).
+
+- Looking forward to learn from your amazing *projects*.
+
+- Enriching the presentation with occasional *mathematical excursions*.
+
+- Using some stuff for my neural net phase transitions *research*.
+
+* What are you looking forward to?
+#+attr_html: :width 400px
+#+attr_latex: :width 250px
+#+Caption: "2001: A Space Odyssey" (Kubrick and Clarke, 1968)
+[[../img/0_2001.jpg]]
+
+I am looking forward to:
+- ...
+
+* Next: Introduction to Machine Learning
+#+attr_html: :width 600px
+#+caption: At the foot of the staircase (Unsplash)
+[[../img/0_start.jpg]]
+
