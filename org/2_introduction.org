@@ -198,7 +198,7 @@ Many different uses, many different models:
 In this class exercise, you learn to classify, model, and update a
 production model by hand using a table, pseudocode, and a diagram.
 
-Download the practice file from tinyurl.com/
+Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tinyurl.com/ml-intro-practice-org]]
 
 * How machines learn
 
