@@ -193,14 +193,14 @@ Many different uses, many different models:
   #+caption: Test data for disease diagnosis model (source: Roiger, 2021)
   [[../img/1_testing.png]]
 
-* Practice: Testing and Improving a Classification Model
+* TODO Practice: Testing and Improving a Classification Model
 
 In this class exercise, you learn to classify, model, and update a
 production model by hand using a table, pseudocode, and a diagram.
 
 Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tinyurl.com/ml-intro-practice-org]]
 
-* How machines learn
+* NEXT How machines learn
 
 - Unlike humans, machines need explicit conditions and instructions
   literally down to the letter (ML does not change that completely).
@@ -598,7 +598,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 | Overfitting      | Modeling noise instead of signals      |
 | Underfitting     | Model is too simple for the data       |
 
-* TODO ML Code Glossary
+* TODO Practice: ML Code Glossary
 
 - Create a table in Org-mode by typing ~|~ for each new column
 
