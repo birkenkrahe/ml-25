@@ -421,11 +421,74 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 
 - In R: ~g~ is the acceleration due to gravity[fn:15]
   #+begin_src R
-    d <- c(4.9,19.6,44.1,78.5) # distance observations
-    t2 <-c(1,2,3,4)  # time observations
-    2*d/(t^2) # fit data to model = compute g
-    format(2*d/(t2^2),digits=2) # compute, print 2 digits
+    x <- c(4.9,19.6,44.1,78.5) # distance observations
+    t <-c(1,2,3,4)  # time observations
+    2*x/(t^2) # fit data to equation and compute g
+    as.numeric(format(2*x/(t^2),digits=2)) # compute, print 2 digits
   #+end_src
+
+  #+RESULTS:
+  : [1] 9.8000 9.8000 9.8000 9.8125
+  : [1] 9.8 9.8 9.8 9.8
+  : [1] 7
+
+- Code question: Why does =2*d/(t^2)= work here given that both =d= and =t=
+  are vectors? Why don't I have to use a =for= loop to compute this?
+  #+begin_quote
+  R has /vectorization/, which means that permitted vector operations
+  are executed element-wise without further instruction.
+  #+end_quote
+
+- How would you compute this with a =for= loop?
+  #+begin_src R
+    for (i in t)
+      print(x[i] * 2 / t[i]^2)
+  #+end_src
+
+  #+RESULTS:
+  : [1] 9.8
+  : [1] 9.8
+  : [1] 9.8
+  : [1] 9.8125
+
+- Alternative: =sapply= with an anonymous ('lambda') function:
+  #+begin_src R
+    g = sapply(X=x, FUN=function(x){2*x/t^2})
+    as.numeric(format(diag(g),digits=2))
+  #+end_src
+
+  #+RESULTS:
+  : [1] 9.8 9.8 9.8 9.8
+
+- Puzzle: This other table of distance + time data was found on a
+  napkin that Elon Musk had scribbled on and left behind at
+  Mar-a-Lago, Florida - what's going on?
+
+  | Distance [m] | Time [s] |
+  |--------------+----------|
+  |         1.86 |        1 |
+  |         7.42 |        2 |
+  |        16.70 |        3 |
+  |        29.68 |        4 |
+
+- The gravitational constant works out to:
+  #+begin_src R
+    x2 <- c(1.86,7.42,16.7,29.68)
+    t2 <- 1:4
+    g2 = sapply(X=x2, FUN=function(x){2*x2/t2^2})
+    as.numeric(format(diag(g2),digit=2))
+  #+end_src
+
+  #+RESULTS:
+  : [1] 3.7 3.7 3.7 3.7
+
+- What's the explanation?
+  #+begin_quote
+  "The gravitational constant of 3.7   m/s 2 3.7m/s 2 in the data
+  aligns with the gravity on Mars. The napkin likely reflects
+  calculations for motion under Martian conditions, fitting Elon
+  Musk's interests in space exploration and Mars colonization."
+  #+end_quote
 
 - Other model examples include:
   1. Genomic data models identify genes responsible for disease
@@ -574,6 +637,17 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   #+attr_html: :width 500px
   #+caption: Overfitting (Lantz, 2019)
   [[../img/1_lantz_overfitting.jpg]]
+
+* TODO Assignment: Fitting a model to obtain g
+
+Create a linear model using R's =lm= function to predict the falling
+=distance= at =time= = 5 seconds.
+
+Compare the prediction with the value for the =distance= at that =time=
+computed with the formula for =distance= as a function of =time=.
+
+Upload your notebook solution (or a URL to an online notebook) to
+Canvas.
 
 * Summary
 

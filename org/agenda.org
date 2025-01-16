@@ -9,7 +9,6 @@
 :header-args:R:      :session *R* :results graphics output file :exports both
 :header-args:C++:    :main yes :includes <iostream> :results output :exports both
 :END:
-
 * Week 1: Overview & Introduction
 #+attr_html: :width 600px: 
 #+caption: Salvador Dali, The Persistence of Memory (1931)
@@ -141,3 +140,6 @@ influences the prediction? Can the prediction be validated, and how?
 - If you missed class, or if you did not finish in class, you can
   submit this by the deadline. If you submit it after the deadline, or
   if you submit incomplete solutions, you lose points.
+
+** TODO Home assignment: Fitting a linear model to compute g
+
