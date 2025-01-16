@@ -20,7 +20,7 @@ influences the prediction? Can the prediction be validated, and how?
 
 #+begin_quote
 - Yes, the answer to the question is a prediction informed by
-  historical data. 
+  historical data.
 
 - It is influenced by Dali's own statements, historical context, such
   as cultural events at the time, and Dali's own experiences.
@@ -35,12 +35,12 @@ influences the prediction? Can the prediction be validated, and how?
   Camembert [cheese] melting in the sun." (Prigogine)
 #+end_quote
 
-- [ ] Overview: Course content, grading, tools, book, etc.
+- [X] Overview: Course content, grading, tools, book, etc.
 - [ ] Introduction to Machine Learning (no code)
 - [ ] Updating a decision tree model (no code)
 - [ ] On completing DataCamp assignments
 
-** TODO On completing DataCamp assignments
+** DONE On completing DataCamp assignments
 
 1. Watch the video first with full attention.
 2. Write down immediate questions for later.
@@ -53,3 +53,91 @@ influences the prediction? Can the prediction be validated, and how?
 9. Don't ignore nagging questions that you have.
 10. Start a journal to summarize what you've learnt.
 
+
+** NEXT Review
+
+1. What is "Git"?
+   #+begin_quote
+   Git is version control software that supports the development and 
+   #+end_quote
+
+2. Which machine learning techniques will we not cover?
+   #+begin_quote
+   Machine learning techniques that use "black-box" models based on
+   neural network architectures.
+   #+end_quote
+
+3. What is a "literate program"?
+   #+begin_quote
+   A program that is written primarily for humans, that includes
+   documentation, code, and output, and that can be tangled into
+   source code only, or woven into documentation only.
+   #+end_quote
+
+4. What is *confirmation bias*?
+   #+begin_quote
+   Confirmation bias is the tendency to search for, interpret, and
+   remember information in a way that *confirms* one's pre-existing
+   beliefs or hypothesis (systematic assumptions) while giving less
+   consideration to evidence that contradicts them.
+
+   A colloquial term for confirmation bias is "tunnel vision".
+   #+end_quote
+
+5. Give an example for confirmation bias?
+   #+begin_quote
+   Someone who believes that climate change is a hoax might focus on
+   cold weather as proof that global warming isn't real while ignoring
+   historical evidence to the contrary.
+
+   Conversely, someone who believes in climate change might
+   overemphasize a single extreme weather event like a hurricane, as
+   proof of climate change while ignoring that individual events
+   usually have multiple factors.
+   #+end_quote
+
+6. *Let's discuss:* What is a good *response* to confirmation bias?
+   #+begin_quote
+   1. Actively look for information that challenges your beliefs.
+   2. Engage in civilized debate with those who disagree with you.
+   3. Ask neutral questions - not "Why" but "What" and "How".
+   4. Rely on multiple sources created over a longer period of time.
+   5. Challenge your own views through systematic self-reflection.
+   6. Balance data-driven, mathematical, and heuristic methods.
+   7. Make yourself more aware of the relative meaning of objectivity.
+   8. Take time out from your hobby horses.
+   9. Avoid social media like the plague.
+   10. Eat and sleep well.
+   #+end_quote
+
+7. What's a "captcha"?
+   #+begin_quote
+   "Captcha" stands for "Completely Automated Public Turing" test to
+   tell computers and humans apart. They range from media-based (e.g.
+   text/image recognition) to behavior-based (e.g. motion patterns).
+   #+end_quote
+
+8. What's OCR?
+   #+begin_quote
+   Many old books and newspapers were digitized using Optical
+   Character Recognition (OCR) software. When OCR struggled with
+   certain words or symbols, von Ahn's reCaptcha presented users with
+   two words: One that the software had difficulty recognizing, and
+   one with a known answer. If their response to the known word was
+   correct, then their response to the unknown word was used to
+   improve the digitization process - an example of both
+   "crowdsourcing" (as a human process) and labeling (as a machine
+   learning step). Check out von Ahn's own explanation of "human
+   computation" ([[https://youtu.be/PQ-xzwj_p_4?si=vD6-OoHcIwMWHnmh][BigThink, 2014]]) - shared in the group chat.
+   #+end_quote
+
+
+** TODO Testing and improving a classification model (lab)
+
+- This is an example of a classroom exercise that you can use to get
+  bonus points (which you may need to balance bad test results or
+  missing assignments).
+
+- If you missed class, or if you did not finish in class, you can
+  submit this by the deadline. If you submit it after the deadline, or
+  if you submit incomplete solutions, you lose points.

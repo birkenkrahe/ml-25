@@ -23,7 +23,7 @@ Answers:
 [[../img/0_machine_learning_captcha.png]]
 
 What do you think - is machine learning important? Why or why not?
-
+#+begin_quote
 - *Automate* human jobs with speed and accuracy - not "normal robots"
   that perform rote processes repeatedly, reliably, and fast.
 
@@ -39,6 +39,7 @@ What do you think - is machine learning important? Why or why not?
   (identify rare particles), *astrobiology* (search for extraterrestrial
   life), *extreme environments* (predictions in harsh conditions -
   deserts, Mars etc.)
+#+end_quote
 
 * What will we do in this course?
 
@@ -64,8 +65,11 @@ Process:
 | Testing and modeling         | DSC 482.02 |             |
 | Deep learning (neural nets)  | DSC 482.03 | CSC 482     |
 | Field theory for neural nets | DSC 482.04 |             |
+|------------------------------+------------+-------------|
+| Introduction to AI           |            |             |
+|                              |            |             |
 
-The 482 courses are special topics offered at our whim.
+The 482 courses are special topics offered at a whim.
 
 * How will you be evaluated?
 #+Caption: Course evaluation (see Syllabus)

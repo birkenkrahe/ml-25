@@ -200,7 +200,7 @@ production model by hand using a table, pseudocode, and a diagram.
 
 Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tinyurl.com/ml-intro-practice-org]]
 
-* NEXT How machines learn
+* How machines learn
 
 - Unlike humans, machines need explicit conditions and instructions
   literally down to the letter (ML does not change that completely).
