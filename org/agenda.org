@@ -57,7 +57,9 @@ influences the prediction? Can the prediction be validated, and how?
 
 1. What is "Git"?
    #+begin_quote
-   Git is version control software that supports the development and 
+   Git is version control software that supports the development and
+   maintenance of (large) software projects, e.g. Linux, but also
+   any sizeable R package development.
    #+end_quote
 
 2. Which machine learning techniques will we not cover?
