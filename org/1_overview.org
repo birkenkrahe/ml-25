@@ -345,7 +345,7 @@ The 482 courses are special topics offered at a whim.
 [[../img/0_Rlogo.png]]
 
 Complete/review  introductory R or statistics courses:
-- [[https://app.datacamp.com/learn/courses/free-introduction-to-r][Introduction to R" in DataCamp]] (data structures)
+- [[https://app.datacamp.com/learn/courses/free-introduction-to-r][Introduction to R in DataCamp]] (data structures)
 - [[https://app.datacamp.com/learn/courses/intermediate-r][Intermediate R]] (conditionals, functions, loops, utilities)
 - [[https://app.datacamp.com/learn/courses/introduction-to-statistics][Introduction to statistics]] (no code)
 - [[https://github.com/matloff/fasteR][fasteR by Norman Matloff (GitHub)]] - fast lane to R
