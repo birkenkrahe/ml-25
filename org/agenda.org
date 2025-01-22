@@ -1,147 +1,193 @@
 #+title: Agenda Notebook
 #+author: Marcus Birkenkrahe
-#+subtitle: DSC 305 - Machine Learning
+#+subtitle: CSC 410 - Data Communications and Networking - Spring 2025
 #+SEQ_TODO: TODO NEXT IN_PROGRESS | DONE CANCELLED
-#+startup: overview hideblocks indent entitiespretty
+#+startup: overview hideblocks indent 
 :PROPERTIES:
 :header-args:C:      :main yes :includes <stdio.h> :results output :exports both
 :header-args:python: :session *Python* :python python3 :results output :exports both
 :header-args:R:      :session *R* :results graphics output file :exports both
 :header-args:C++:    :main yes :includes <iostream> :results output :exports both
 :END:
-* Week 1: Overview & Introduction
-#+attr_html: :width 600px: 
-#+caption: Salvador Dali, The Persistence of Memory (1931)
+* Week 1: Course overview
+#+attr_html: :width 400px
 [[../img/cover.jpg]]
 
-What inspired this painting by Dali? Is the answer a prediction? What
-influences the prediction? Can the prediction be validated, and how?
+- [X] Course overview
+- [X] Installing Cisco Packet Tracer
+- [X] Introducing Networks and Protocols
+- [ ] Getting started with Cisco Packet Tracer
+- [ ] C Programming Basics Review: "FizzBuzz"
 
-#+begin_quote
-- Yes, the answer to the question is a prediction informed by
-  historical data.
+** DONE [[file:1_overview.org][Course overview]]: Content, Grading, Projects, Platforms
 
-- It is influenced by Dali's own statements, historical context, such
-  as cultural events at the time, and Dali's own experiences.
+** DONE Review (Overview)
 
-- The prediction can be partially validated but not proven.
-
-- "The soft watches are an unconscious symbol of the relativity of
-  space and time [like in Einstein's theory of special relativity]."
-  (Adés)
-
-- "The soft watches were inspired by the surrealist perception of a
-  Camembert [cheese] melting in the sun." (Prigogine)
-#+end_quote
-
-- [X] Overview: Course content, grading, tools, book, etc.
-- [ ] Introduction to Machine Learning (no code)
-- [ ] Updating a decision tree model (no code)
-- [ ] On completing DataCamp assignments
-
-** DONE On completing DataCamp assignments
-
-1. Watch the video first with full attention.
-2. Write down immediate questions for later.
-3. Build a notebook for DataCamp courses.
-4. Recreate the individual steps in the video.
-5. Create or import datasets.
-6. Look up function definitions.
-7. Solve the exercises outside of DataCamp.
-8. If you loathe Emacs, use DataLab or Colab instead.
-9. Don't ignore nagging questions that you have.
-10. Start a journal to summarize what you've learnt.
-
-
-** NEXT Review
-
-1. What is "Git"?
+1. Remember at least 2 topics that will be addressed in this class.
    #+begin_quote
-   Git is version control software that supports the development and
-   maintenance of (large) software projects, e.g. Linux, but also
-   any sizeable R package development.
+   1. Cloud computing
+   2. Microservice technologies
+   3. Networking and Internet protocols
+   4. Cisco Packet Tracer simulation
+   5. Socket programming with C
    #+end_quote
 
-2. Which machine learning techniques will we not cover?
+2. What is "Termux"?
    #+begin_quote
-   Machine learning techniques that use "black-box" models based on
-   neural network architectures.
+   A Linux emulator for Android phones.
    #+end_quote
 
-3. What is a "literate program"?
+3. Why is Linux relevant for computer networks?
    #+begin_quote
-   A program that is written primarily for humans, that includes
-   documentation, code, and output, and that can be tangled into
-   source code only, or woven into documentation only.
+   1. Dominant operating system for servers (97% of web servers, 90%
+      of cloud computing servers, > 70% of global market overall).
+   2. Free and open source.
+   3. Core platform for microservices like Docker and Kubernetes.
+   4. Powerful command-line networking tools for configuration,
+      firewalling, monitoring, analysis.
    #+end_quote
 
-4. What is *confirmation bias*?
+4. What is an Internet "packet"?
    #+begin_quote
-   Confirmation bias is the tendency to search for, interpret, and
-   remember information in a way that *confirms* one's pre-existing
-   beliefs or hypothesis (systematic assumptions) while giving less
-   consideration to evidence that contradicts them.
-
-   A colloquial term for confirmation bias is "tunnel vision".
+   An Internet packet (= header + payload) is a small unit of data
+   transmitted over a network as part of a message. Packets are
+   independently routed through the network and then reassembled at
+   their destination to recreate the original message.
    #+end_quote
 
-5. Give an example for confirmation bias?
+5. What is Cisco Packet Tracer?
    #+begin_quote
-   Someone who believes that climate change is a hoax might focus on
-   cold weather as proof that global warming isn't real while ignoring
-   historical evidence to the contrary.
-
-   Conversely, someone who believes in climate change might
-   overemphasize a single extreme weather event like a hurricane, as
-   proof of climate change while ignoring that individual events
-   usually have multiple factors.
+   Cisco packet tracer is a cross-platform network simulation tool
+   developed by Cisco Systems, the dominant firm in networking.
    #+end_quote
 
-6. *Let's discuss:* What is a good *response* to confirmation bias?
+** IN_PROGRESS Introducing Networks and Protocols
+
+   - [X] Network programming and C
+   - [ ] OSI layer model
+   - [ ] TCP/IP reference model
+   - [ ] The Internet Protocol (IP)
+   - [ ] IPv4 and IPv6 addresses
+   - [ ] Domain names
+   - [ ] Internet protocol routing
+   - [ ] Network address translation
+   - [ ] Client-Server paradigm
+   - [ ] Listing your IP addresses using C
+
+* Week 2: Introduction to networking
+#+attr_html: :width 600px: 
+[[../img/builder.jpg]]
+
+** TODO Review / Preview (next test sometime this week)
+
+1. What is a network?
    #+begin_quote
-   1. Actively look for information that challenges your beliefs.
-   2. Engage in civilized debate with those who disagree with you.
-   3. Ask neutral questions - not "Why" but "What" and "How".
-   4. Rely on multiple sources created over a longer period of time.
-   5. Challenge your own views through systematic self-reflection.
-   6. Balance data-driven, mathematical, and heuristic methods.
-   7. Make yourself more aware of the relative meaning of objectivity.
-   8. Take time out from your hobby horses.
-   9. Avoid social media like the plague.
-   10. Eat and sleep well.
+   A collection of interconnected nodes or devices that exchange data.
    #+end_quote
 
-7. What's a "captcha"?
+2. Which areas of mathematics are most relevant for networks?
    #+begin_quote
-   "Captcha" stands for "Completely Automated Public Turing" test to
-   tell computers and humans apart. They range from media-based (e.g.
-   text/image recognition) to behavior-based (e.g. motion patterns).
+   - *Graph theory* (theory of nodes connected by weighted edges) for
+     network optimization and routing algorithms.
+   - *Probability and statistics* for traffic modeling and performance
+     analysis.
+   - *Fourier analysis* (approximations of general functions by sums of
+     simpler trigonometric functions) for signal processing.
    #+end_quote
 
-8. What's OCR?
+3. In which sense it "The Internet is C" true?
    #+begin_quote
-   Many old books and newspapers were digitized using Optical
-   Character Recognition (OCR) software. When OCR struggled with
-   certain words or symbols, von Ahn's reCaptcha presented users with
-   two words: One that the software had difficulty recognizing, and
-   one with a known answer. If their response to the known word was
-   correct, then their response to the unknown word was used to
-   improve the digitization process - an example of both
-   "crowdsourcing" (as a human process) and labeling (as a machine
-   learning step). Check out von Ahn's own explanation of "human
-   computation" ([[https://youtu.be/PQ-xzwj_p_4?si=vD6-OoHcIwMWHnmh][BigThink, 2014]]) - shared in the group chat.
+   - Network stacks (layered software supporting the network) is
+     programmed in C.
+   - All network-relevant (processes, files, sockets) kernel code is
+     programmed in C.
    #+end_quote
 
+4. Name at least two benefits of a "layering" approach to building:
+   #+begin_quote
+   - Modularity = independent design, development, maintenance
+   - Abstraction = layer details hidden from other layers
+   - Interchangeability = component replacement by layer
+   - Interoperability = different systems working together
+   #+end_quote
 
-** TODO Testing and improving a classification model (lab)
+5. Name at least two of the layers of the OSI model.
+   #+begin_quote
+   1) Application
+   2) Presentation
+   3) Session
+   4) Transport
+   5) Network
+   6) Data Link
+   7) Physical
+   #+end_quote
 
-- This is an example of a classroom exercise that you can use to get
-  bonus points (which you may need to balance bad test results or
-  missing assignments).
+6. What does "on-premise" computing mean and what else is there?
+   #+caption: Cloud service models - car analogy (DataCamp, 2020)
+   #+attr_html: :width 600px
+   [[../img/services.png]]
 
-- If you missed class, or if you did not finish in class, you can
-  submit this by the deadline. If you submit it after the deadline, or
-  if you submit incomplete solutions, you lose points.
+   #+begin_comment
+    - On-premise: Run infrastructrure (servers), platform (apps), 
+      and (end-customer) software.  
 
-** TODO Home assignment: Fitting a linear model to compute g
+    - Cloud: Outsource infrastructure, platform(s), and software.
+   #+end_comment
+
+7. What do different cloud services (business models) deliver?
+   #+caption: IaaS vs. PaaS vs. SaaS (DataCamp, 2020)
+   #+attr_html: :width 600px
+   [[../img/services1.png]]
+
+8. What is the relationship between "control" and "abstraction" in
+   cloud computing?
+   #+caption: Control vs. Abstraction (DataCamp, 2020)
+   #+attr_html: :width 500px
+   [[../img/pyramid.png]]
+
+9. Who dominates the cloud market?
+   #+attr_html: :width 600px: 
+   #+caption: Source: Synergy Research Group (not checked)
+   [[../img/cloud_market.png]]
+
+10. What is the size of the global IT services market?
+    #+attr_html: :width 600px: 
+    #+caption: Source: Precedence Research (not checked)
+    [[../img/it_market.png]]
+
+    #+begin_quote    
+    The size of the market for cloud computing is 5.6% of the market
+    for global IT services. 
+
+    The rest (estimated via ChatGPT - not checked):
+
+    | Segment                            | Bn USD |
+    |------------------------------------+--------|
+    | IT Infrastructure Management       |    300 |
+    | Managed IT Services                |    200 |
+    | Enterprise Software & Apps         |    250 |
+    | Consulting Services                |    150 |
+    | Cybersecurity                      |    120 |
+    | IT Support & Maintenance           |    100 |
+    | System Integration                 |     90 |
+    | Telecommunications & Connectivity  |     80 |
+    | Business Process Outsourcing (BPO) |     80 |
+    | Emerging Technologies              |     50 |
+    | Training & Professional Services   |     30 |
+    |------------------------------------+--------|
+    | *Total*                              |  *1,250* |
+
+    #+end_quote
+
+** IN_PROGRESS [[./2_packettracer.org][Cisco Packet Tracer]]: Intro & Installation & Getting started
+
+
+** C Programming Basics Review: Control & Functions & Pointers
+
+1. Using Emacs, create an Org-mode source file.
+2. Solve the problem using pseudocode.
+3. Solve the problem in C using only one =main= function.
+4. Solve the problem using a function =fizzbuzz=.
+5. Solve the problem using pointers and pointer arithmetic.
+
 
