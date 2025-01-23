@@ -1,193 +1,266 @@
 #+title: Agenda Notebook
 #+author: Marcus Birkenkrahe
-#+subtitle: CSC 410 - Data Communications and Networking - Spring 2025
+#+subtitle: DSC 305 - Machine Learning
 #+SEQ_TODO: TODO NEXT IN_PROGRESS | DONE CANCELLED
-#+startup: overview hideblocks indent 
+#+startup: overview hideblocks indent entitiespretty
 :PROPERTIES:
 :header-args:C:      :main yes :includes <stdio.h> :results output :exports both
 :header-args:python: :session *Python* :python python3 :results output :exports both
 :header-args:R:      :session *R* :results graphics output file :exports both
 :header-args:C++:    :main yes :includes <iostream> :results output :exports both
 :END:
-* Week 1: Course overview
-#+attr_html: :width 400px
+* Week 1: Overview
+#+attr_html: :width 600px: 
+#+caption: Salvador Dali, The Persistence of Memory (1931)
 [[../img/cover.jpg]]
 
-- [X] Course overview
-- [X] Installing Cisco Packet Tracer
-- [X] Introducing Networks and Protocols
-- [ ] Getting started with Cisco Packet Tracer
-- [ ] C Programming Basics Review: "FizzBuzz"
+What inspired this painting by Dali? Is the answer a prediction? What
+influences the prediction? Can the prediction be validated, and how?
 
-** DONE [[file:1_overview.org][Course overview]]: Content, Grading, Projects, Platforms
+#+begin_quote
+- Yes, the answer to the question is a prediction informed by
+  historical data.
 
-** DONE Review (Overview)
+- It is influenced by Dali's own statements, historical context, such
+  as cultural events at the time, and Dali's own experiences.
 
-1. Remember at least 2 topics that will be addressed in this class.
+- The prediction can be partially validated but not proven.
+
+- "The soft watches are an unconscious symbol of the relativity of
+  space and time [like in Einstein's theory of special relativity]."
+  (Adés)
+
+- "The soft watches were inspired by the surrealist perception of a
+  Camembert [cheese] melting in the sun." (Prigogine)
+#+end_quote
+
+- [X] Overview: Course content, grading, tools, book, etc.
+- [X] On completing DataCamp assignments
+- [X] Introduction to Machine Learning (no code)
+- [ ] Updating a decision tree model (no code)
+
+** DONE On completing DataCamp assignments
+
+1. Watch the video first with full attention.
+2. Write down immediate questions for later.
+3. Build a notebook for DataCamp courses.
+4. Recreate the individual steps in the video.
+5. Create or import datasets.
+6. Look up function definitions.
+7. Solve the exercises outside of DataCamp.
+8. If you loathe Emacs, use DataLab or Colab instead.
+9. Don't ignore nagging questions that you have.
+10. Start a journal to summarize what you've learnt.
+
+** DONE Review
+
+1. What is "Git"?
    #+begin_quote
-   1. Cloud computing
-   2. Microservice technologies
-   3. Networking and Internet protocols
-   4. Cisco Packet Tracer simulation
-   5. Socket programming with C
+   Git is version control software that supports the development and
+   maintenance of (large) software projects, e.g. Linux, but also
+   any sizeable R package development.
    #+end_quote
 
-2. What is "Termux"?
+2. Which machine learning techniques will we not cover?
    #+begin_quote
-   A Linux emulator for Android phones.
+   Machine learning techniques that use "black-box" models based on
+   neural network architectures.
    #+end_quote
 
-3. Why is Linux relevant for computer networks?
+3. What is a "literate program"?
    #+begin_quote
-   1. Dominant operating system for servers (97% of web servers, 90%
-      of cloud computing servers, > 70% of global market overall).
-   2. Free and open source.
-   3. Core platform for microservices like Docker and Kubernetes.
-   4. Powerful command-line networking tools for configuration,
-      firewalling, monitoring, analysis.
+   A program that is written primarily for humans, that includes
+   documentation, code, and output, and that can be tangled into
+   source code only, or woven into documentation only.
    #+end_quote
 
-4. What is an Internet "packet"?
+4. What is *confirmation bias*?
    #+begin_quote
-   An Internet packet (= header + payload) is a small unit of data
-   transmitted over a network as part of a message. Packets are
-   independently routed through the network and then reassembled at
-   their destination to recreate the original message.
+   Confirmation bias is the tendency to search for, interpret, and
+   remember information in a way that *confirms* one's pre-existing
+   beliefs or hypothesis (systematic assumptions) while giving less
+   consideration to evidence that contradicts them.
+
+   A colloquial term for confirmation bias is "tunnel vision".
    #+end_quote
 
-5. What is Cisco Packet Tracer?
+5. Give an example for confirmation bias?
    #+begin_quote
-   Cisco packet tracer is a cross-platform network simulation tool
-   developed by Cisco Systems, the dominant firm in networking.
+   Someone who believes that climate change is a hoax might focus on
+   cold weather as proof that global warming isn't real while ignoring
+   historical evidence to the contrary.
+
+   Conversely, someone who believes in climate change might
+   overemphasize a single extreme weather event like a hurricane, as
+   proof of climate change while ignoring that individual events
+   usually have multiple factors.
    #+end_quote
 
-** IN_PROGRESS Introducing Networks and Protocols
-
-   - [X] Network programming and C
-   - [ ] OSI layer model
-   - [ ] TCP/IP reference model
-   - [ ] The Internet Protocol (IP)
-   - [ ] IPv4 and IPv6 addresses
-   - [ ] Domain names
-   - [ ] Internet protocol routing
-   - [ ] Network address translation
-   - [ ] Client-Server paradigm
-   - [ ] Listing your IP addresses using C
-
-* Week 2: Introduction to networking
-#+attr_html: :width 600px: 
-[[../img/builder.jpg]]
-
-** TODO Review / Preview (next test sometime this week)
-
-1. What is a network?
+6. *Let's discuss:* What is a good *response* to confirmation bias?
    #+begin_quote
-   A collection of interconnected nodes or devices that exchange data.
+   1. Actively look for information that challenges your beliefs.
+   2. Engage in civilized debate with those who disagree with you.
+   3. Ask neutral questions - not "Why" but "What" and "How".
+   4. Rely on multiple sources created over a longer period of time.
+   5. Challenge your own views through systematic self-reflection.
+   6. Balance data-driven, mathematical, and heuristic methods.
+   7. Make yourself more aware of the relative meaning of objectivity.
+   8. Take time out from your hobby horses.
+   9. Avoid social media like the plague.
+   10. Eat and sleep well.
    #+end_quote
 
-2. Which areas of mathematics are most relevant for networks?
+7. What's a "captcha"?
    #+begin_quote
-   - *Graph theory* (theory of nodes connected by weighted edges) for
-     network optimization and routing algorithms.
-   - *Probability and statistics* for traffic modeling and performance
-     analysis.
-   - *Fourier analysis* (approximations of general functions by sums of
-     simpler trigonometric functions) for signal processing.
+   "Captcha" stands for "Completely Automated Public Turing" test to
+   tell computers and humans apart. They range from media-based (e.g.
+   text/image recognition) to behavior-based (e.g. motion patterns).
    #+end_quote
 
-3. In which sense it "The Internet is C" true?
+8. What's OCR?
    #+begin_quote
-   - Network stacks (layered software supporting the network) is
-     programmed in C.
-   - All network-relevant (processes, files, sockets) kernel code is
-     programmed in C.
+   Many old books and newspapers were digitized using Optical
+   Character Recognition (OCR) software. When OCR struggled with
+   certain words or symbols, von Ahn's reCaptcha presented users with
+   two words: One that the software had difficulty recognizing, and
+   one with a known answer. If their response to the known word was
+   correct, then their response to the unknown word was used to
+   improve the digitization process - an example of both
+   "crowdsourcing" (as a human process) and labeling (as a machine
+   learning step). Check out von Ahn's own explanation of "human
+   computation" ([[https://youtu.be/PQ-xzwj_p_4?si=vD6-OoHcIwMWHnmh][BigThink, 2014]]) - shared in the group chat.
    #+end_quote
 
-4. Name at least two benefits of a "layering" approach to building:
+* Week 2: Introduction to machine learning
+
+- [ ] Extending and testing a decision tree model
+- [ ] 
+
+** DONE Testing and improving a classification model (lab)
+
+- This is an example of a classroom exercise that you can use to get
+  bonus points (which you may need to balance bad test results or
+  missing assignments).
+
+- If you missed class, or if you did not finish in class, you can
+  submit this by the deadline. If you submit it after the deadline, or
+  if you submit incomplete solutions, you lose points.
+
+
+** TODO Lesson Review/Test Preview:
+
+1. Which of these is an optimization task for machine learning?
    #+begin_quote
-   - Modularity = independent design, development, maintenance
-   - Abstraction = layer details hidden from other layers
-   - Interchangeability = component replacement by layer
-   - Interoperability = different systems working together
+   1) Improve energy use in an office
+   2) Predict election outcomes
+   3) Identify email spam
+   4) Detect fraudulent transactions
+   #+end_quote
+   #+begin_quote
+   While all options involve ML tasks like classification or
+   prediction, optimization refers to improving a process or a
+   resource allocation. Prediction and classification can *indirectly*
+   help to improve processes but that's not the primary purpose.
+
+   A *task* is something that you do directly. A *goal* is something that
+   may be achieved indirectly by performing (many) tasks. A *strategy*
+   is a process (usually of multiple steps) to achieve a goal.
+
+   Example: Spam identification
+   - Identifying whether an email is spam is a classification *task*.
+   - Improving the time spent on processing emails is a *goal*.
+   - Using ML to classify spam, refine models over time, and automate
+     filtering to unclutter the inbox is a *strategy*.
+
+   Example: Optimize energy use
+   - Balance different energy sources with ML is a *task*.
+   - Reduce overall energy costs while maintaining comfort is a *goal*.
+   - Using ML to predict energy usage patterns, adapt settings in
+     real-time, and balance power sources is a *strategy*.
    #+end_quote
 
-5. Name at least two of the layers of the OSI model.
+2. What is a key limitation of ML models? Example?
    #+begin_quote
-   1) Application
-   2) Presentation
-   3) Session
-   4) Transport
-   5) Network
-   6) Data Link
-   7) Physical
+   Lack of flexibility. The model needs to be retrained, retuned and
+   retested if new data appear, and it can not infer logical steps
+   outside of its specific predictive or classification task.
+
+   Retraining especially (depending on the data) can come at a high
+   cost. An example are generative AI models (LLMs), or automated
+   driving models with real-world edge cases not found in training
+   data, or when sensors deliver poor data in real-time.
    #+end_quote
 
-6. What does "on-premise" computing mean and what else is there?
-   #+caption: Cloud service models - car analogy (DataCamp, 2020)
-   #+attr_html: :width 600px
-   [[../img/services.png]]
+3. What's a major challenge when processing human language, and why?
+   #+begin_quote
+   The difficulty in interpreting audio and text data accurately.
 
-   #+begin_comment
-    - On-premise: Run infrastructrure (servers), platform (apps), 
-      and (end-customer) software.  
+   Why: Variability of spoken language (dialects, intonations, noise),
+   temporal nature of data (time-series), multi-modality (emotion,
+   emphasis, intonation), and lack of annotated data.
+   #+end_quote
+   
+4. Which ethical issues with ML can you think of?
+   #+begin_quote
+   1) Privacy (training/test data)
+   2) Bias (e.g. educational ML)
+   3) Reliability in critical situations (e.g. medical ML)
+   4) Social pressure (to adopt or not adopt AI)
+   5) Copyright issues (e.g. public/private training data)
+   6) Decision power (e.g. self-driving cars, military applications)
+   7) Addiction and compulsion (to use AI instead of analog/manual)
+   8) Cheating (e.g. students)
+   9) Accountability (e.g. black-box methods like neural nets)
+   10) Job displacement and economic inequality (AI replacing job)
+   #+end_quote
 
-    - Cloud: Outsource infrastructure, platform(s), and software.
-   #+end_comment
+5. Which data can and should be anonymized and is that relevant for
+   ML?
+   #+begin_quote
+   All confidential data (e.g. financial, health, survey) should be
+   anonymized. ML makes this difficult because it can use existing
+   features to identify/reconstruct actors and data that were deleted.
+   #+end_quote
 
-7. What do different cloud services (business models) deliver?
-   #+caption: IaaS vs. PaaS vs. SaaS (DataCamp, 2020)
-   #+attr_html: :width 600px
-   [[../img/services1.png]]
+6. Define supervised and unsupervised learning with an example each.
+   #+begin_quote
+   1) *Supervised ML:* Training a model on a labeled dataset - each
+      input has a corresponding output. Model learns to map inputs to
+      outputs, and can apply this to unknown inputs. *Example:* Medical
+      diagnosis (= output) based on observed patient data (= input).
 
-8. What is the relationship between "control" and "abstraction" in
-   cloud computing?
-   #+caption: Control vs. Abstraction (DataCamp, 2020)
-   #+attr_html: :width 500px
-   [[../img/pyramid.png]]
+   2) *Unsupervised ML*: Training a model on an unlabeled dataset -
+      input is a pattern or a grouping, desired output is a structure
+      to the pattern or grouping. *Example*: Segmentation of customers
+      into clusters with similar buying behavior (= output) based on
+      customer purchasing behavior (= input).
+   #+end_quote
 
-9. Who dominates the cloud market?
-   #+attr_html: :width 600px: 
-   #+caption: Source: Synergy Research Group (not checked)
-   [[../img/cloud_market.png]]
+7. When and why are datasets split in machine learning? Issues?
+   #+begin_quote
+   Create separate training data (to build the model) and test data
+   (to evaluate the model). Issues include existing patterns (bias) in
+   the data (lack of randomization), missing data, missing features.
+   #+end_quote
 
-10. What is the size of the global IT services market?
-    #+attr_html: :width 600px: 
-    #+caption: Source: Precedence Research (not checked)
-    [[../img/it_market.png]]
+8. What are the earliest historical roots of machine learning?
+   #+begin_quote
+   Galton's statistical modeling using linear regression - his
+   presentation [[https://archive.org/details/1877GaltonTypicalLawsOfHeredity/mode/2up]["Typical Laws of Heredity" (1877)]].
+   #+end_quote
 
-    #+begin_quote    
-    The size of the market for cloud computing is 5.6% of the market
-    for global IT services. 
+9. Is there a limit to the features that can (or should) be used?
+   #+begin_quote
+   There is no theoretical limit, quite the opposite. 
+   #+end_quote
 
-    The rest (estimated via ChatGPT - not checked):
-
-    | Segment                            | Bn USD |
-    |------------------------------------+--------|
-    | IT Infrastructure Management       |    300 |
-    | Managed IT Services                |    200 |
-    | Enterprise Software & Apps         |    250 |
-    | Consulting Services                |    150 |
-    | Cybersecurity                      |    120 |
-    | IT Support & Maintenance           |    100 |
-    | System Integration                 |     90 |
-    | Telecommunications & Connectivity  |     80 |
-    | Business Process Outsourcing (BPO) |     80 |
-    | Emerging Technologies              |     50 |
-    | Training & Professional Services   |     30 |
-    |------------------------------------+--------|
-    | *Total*                              |  *1,250* |
-
+10. What should you maximize, and what should you minimize: Sample or
+    population?
+    #+begin_quote
+    You should maxmimize the sample (the data you're using), and you
+    cannot manipulate the population because it's a real world fact.
     #+end_quote
 
-** IN_PROGRESS [[./2_packettracer.org][Cisco Packet Tracer]]: Intro & Installation & Getting started
 
-
-** C Programming Basics Review: Control & Functions & Pointers
-
-1. Using Emacs, create an Org-mode source file.
-2. Solve the problem using pseudocode.
-3. Solve the problem in C using only one =main= function.
-4. Solve the problem using a function =fizzbuzz=.
-5. Solve the problem using pointers and pointer arithmetic.
-
+** TODO Home assignment: Fitting a linear model to compute g
 

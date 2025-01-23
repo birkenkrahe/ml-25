@@ -11,7 +11,7 @@ This exercise consists of four parts:
 3. Draw the new decision tree model (inline image)
 5. Submit all deliverables as ZIP file to Canvas
 
-** *Test the model on new patients*
+* *Test the model on new patients*
 
 Use the provided decision tree to classify the following
 patients. Write the diagnosis based on the tree’s production rules
@@ -26,7 +26,7 @@ as shown [[https://github.com/birkenkrahe/ml-25/blob/main/img/1_decision_tree.pn
 | 16      | No             | Yes   |                             |
 | 17      | Yes            | Yes   |                             |
 
-** Modify the production rules
+* Modify the production rules
 
 Imagine you want to improve the decision tree by adding a new
 attribute: *duration of symptoms* (short = less than 3 days, long =
@@ -59,7 +59,7 @@ Updated production rules:
 ...
 #+end_example
 
-** Draw the new decision tree model
+* Draw the new decision tree model
 
 *Draw* the new decision tree using =draw.io= or another free drawing
 program. You can find the original production rules diagram here:
@@ -70,7 +70,7 @@ Org-mode images):
 #+attr_html: :width 600px:
 [[../img/solution.png]]
 
-** *Submission*
+* *Submission*
 
 Submit this Org-mode file with the completed diagnostic table, with
 the updated production rules, and with the updated diagram as a ZIP

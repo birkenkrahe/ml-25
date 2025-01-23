@@ -193,7 +193,7 @@ Many different uses, many different models:
   #+caption: Test data for disease diagnosis model (source: Roiger, 2021)
   [[../img/1_testing.png]]
 
-* TODO Practice: Testing and Improving a Classification Model
+* DONE Practice: Testing and Improving a Classification Model
 
 In this class exercise, you learn to classify, model, and update a
 production model by hand using a table, pseudocode, and a diagram.
@@ -225,29 +225,27 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 #+attr_html: :width 400px
 [[../img/1_sheldon.png]]
 
-- *Data storage* utilizes observation, memory, and recall to provide a
-  factual basis for further reasoning
+              - *Data storage* utilizes observation, memory, and recall to provide a
+                factual basis for further reasoning
 
-- Storage needs to take software and hardware conditions into
-  account - how?[fn:10]
+              - Storage needs to take software and hardware conditions into
+                account - how?[fn:10]
 
-- You need to store raw data selectively - *more data* does not
-  necessarily mean *more information* (too much data can obscure what
-  you're looking for) and carries a performance overhead
+              - You need to store raw data selectively - *more data* does not
+                necessarily mean *more information* (too much data can obscure what
+                you're looking for) and carries a performance overhead
 
-- Remember studying for an exam - do you gorge yourself on all
-  available details or do you select questions and answers that were
-  discussed in class?[fn:11]
+              - Remember studying for an exam - do you gorge yourself on all
+                available details or do you select questions and answers that were
+                discussed in class?[fn:11]
 
-- See Kupek (2023): "[[https://stackoverflow.blog/2023/01/04/getting-your-data-in-shape-for-machine-learning/][Getting your data in shape for machine learning]]"
-  with a (Python) Google Colaboratory [[https://colab.research.google.com/drive/1mg2WRO7_DIc1U_0Q1NO7ou6C4F89NuWY?usp=sharing][notebook for coding examples]].
+              - See Kupek (2023): "[[https://stackoverflow.blog/2023/01/04/getting-your-data-in-shape-for-machine-learning/][Getting your data in shape for machine learning]]"
+                with a (Python) Google Colaboratory [[https://colab.research.google.com/drive/1mg2WRO7_DIc1U_0Q1NO7ou6C4F89NuWY?usp=sharing][notebook for coding examples]].
 
 * Nile example: data storage
 
 - To run the code below, open [[https://tinyurl.com/2mnv425w][tinyurl.com/2mnv425w]], save the
   file to ~1_ml_intro_practice.org~ and open it in Emacs.
-
-- Once you're done, upload the completed file to Canvas:
 
 - Example: the following numbers come from R's ~Nile~ data set:
   #+begin_example
@@ -274,8 +272,12 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 - The values are stored as a text file ~Nile.txt~ of size 440 byte,
   which means 440 * 8 = 3520 bits, or binary value capacitors:
   #+begin_src R
-    shell(cmd="DIR ..\\data\\Nile.txt") # escaped Windows backward slash
+    ##shell(cmd="DIR ..\\data\\Nile.txt") # escaped Windows backward slash
+    system("file ../data/Nile.txt")
   #+end_src
+
+  #+RESULTS:
+  : ../data/Nile.txt: ASCII text
 
 - When on disk, ~Nile.txt~ is stored in non-volatile memory (it's
   permanent). When it is loaded into R (or another shell program), it
@@ -286,7 +288,8 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 
 - You can look at the text file using ~notepad~:
   #+begin_src R :results silent
-    shell(cmd="notepad ..\\data\\Nile.txt")
+    ##shell(cmd="notepad ..\\data\\Nile.txt")
+    system("cat ../data/Nile.txt")
   #+end_src
 
 * Abstraction = transform + train
@@ -297,7 +300,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 - *Abstraction* involves translating stored data into broader
   representations and concepts
 
-- [X] Abstraction needs to take available computing data structures
+- [ ] Abstraction needs to take available computing data structures
   into account - how?
 
 - The nature of a "representation" is that it is *not the
@@ -305,7 +308,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 
 - For ML, recognition is more important than reality: the "AI" is not
   trying to build a world, but to translate it into something it can
-  "see".
+  "see" so that it can process it further [fn:13]
 
 * Nile example: transformation
 
@@ -346,11 +349,11 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   patterns within the data
 
 - A model represents an idea greater than the sum of its parts (also:
-  "The whole is greater than the sum of its parts")[fn:13]
+  "The whole is greater than the sum of its parts")[fn:14]
 
 - Machines, unlike humans, cannot comprehend these Gestalt patterns as
   a whole, they can only sequentially process the components of a
-  pattern[fn:14].
+  pattern[fn:15].
 
 - There are many different types of models, including:
   + Mathematical equations
@@ -358,7 +361,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   + Logical if/else rules (conditional structures)
   + Groupings of data (clusters)
 
-- Typically , the machine does not pick the model - it is picked by a
+- Typically, the machine does not pick the model - it is picked by a
   human depending on the learning task and the type of data available
 
 * Nile example - modeling
@@ -419,7 +422,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   #+caption: Modeling example in physics (Lantz, 2019)
   [[../img/1_lantz_5.png]]
 
-- In R: ~g~ is the acceleration due to gravity[fn:15]
+- In R: ~g~ is the acceleration due to gravity[fn:16]
   #+begin_src R
     x <- c(4.9,19.6,44.1,78.5) # distance observations
     t <-c(1,2,3,4)  # time observations
@@ -497,7 +500,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   4. Medical models identify diagnostic patterns
 
 - These patterns were always there but had not been identified/seen
-  prior to presenting the information in a different format.[fn:16]
+  prior to presenting the information in a different format.[fn:17]
 
 * Nile example - training a density model
 
@@ -603,7 +606,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   #+caption: Machines cannot do heuristics (Lantz, 2019)
   [[../img/1_lantz_6.png]]
 
-- [ ] Could "a little bias" also be useful?[fn:17]
+- [ ] Could "a little bias" also be useful?[fn:18]
 
 * Evaluation + overfitting
 #+attr_html: :width 400px
@@ -633,7 +636,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 - Famous noise that turned into gold: [[https://www.esa.int/Science_Exploration/Space_Science/Herschel/Cosmic_Microwave_Background_CMB_radiation][cosmic microwave background]]
   radiation that is attributed to an echo of the 'Big Bang'
 
-- Modeling noise is called /overfitting/.[fn:18]
+- Modeling noise is called /overfitting/.[fn:19]
   #+attr_html: :width 500px
   #+caption: Overfitting (Lantz, 2019)
   [[../img/1_lantz_overfitting.jpg]]
@@ -777,32 +780,35 @@ rabbit out of a hat when needed. This has often worked for me!
 the idea of a representation: /"Ceci n'est pas une pipe"/ because it's
 an image of a pipe, and not the pipe itself.
 
-[fn:13]In visual perception, the idea of a model summarizing data is
+[fn:13]Contrary to humans, for whom "seeing is believing", which
+implies that we cannot see without processing.
+
+[fn:14]In visual perception, the idea of a model summarizing data is
 illustrated by the six Gestalt (German for "shape") principles: each
 of them implies not just the pixels of the image but a pattern that
 leads a human perceiving more than just the pattern itself.
 
-[fn:14]This was one of the critiques of AI by philosopher Hubert
+[fn:15]This was one of the critiques of AI by philosopher Hubert
 Dreyfus ([[https://en.wikipedia.org/wiki/Hubert_Dreyfus#Dreyfus'_criticism_of_AI][see Wikipedia here]] and here for a [[https://debategraph.org/Details.aspx?nid=2785][graph representation]]).
 
-[fn:15]For the back story on this, I asked a fully trained model,
+[fn:16]For the back story on this, I asked a fully trained model,
 ChatGPT: "How far does an object of 1 kg fall in 1 second?" - very
 complete answer, check it out: [[https://tinyurl.com/mr2sm6zx][tinyurl.com/mr2sm6zx]].
 
-[fn:16]There is also the danger here - all predictions are stochastic
+[fn:17]There is also the danger here - all predictions are stochastic
 in nature, i.e. they are probabilistic predictions, likelihoods,
 only. And the testing as well as the evaluation is rife with
 assumptions. One may ask: how permanent are the results, which are
 unlike gravity, subject to cultural definitions ("fraud", "disorder",
 "disease") hence not as objective as physical, observable laws?
 
-[fn:17]Bias (like presets) allows us to favor some choices over others
+[fn:18]Bias (like presets) allows us to favor some choices over others
 and discard some choices as irrelevant (or immoral/toxic). The net
 effect could be that we become more action-oriented and less bogged
 down by search. Bias is also how ML algorithms choose among many ways
 to understand data.
 
-[fn:18]Compare this with the very similar looking diagram earlier, the
+[fn:19]Compare this with the very similar looking diagram earlier, the
 linear trendline modeling of the ~Nile~ time series data. Underfitting
 misses out on available information, while overfitting interprets
 noise (irrelevant information) as meaningful for the pattern.
