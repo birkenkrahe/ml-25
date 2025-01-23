@@ -133,8 +133,8 @@ influences the prediction? Can the prediction be validated, and how?
 
 * Week 2: Introduction to machine learning
 
-- [ ] Extending and testing a decision tree model
-- [ ] 
+- [X] Extending and testing a decision tree model
+- [ ] Review/Preview of last week (incl. DataCamp)
 
 ** DONE Testing and improving a classification model (lab)
 
@@ -147,7 +147,7 @@ influences the prediction? Can the prediction be validated, and how?
   if you submit incomplete solutions, you lose points.
 
 
-** TODO Lesson Review/Test Preview:
+** DONE Lesson Review/Test Preview:
 
 1. Which of these is an optimization task for machine learning?
    #+begin_quote
@@ -166,13 +166,13 @@ influences the prediction? Can the prediction be validated, and how?
    may be achieved indirectly by performing (many) tasks. A *strategy*
    is a process (usually of multiple steps) to achieve a goal.
 
-   Example: Spam identification
+   Example: *Spam identification*
    - Identifying whether an email is spam is a classification *task*.
    - Improving the time spent on processing emails is a *goal*.
    - Using ML to classify spam, refine models over time, and automate
      filtering to unclutter the inbox is a *strategy*.
 
-   Example: Optimize energy use
+   Example: *Optimize energy use*
    - Balance different energy sources with ML is a *task*.
    - Reduce overall energy costs while maintaining comfort is a *goal*.
    - Using ML to predict energy usage patterns, adapt settings in
@@ -251,7 +251,8 @@ influences the prediction? Can the prediction be validated, and how?
 
 9. Is there a limit to the features that can (or should) be used?
    #+begin_quote
-   There is no theoretical limit, quite the opposite. 
+   There is no theoretical limit, quite the opposite. But in terms of
+   processability, there is - dimensional reduction must be done.
    #+end_quote
 
 10. What should you maximize, and what should you minimize: Sample or
@@ -260,7 +261,6 @@ influences the prediction? Can the prediction be validated, and how?
     You should maxmimize the sample (the data you're using), and you
     cannot manipulate the population because it's a real world fact.
     #+end_quote
-
 
 ** TODO Home assignment: Fitting a linear model to compute g
 

@@ -225,27 +225,27 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 #+attr_html: :width 400px
 [[../img/1_sheldon.png]]
 
-              - *Data storage* utilizes observation, memory, and recall to provide a
-                factual basis for further reasoning
+- *Data storage* utilizes observation, memory, and recall to provide a
+  factual basis for further reasoning
 
-              - Storage needs to take software and hardware conditions into
-                account - how?[fn:10]
+- Storage needs to take software and hardware conditions into
+  account - how?[fn:10]
 
-              - You need to store raw data selectively - *more data* does not
-                necessarily mean *more information* (too much data can obscure what
-                you're looking for) and carries a performance overhead
+- You need to store raw data selectively - *more data* does not
+  necessarily mean *more information* (too much data can obscure what
+  you're looking for) and carries a performance overhead
 
-              - Remember studying for an exam - do you gorge yourself on all
-                available details or do you select questions and answers that were
-                discussed in class?[fn:11]
+- Remember studying for an exam - do you gorge yourself on all
+  available details or do you select questions and answers that were
+  discussed in class?[fn:11]
 
-              - See Kupek (2023): "[[https://stackoverflow.blog/2023/01/04/getting-your-data-in-shape-for-machine-learning/][Getting your data in shape for machine learning]]"
-                with a (Python) Google Colaboratory [[https://colab.research.google.com/drive/1mg2WRO7_DIc1U_0Q1NO7ou6C4F89NuWY?usp=sharing][notebook for coding examples]].
+- See Kupek (2023): "[[https://stackoverflow.blog/2023/01/04/getting-your-data-in-shape-for-machine-learning/][Getting your data in shape for machine learning]]"
+  with a (Python) Google Colaboratory [[https://colab.research.google.com/drive/1mg2WRO7_DIc1U_0Q1NO7ou6C4F89NuWY?usp=sharing][notebook for coding examples]].
 
 * Nile example: data storage
 
-- To run the code below, open [[https://tinyurl.com/2mnv425w][tinyurl.com/2mnv425w]], save the
-  file to ~1_ml_intro_practice.org~ and open it in Emacs.
+- To run the code below, open [[https://tinyurl.com/2mnv425w][tinyurl.com/2mnv425w]], save the file to
+  ~nile.org~ and open it in Emacs.
 
 - Example: the following numbers come from R's ~Nile~ data set:
   #+begin_example
@@ -286,10 +286,15 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   #+attr_html: :width 400px
   [[../img/1_lantz_dramcapacitor.png]]
 
-- You can look at the text file using ~notepad~:
+- You can look at the text file using ~notepad~ (Windows) or =cat=
+  (Linux):
   #+begin_src R :results silent
     ##shell(cmd="notepad ..\\data\\Nile.txt")
     system("cat ../data/Nile.txt")
+  #+end_src
+
+  #+begin_src R
+    system("ping lyon.edu")
   #+end_src
 
 * Abstraction = transform + train
@@ -300,8 +305,8 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 - *Abstraction* involves translating stored data into broader
   representations and concepts
 
-- [ ] Abstraction needs to take available computing data structures
-  into account - how?
+- Abstraction needs to take available computing data structures into
+  account - how?
 
 - The nature of a "representation" is that it is *not the
   original* [fn:12]
