@@ -242,10 +242,10 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 - See Kupek (2023): "[[https://stackoverflow.blog/2023/01/04/getting-your-data-in-shape-for-machine-learning/][Getting your data in shape for machine learning]]"
   with a (Python) Google Colaboratory [[https://colab.research.google.com/drive/1mg2WRO7_DIc1U_0Q1NO7ou6C4F89NuWY?usp=sharing][notebook for coding examples]].
 
-* Nile example: data storage
+* DONE Nile example: data storage
 
-- To run the code below, open [[https://tinyurl.com/2mnv425w][tinyurl.com/2mnv425w]], save the file to
-  ~nile.org~ and open it in Emacs.
+- To run the code below, open [[https://tinyurl.com/2mnv425w][tinyurl.com/2mnv425w]], save the
+  file to ~1_ml_intro_practice.org~ and open it in Emacs.
 
 - Example: the following numbers come from R's ~Nile~ data set:
   #+begin_example
@@ -286,15 +286,10 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   #+attr_html: :width 400px
   [[../img/1_lantz_dramcapacitor.png]]
 
-- You can look at the text file using ~notepad~ (Windows) or =cat=
-  (Linux):
+- You can look at the text file using ~notepad~:
   #+begin_src R :results silent
     ##shell(cmd="notepad ..\\data\\Nile.txt")
     system("cat ../data/Nile.txt")
-  #+end_src
-
-  #+begin_src R
-    system("ping lyon.edu")
   #+end_src
 
 * Abstraction = transform + train
@@ -315,7 +310,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   trying to build a world, but to translate it into something it can
   "see" so that it can process it further [fn:13]
 
-* Nile example: transformation
+* DONE Nile example: transformation
 
 - ~Nile~ example: earlier, we stored integer numbers in memory. A
   convenient representation in R involves choosing a *data structure*
@@ -326,14 +321,125 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   1) read the text file ~read.table~ as a ~data.frame~
   2) remove column name with ~colnames~
   3) create time series with ~ts~ from data frame
-  #+begin_src R :results silent
+  #+begin_src R :results output
     nile_df <- read.table(
       file="../data/Nile.txt",   # read from text file
-      sep=" ",                  # entries separated by empty space
+      sep="",                  # entries separated by empty space
       header=FALSE)             # no 1st row with attribute information
     colnames(nile_df) <- NULL
-    nile_ts <- ts(nile_df,start=1871)
+    ##nile_df
+    nile_ts <- ts(nile_df,start=1871) # convert data into time-series
+    nile_ts
   #+end_src
+
+  #+RESULTS:
+  #+begin_example
+  Time Series:
+  Start = 1871 
+  End = 1970 
+  Frequency = 1 
+         [,1]
+    [1,] 1120
+    [2,] 1160
+    [3,]  963
+    [4,] 1210
+    [5,] 1160
+    [6,] 1160
+    [7,]  813
+    [8,] 1230
+    [9,] 1370
+   [10,] 1140
+   [11,]  995
+   [12,]  935
+   [13,] 1110
+   [14,]  994
+   [15,] 1020
+   [16,]  960
+   [17,] 1180
+   [18,]  799
+   [19,]  958
+   [20,] 1140
+   [21,] 1100
+   [22,] 1210
+   [23,] 1150
+   [24,] 1250
+   [25,] 1260
+   [26,] 1220
+   [27,] 1030
+   [28,] 1100
+   [29,]  774
+   [30,]  840
+   [31,]  874
+   [32,]  694
+   [33,]  940
+   [34,]  833
+   [35,]  701
+   [36,]  916
+   [37,]  692
+   [38,] 1020
+   [39,] 1050
+   [40,]  969
+   [41,]  831
+   [42,]  726
+   [43,]  456
+   [44,]  824
+   [45,]  702
+   [46,] 1120
+   [47,] 1100
+   [48,]  832
+   [49,]  764
+   [50,]  821
+   [51,]  768
+   [52,]  845
+   [53,]  864
+   [54,]  862
+   [55,]  698
+   [56,]  845
+   [57,]  744
+   [58,]  796
+   [59,] 1040
+   [60,]  759
+   [61,]  781
+   [62,]  865
+   [63,]  845
+   [64,]  944
+   [65,]  984
+   [66,]  897
+   [67,]  822
+   [68,] 1010
+   [69,]  771
+   [70,]  676
+   [71,]  649
+   [72,]  846
+   [73,]  812
+   [74,]  742
+   [75,]  801
+   [76,] 1040
+   [77,]  860
+   [78,]  874
+   [79,]  848
+   [80,]  890
+   [81,]  744
+   [82,]  749
+   [83,]  838
+   [84,] 1050
+   [85,]  918
+   [86,]  986
+   [87,]  797
+   [88,]  923
+   [89,]  975
+   [90,]  815
+   [91,] 1020
+   [92,]  906
+   [93,]  901
+   [94,] 1170
+   [95,]  912
+   [96,]  746
+   [97,]  919
+   [98,]  718
+   [99,]  714
+  [100,]  740
+  #+end_example
 
 - The transformed data set contains additional information that was
   not present in the numbers themselves. We have used additional
@@ -342,7 +448,16 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   #+begin_src R
     str(nile_ts)
     class(nile_ts)
+    str(Nile)
   #+end_src
+
+  #+RESULTS:
+  :  Time-Series [1:100, 1] from 1871 to 1970: 1120 1160 963 1210 1160 1160 813 1230 1370 1140 ...
+  :  - attr(*, "dimnames")=List of 2
+  :   ..$ : NULL
+  :   ..$ : NULL
+  : [1] "ts"
+  :  Time-Series [1:100] from 1871 to 1970: 1120 1160 963 1210 1160 1160 813 1230 1370 1140 ...
 
 * Modeling
 #+attr_html: :width 600px
@@ -369,7 +484,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
 - Typically, the machine does not pick the model - it is picked by a
   human depending on the learning task and the type of data available
 
-* Nile example - modeling
+* DONE Nile example - modeling
 
 - As an example of statistical inference, we use the time series data
   of ~Nile~ to create a statistical model
@@ -381,10 +496,15 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
     summary(Nile) # 5-point summary + sample average
   #+end_src
 
+  #+RESULTS:
+  : [1] "Nile"    "nile_df" "nile_ts"
+  :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  :   456.0   798.5   893.5   919.4  1032.5  1370.0
+
 - To visualize this model, you can use ~boxplot~ (and ~abline~ to add the
   ~mean~):
-  #+begin_src R :results graphics file :file ../img/lantz_boxplot.png
-    boxplot(Nile,
+  #+begin_src R :results graphics file :file boxplot.png
+    boxplot(Nile,  # target data
             las=1, # reorient x-axis labels
             horizontal=TRUE, # show boxplot horizontally
             main="Annual flow of the Nile at Aswan\nbetween 1871 and 1970",
@@ -394,14 +514,49 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
            lwd=2)         # double line width
   #+end_src
 
+  #+RESULTS:
+  [[file:boxplot.png]]
+
 - The /generic/ function ~summary~ collapses the abstraction (time series
   representation) into a statistical summary
+
+- The data pattern (distribution) is lost here:
+  #+begin_src R :file plot.png :results output graphics file :exports both :comments both :tangle yes :noweb yes
+    plot(Nile)  # automatically picks a line plot
+  #+end_src
+
+  #+RESULTS:
+  [[file:plot.png]]
+
+- What about the dip? When was it?
+  #+begin_src R
+    time(Nile)[Nile==min(Nile)]
+  #+end_src
+
+  #+RESULTS:
+  : [1] 1913
 
 - That ~summary~ is /generic/ is relevant because it means that it can
   deal with many different abstractions (and models, too):
   #+begin_src R
     methods(summary)
   #+end_src
+
+  #+RESULTS:
+  #+begin_example
+   [1] summary.aov                    summary.aovlist*               summary.aspell*               
+   [4] summary.check_packages_in_dir* summary.connection             summary.data.frame            
+   [7] summary.Date                   summary.default                summary.ecdf*                 
+  [10] summary.factor                 summary.glm                    summary.infl*                 
+  [13] summary.lm                     summary.loess*                 summary.manova                
+  [16] summary.matrix                 summary.mlm*                   summary.nls*                  
+  [19] summary.packageStatus*         summary.POSIXct                summary.POSIXlt               
+  [22] summary.ppr*                   summary.prcomp*                summary.princomp*             
+  [25] summary.proc_time              summary.srcfile                summary.srcref                
+  [28] summary.stepfun                summary.stl*                   summary.table                 
+  [31] summary.tukeysmooth*           summary.warnings              
+  see '?methods' for accessing help and source code
+  #+end_example
 
 * ML training
 #+attr_html: :width 400px
