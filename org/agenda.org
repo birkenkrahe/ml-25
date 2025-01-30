@@ -261,13 +261,14 @@ influences the prediction? Can the prediction be validated, and how?
     cannot manipulate the population because it's a real world fact.
     #+end_quote
 
-
 * Week 3: Machine learning models overview
 
 - [X] *Projects:* Enter your ideas now - sprint review: Fri 7-Feb
 - [X] *Review*: DataCamp - Understanding Machine Learning Models
 - [X] *Lecture*: Intro to ML with code along (continued)
 - [ ] *Test 2* is live - deadline Tuesday 4-Feb (100%).
+- [ ] The test does not include today's content.
+- [ ] Next up: 
 
 ** DONE Projects - sprint review coming soon
 #+attr_html: :width 600px: 
@@ -377,11 +378,15 @@ influences the prediction? Can the prediction be validated, and how?
 
 ** TODO Model training, generalization, and evaluation
 
-- *Review:* What did you learn in the last couple of sessions?
+- Everybody: What did you learn in the last couple of sessions?
+
+- Summarize:
+
+  1) 
 
 - What (if anything) surprised / amazed / shocked you?
 
-- Summarize:
+  1) 
 
 ** TODO Sample answers
 
@@ -420,11 +425,20 @@ influences the prediction? Can the prediction be validated, and how?
      Training 
      #+end_quote
 
-- Surprised/amazed/shocked:
+- What surprised/amazed/shocked me:
   #+begin_quote
-  1. So many project ideas (check the Google Chat).
+  1. So many new project ideas (check the Google Chat).
   2. AI changes the game somewhat but not much (MLOps).
   3. Most ML isn't generative AI but traditional stats.
+  4. High attendance & classroom spirits despite the cold.
   #+end_quote
 
 ** TODO Home assignment: Fitting a linear model to compute g 
+
+** NEXT R Review: Data structures / Managing / Exploring
+
+- The DataCamp lessons & our classroom work require "Intermediate R".
+
+- Download and work through: [[https://tinyurl.com/R-data-structures][tinyurl.com/R-data-structures]] (raw).
+
+

@@ -750,7 +750,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   3) "generalization reasoning models" (in response to your interest)
   4) "generalization models" (in response to the too specific result)
   5) "generalization machine learning" (result still too
-     specific)[fn:20]
+     specific)[fn:18]
 
 - *Human heuristics* are guided by emotion and can be fallible -
   e.g. "availability heuristics", the tendency to estimate likelihood
@@ -767,7 +767,7 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   #+caption: Machines cannot do heuristics (Lantz, 2019)
   [[../img/1_lantz_6.png]]
 
-- [ ] Could "a little bias" also be useful?[fn:18]
+- Could "a little bias" also be useful?[fn:19]
 
 * Evaluation + overfitting
 #+attr_html: :width 400px
@@ -795,9 +795,9 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   4) *complex* phenomena whose impact appears to be random
 
 - Famous noise that turned into gold: [[https://www.esa.int/Science_Exploration/Space_Science/Herschel/Cosmic_Microwave_Background_CMB_radiation][cosmic microwave background]]
-  radiation that is attributed to an echo of the 'Big Bang'
+  radiation that is attributed to an echo of the 'Big Bang'.[fn:20] 
 
-- Modeling noise is called /overfitting/.[fn:19]
+- Modeling noise is called /overfitting/.[fn:21]
   #+attr_html: :width 500px
   #+caption: Overfitting (Lantz, 2019)
   [[../img/1_lantz_overfitting.jpg]]
@@ -872,10 +872,6 @@ Canvas.
 - Serrano (2021). Grokking Machine Learning.
 
 * Footnotes
-
-[fn:20]The Google ML crash course has a nice video on "generalization"
-in ML [[https://developers.google.com/machine-learning/crash-course/overfitting/generalization][here]]. This [[https://developers.google.com/machine-learning][whole no-code course]] seems quite good albeit a little
-on the naive side.
 
 [fn:1] *Statistical* methods make assumptions about the nature of the
 data. If these assumptions are violated the models built with the data
@@ -967,13 +963,23 @@ assumptions. One may ask: how permanent are the results, which are
 unlike gravity, subject to cultural definitions ("fraud", "disorder",
 "disease") hence not as objective as physical, observable laws?
 
-[fn:18]Bias (like presets) allows us to favor some choices over others
+[fn:18]The Google ML crash course has a nice video on "generalization"
+in ML [[https://developers.google.com/machine-learning/crash-course/overfitting/generalization][here]]. This [[https://developers.google.com/machine-learning][whole no-code course]] seems quite good albeit a little
+on the naive side.
+
+[fn:19]Bias (like presets) allows us to favor some choices over others
 and discard some choices as irrelevant (or immoral/toxic). The net
 effect could be that we become more action-oriented and less bogged
-down by search. Bias is also how ML algorithms choose among many ways
-to understand data.
+down by search. Bias (through hyperparameter tuning) is also how ML
+algorithms choose among many ways to understand data. Transparency of
+existing bias is a greater issue than the bias itself.
 
-[fn:19]Compare this with the very similar looking diagram earlier, the
+[fn:20]Cosmic Microwave Background radiation is considered to be the
+"oldest" light in the universe. Attributed to the Big Bang, it has
+cooled and weakened considerably so that it now resides in the
+microwave domain (from several hundred nano-meters to centimeters).
+
+[fn:21]Compare this with the very similar looking diagram earlier, the
 linear trendline modeling of the ~Nile~ time series data. Underfitting
 misses out on available information, while overfitting interprets
 noise (irrelevant information) as meaningful for the pattern.
