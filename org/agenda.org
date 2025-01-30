@@ -261,9 +261,8 @@ influences the prediction? Can the prediction be validated, and how?
     cannot manipulate the population because it's a real world fact.
     #+end_quote
 
+
 * Week 3: Machine learning models overview
-#+attr_html: :width 400px: 
-[[../img/test1.png]]
 
 - [X] *Projects:* Enter your ideas now - sprint review: Fri 7-Feb
 - [X] *Review*: DataCamp - Understanding Machine Learning Models
@@ -375,5 +374,57 @@ influences the prediction? Can the prediction be validated, and how?
     *collapsing* features into a single underlying factor.
     #+end_quote
 
+
+** TODO Model training, generalization, and evaluation
+
+- *Review:* What did you learn in the last couple of sessions?
+
+- What (if anything) surprised / amazed / shocked you?
+
+- Summarize:
+
+** TODO Sample answers
+
+- What did you learn: Limits of machine learning
+  
+  1) ML models are... 
+     #+begin_quote
+     ...highly inflexible - strictly parametrized and subject to an
+     immutable workflow.
+     #+end_quote
+
+  2) The ML workflow always includes:
+     #+begin_quote
+     1. data set preparation and analysis
+     2. data transformation
+     3. model training & customization
+     4. model testing & evaluation
+     #+end_quote
+     
+  3) Manual examples you saw included: 
+     #+begin_quote
+     Medical diagnosis (decision tree) and Nile data (workflow)
+          #+end_quote
+
+  4) =Nile= data were: 
+     #+begin_quote
+     1. stored in an external file (=write=)
+     2. read into memory (=read.table=)
+     3. transformed to a time-series (=ts=)
+     4. modeled statistically (=summary=)
+     5. modeled graphically (=boxplot=, =plot=)
+     #+end_quote
+
+  5) What remains:
+     #+begin_quote
+     Training 
+     #+end_quote
+
+- Surprised/amazed/shocked:
+  #+begin_quote
+  1. So many project ideas (check the Google Chat).
+  2. AI changes the game somewhat but not much (MLOps).
+  3. Most ML isn't generative AI but traditional stats.
+  #+end_quote
 
 ** TODO Home assignment: Fitting a linear model to compute g 

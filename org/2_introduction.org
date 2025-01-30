@@ -749,7 +749,8 @@ Download the practice file from [[https://tinyurl.com/ml-intro-practice-org][tin
   2) "generalization reasoning" (in response to Google's completion)
   3) "generalization reasoning models" (in response to your interest)
   4) "generalization models" (in response to the too specific result)
-  5) "generalization machine learning" (result still too specific)
+  5) "generalization machine learning" (result still too
+     specific)[fn:20]
 
 - *Human heuristics* are guided by emotion and can be fallible -
   e.g. "availability heuristics", the tendency to estimate likelihood
@@ -835,7 +836,7 @@ Canvas.
 | Overfitting      | Modeling noise instead of signals      |
 | Underfitting     | Model is too simple for the data       |
 
-* TODO Practice: ML Code Glossary
+* TODO Practice/Assignment: ML Code Glossary
 
 - Create a table in Org-mode by typing ~|~ for each new column
 
@@ -871,6 +872,10 @@ Canvas.
 - Serrano (2021). Grokking Machine Learning.
 
 * Footnotes
+
+[fn:20]The Google ML crash course has a nice video on "generalization"
+in ML [[https://developers.google.com/machine-learning/crash-course/overfitting/generalization][here]]. This [[https://developers.google.com/machine-learning][whole no-code course]] seems quite good albeit a little
+on the naive side.
 
 [fn:1] *Statistical* methods make assumptions about the nature of the
 data. If these assumptions are violated the models built with the data
