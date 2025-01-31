@@ -1,444 +1,388 @@
 #+title: Agenda Notebook
 #+author: Marcus Birkenkrahe
-#+subtitle: DSC 305 - Machine Learning
-#+SEQ_TODO: TODO NEXT IN_PROGRESS | DONE CANCELLED
-#+startup: overview hideblocks indent entitiespretty
+#+subtitle: CSC 410 - Data Communications and Networking - Spring 2025
+#+SEQ_TODO: TODO NEXT IN_PROGRESS PRACTICE WAITING | DONE CANCELLED
+#+startup: overview hideblocks indent
 :PROPERTIES:
 :header-args:C:      :main yes :includes <stdio.h> :results output :exports both
 :header-args:python: :session *Python* :python python3 :results output :exports both
 :header-args:R:      :session *R* :results graphics output file :exports both
 :header-args:C++:    :main yes :includes <iostream> :results output :exports both
 :END:
-* Week 1: Overview
-#+attr_html: :width 600px: 
-#+caption: Salvador Dali, The Persistence of Memory (1931)
+* Week 1: Course overview
+#+attr_html: :width 400px
 [[../img/cover.jpg]]
 
-What inspired this painting by Dali? Is the answer a prediction? What
-influences the prediction? Can the prediction be validated, and how?
+- [X] Course overview
+- [X] Installing Cisco Packet Tracer
+- [X] Introducing Networks and Protocols
+- [ ] Getting started with Cisco Packet Tracer
+- [ ] C Programming Basics Review: "FizzBuzz"
 
-#+begin_quote
-- Yes, the answer to the question is a prediction informed by
-  historical data.
+** DONE [[file:1_overview.org][Course overview]]: Content, Grading, Projects, Platforms
 
-- It is influenced by Dali's own statements, historical context, such
-  as cultural events at the time, and Dali's own experiences.
+** DONE Review (Overview)
 
-- The prediction can be partially validated but not proven.
-
-- "The soft watches are an unconscious symbol of the relativity of
-  space and time [like in Einstein's theory of special relativity]."
-  (Adés)
-
-- "The soft watches were inspired by the surrealist perception of a
-  Camembert [cheese] melting in the sun." (Prigogine)
-#+end_quote
-
-- [X] Overview: Course content, grading, tools, book, etc.
-- [X] On completing DataCamp assignments
-- [X] Introduction to Machine Learning (no code)
-- [ ] Updating a decision tree model (no code)
-
-** DONE On completing DataCamp assignments
-
-1. Watch the video first with full attention.
-2. Write down immediate questions for later.
-3. Build a notebook for DataCamp courses.
-4. Recreate the individual steps in the video.
-5. Create or import datasets.
-6. Look up function definitions.
-7. Solve the exercises outside of DataCamp.
-8. If you loathe Emacs, use DataLab or Colab instead.
-9. Don't ignore nagging questions that you have.
-10. Start a journal to summarize what you've learnt.
-
-** DONE Review
-
-1. What is "Git"?
+1. Remember at least 2 topics that will be addressed in this class.
    #+begin_quote
-   Git is version control software that supports the development and
-   maintenance of (large) software projects, e.g. Linux, but also
-   any sizeable R package development.
+   1. Cloud computing
+   2. Microservice technologies
+   3. Networking and Internet protocols
+   4. Cisco Packet Tracer simulation
+   5. Socket programming with C
    #+end_quote
 
-2. Which machine learning techniques will we not cover?
+2. What is "Termux"?
    #+begin_quote
-   Machine learning techniques that use "black-box" models based on
-   neural network architectures.
+   A Linux emulator for Android phones.
    #+end_quote
 
-3. What is a "literate program"?
+3. Why is Linux relevant for computer networks?
    #+begin_quote
-   A program that is written primarily for humans, that includes
-   documentation, code, and output, and that can be tangled into
-   source code only, or woven into documentation only.
+   1. Dominant operating system for servers (97% of web servers, 90%
+      of cloud computing servers, > 70% of global market overall).
+   2. Free and open source.
+   3. Core platform for microservices like Docker and Kubernetes.
+   4. Powerful command-line networking tools for configuration,
+      firewalling, monitoring, analysis.
    #+end_quote
 
-4. What is *confirmation bias*?
+4. What is an Internet "packet"?
    #+begin_quote
-   Confirmation bias is the tendency to search for, interpret, and
-   remember information in a way that *confirms* one's pre-existing
-   beliefs or hypothesis (systematic assumptions) while giving less
-   consideration to evidence that contradicts them.
-
-   A colloquial term for confirmation bias is "tunnel vision".
+   An Internet packet (= header + payload) is a small unit of data
+   transmitted over a network as part of a message. Packets are
+   independently routed through the network and then reassembled at
+   their destination to recreate the original message.
    #+end_quote
 
-5. Give an example for confirmation bias?
+5. What is Cisco Packet Tracer?
    #+begin_quote
-   Someone who believes that climate change is a hoax might focus on
-   cold weather as proof that global warming isn't real while ignoring
-   historical evidence to the contrary.
-
-   Conversely, someone who believes in climate change might
-   overemphasize a single extreme weather event like a hurricane, as
-   proof of climate change while ignoring that individual events
-   usually have multiple factors.
+   Cisco packet tracer is a cross-platform network simulation tool
+   developed by Cisco Systems, the dominant firm in networking.
    #+end_quote
 
-6. *Let's discuss:* What is a good *response* to confirmation bias?
+** IN_PROGRESS Introducing Networks and Protocols
+
+- [X] Network programming and C
+- [ ] OSI layer model
+- [ ] TCP/IP reference model
+- [ ] The Internet Protocol (IP)
+- [ ] IPv4 and IPv6 addresses
+- [ ] Domain names
+- [ ] Internet protocol routing
+- [ ] Network address translation
+- [ ] Client-Server paradigm
+- [ ] Listing your IP addresses using C
+
+* Week 2: Introduction to networking
+#+attr_html: :width 600px:
+#+caption: Building (Retro)
+[[../img/builder.jpg]]
+
+- [X] The Internet is C
+- [X] Layering principle
+- [X] OSI model
+- [ ] Cisco Packet Tracer
+- [ ] Test 1 (Deadline Friday, 31 January)
+
+** DONE Review / Preview (next test sometime this week)
+
+1. What is a network?
    #+begin_quote
-   1. Actively look for information that challenges your beliefs.
-   2. Engage in civilized debate with those who disagree with you.
-   3. Ask neutral questions - not "Why" but "What" and "How".
-   4. Rely on multiple sources created over a longer period of time.
-   5. Challenge your own views through systematic self-reflection.
-   6. Balance data-driven, mathematical, and heuristic methods.
-   7. Make yourself more aware of the relative meaning of objectivity.
-   8. Take time out from your hobby horses.
-   9. Avoid social media like the plague.
-   10. Eat and sleep well.
+   A collection of interconnected nodes or devices that exchange data.
    #+end_quote
 
-7. What's a "captcha"?
+2. Which areas of mathematics are most relevant for networks?
    #+begin_quote
-   "Captcha" stands for "Completely Automated Public Turing" test to
-   tell computers and humans apart. They range from media-based (e.g.
-   text/image recognition) to behavior-based (e.g. motion patterns).
+   - *Graph theory* (theory of nodes connected by weighted edges) for
+     network optimization and routing algorithms.
+   - *Probability and statistics* for traffic modeling and performance
+     analysis.
+   - *Fourier analysis* (approximations of general functions by sums of
+     simpler trigonometric functions) for signal processing.
    #+end_quote
 
-8. What's OCR?
+3. In which sense it "The Internet is C" true?
    #+begin_quote
-   Many old books and newspapers were digitized using Optical
-   Character Recognition (OCR) software. When OCR struggled with
-   certain words or symbols, von Ahn's reCaptcha presented users with
-   two words: One that the software had difficulty recognizing, and
-   one with a known answer. If their response to the known word was
-   correct, then their response to the unknown word was used to
-   improve the digitization process - an example of both
-   "crowdsourcing" (as a human process) and labeling (as a machine
-   learning step). Check out von Ahn's own explanation of "human
-   computation" ([[https://youtu.be/PQ-xzwj_p_4?si=vD6-OoHcIwMWHnmh][BigThink, 2014]]) - shared in the group chat.
+   - Network stacks (layered software supporting the network) is
+     programmed in C.
+   - All network-relevant (processes, files, sockets) kernel code is
+     programmed in C.
    #+end_quote
 
-* Week 2: Introduction to machine learning
-
-- [ ] Extending and testing a decision tree model
-- [ ] *Lecture*: Introduction to machine learning
-
-** DONE Testing and improving a classification model (lab)
-
-- This is an example of a classroom exercise that you can use to get
-  bonus points (which you may need to balance bad test results or
-  missing assignments).
-
-- If you missed class, or if you did not finish in class, you can
-  submit this by the deadline. If you submit it after the deadline, or
-  if you submit incomplete solutions, you lose points.
-
-
-** DONE Lesson Review/Test Preview:
-
-1. Which of these is an optimization task for machine learning?
+4. Name at least two benefits of a "layering" approach to building:
    #+begin_quote
-   1) Improve energy use in an office
-   2) Predict election outcomes
-   3) Identify email spam
-   4) Detect fraudulent transactions
-   #+end_quote
-   #+begin_quote
-   While all options involve ML tasks like classification or
-   prediction, optimization refers to improving a process or a
-   resource allocation. Prediction and classification can *indirectly*
-   help to improve processes but that's not the primary purpose.
-
-   A *task* is something that you do directly. A *goal* is something that
-   may be achieved indirectly by performing (many) tasks. A *strategy*
-   is a process (usually of multiple steps) to achieve a goal.
-
-   Example: Spam identification
-   - Identifying whether an email is spam is a classification *task*.
-   - Improving the time spent on processing emails is a *goal*.
-   - Using ML to classify spam, refine models over time, and automate
-     filtering to unclutter the inbox is a *strategy*.
-
-   Example: Optimize energy use
-   - Balance different energy sources with ML is a *task*.
-   - Reduce overall energy costs while maintaining comfort is a *goal*.
-   - Using ML to predict energy usage patterns, adapt settings in
-     real-time, and balance power sources is a *strategy*.
+   - *Modularity* = independent design, development, maintenance
+   - *Abstraction* = layer details hidden from other layers
+   - *Interchangeability* = component replacement by layer
+   - *Interoperability* = different systems working together
    #+end_quote
 
-2. What is a key limitation of ML models? Example?
+5. Name at least two of the layers of the OSI model.
    #+begin_quote
-   Lack of flexibility. The model needs to be retrained, retuned and
-   retested if new data appear, and it can not infer logical steps
-   outside of its specific predictive or classification task.
-
-   Retraining especially (depending on the data) can come at a high
-   cost. An example are generative AI models (LLMs), or automated
-   driving models with real-world edge cases not found in training
-   data, or when sensors deliver poor data in real-time.
+   1) Application
+   2) Presentation
+   3) Session
+   4) Transport
+   5) Network
+   6) Data Link
+   7) Physical
    #+end_quote
 
-3. What's a major challenge when processing human language, and why?
-   #+begin_quote
-   The difficulty in interpreting audio and text data accurately.
+6. What does "on-premise" computing mean and what else is there?
+   #+caption: Cloud service models - car analogy (DataCamp, 2020)
+   #+attr_html: :width 600px
+   [[../img/services.png]]
 
-   Why: Variability of spoken language (dialects, intonations, noise),
-   temporal nature of data (time-series), multi-modality (emotion,
-   emphasis, intonation), and lack of annotated data.
-   #+end_quote
-   
-4. Which ethical issues with ML can you think of?
-   #+begin_quote
-   1) Privacy (training/test data)
-   2) Bias (e.g. educational ML)
-   3) Reliability in critical situations (e.g. medical ML)
-   4) Social pressure (to adopt or not adopt AI)
-   5) Copyright issues (e.g. public/private training data)
-   6) Decision power (e.g. self-driving cars, military applications)
-   7) Addiction and compulsion (to use AI instead of analog/manual)
-   8) Cheating (e.g. students)
-   9) Accountability (e.g. black-box methods like neural nets)
-   10) Job displacement and economic inequality (AI replacing job)
-   #+end_quote
+   #+begin_comment
+   - On-premise: Run infrastructrure (servers), platform (apps),
+   and (end-customer) software.
 
-5. Which data can and should be anonymized and is that relevant for
-   ML?
-   #+begin_quote
-   All confidential data (e.g. financial, health, survey) should be
-   anonymized. ML makes this difficult because it can use existing
-   features to identify/reconstruct actors and data that were deleted.
-   #+end_quote
+   - Cloud: Outsource infrastructure, platform(s), and software.
+   #+end_comment
 
-6. Define supervised and unsupervised learning with an example each.
-   #+begin_quote
-   1) *Supervised ML:* Training a model on a labeled dataset - each
-      input has a corresponding output. Model learns to map inputs to
-      outputs, and can apply this to unknown inputs. *Example:* Medical
-      diagnosis (= output) based on observed patient data (= input).
+7. What do different cloud services (business models) deliver?
+   #+caption: IaaS vs. PaaS vs. SaaS (DataCamp, 2020)
+   #+attr_html: :width 600px
+   [[../img/services1.png]]
 
-   2) *Unsupervised ML*: Training a model on an unlabeled dataset -
-      input is a pattern or a grouping, desired output is a structure
-      to the pattern or grouping. *Example*: Segmentation of customers
-      into clusters with similar buying behavior (= output) based on
-      customer purchasing behavior (= input).
-   #+end_quote
+8. What is the relationship between "control" and "abstraction" in
+   cloud computing?
+   #+caption: Control vs. Abstraction (DataCamp, 2020)
+   #+attr_html: :width 500px
+   [[../img/pyramid.png]]
 
-7. When and why are datasets split in machine learning? Issues?
-   #+begin_quote
-   Create separate training data (to build the model) and test data
-   (to evaluate the model). Issues include existing patterns (bias) in
-   the data (lack of randomization), missing data, missing features.
-   #+end_quote
+9. Who dominates the cloud market?
+   #+attr_html: :width 600px:
+   #+caption: Source: Synergy Research Group (not checked)
+   [[../img/cloud_market.png]]
 
-8. What are the earliest historical roots of machine learning?
-   #+begin_quote
-   Galton's statistical modeling using linear regression - his
-   presentation [[https://archive.org/details/1877GaltonTypicalLawsOfHeredity/mode/2up]["Typical Laws of Heredity" (1877)]].
-   #+end_quote
+10. What is the size of the global IT services market?
+    #+attr_html: :width 600px:
+    #+caption: Source: Precedence Research (not checked)
+    [[../img/it_market.png]]
 
-9. Is there a limit to the features that can (or should) be used?
-   #+begin_quote
-   There is no theoretical limit, quite the opposite. 
-   #+end_quote
-
-10. What should you maximize, and what should you minimize: Sample or
-    population?
     #+begin_quote
-    You should maxmimize the sample (the data you're using), and you
-    cannot manipulate the population because it's a real world fact.
+    The size of the market for cloud computing is 5.6% of the market
+    for global IT services.
+
+    The rest (estimated via ChatGPT - not checked):
+
+    | Segment                            | Bn USD |
+    |------------------------------------+--------|
+    | IT Infrastructure Management       |    300 |
+    | Managed IT Services                |    200 |
+    | Enterprise Software & Apps         |    250 |
+    | Consulting Services                |    150 |
+    | Cybersecurity                      |    120 |
+    | IT Support & Maintenance           |    100 |
+    | System Integration                 |     90 |
+    | Telecommunications & Connectivity  |     80 |
+    | Business Process Outsourcing (BPO) |     80 |
+    | Emerging Technologies              |     50 |
+    | Training & Professional Services   |     30 |
+    |------------------------------------+--------|
+    | *Total*                              |  *1,250* |
+
     #+end_quote
 
-* Week 3: Machine learning models overview
 
-- [X] *Projects:* Enter your ideas now - sprint review: Fri 7-Feb
-- [X] *Review*: DataCamp - Understanding Machine Learning Models
-- [X] *Lecture*: Intro to ML with code along (continued)
-- [ ] *Test 2* is live - deadline Tuesday 4-Feb (100%).
-- [ ] The test does not include today's content.
-- [ ] Next up: 
+** IN_PROGRESS [[./2_packettracer.org][Cisco Packet Tracer]]: Intro & Installation & Getting started
+
+* Week 3: TCP/IP & Cisco networks
+#+attr_html: :width 600px: 
+#+caption: The Nerd And The Network
+[[../img/nerd.jpg]]
+
+- [X] Cisco Packet Tracer Review
+- [X] TCP/IP model
+- [ ] IP addresses and domains
+- [ ] What is a Cisco network?
+- [ ] Test 1 (Deadline Friday, 31 January)
+
+** DONE Cisco Packet Tracer review
+
+1. Which physical equipment do you need to use Cisco Packet
+   Tracer?
+   #+begin_quote
+   Laptop or desktop computer with Windows, Linux or MacOS.
+   #+end_quote
+   
+2. What are things you can do with Cisco Packet Tracer?
+   #+begin_quote
+   1. Simulate physical equipment like a server rack.
+   2. Design, plan and test IP networks.
+   3. Configure wireless devices and wireless security.
+   4. Configure and program IoT devices such as sensors.
+   5. Build and configure smart home components.
+   6. Watch data flow across the network and watch packets.
+   7. Build a network topology from scratch.
+   8. Complete assessments towards a Cisco certificate.
+   #+end_quote
+
+3. Which connection is automatically picked for the network?
+   #+begin_quote
+   The Ethernet connection.
+   #+end_quote
+4. What's the difference between the PC and the server devices?
+   #+begin_quote
+   The server has =services=.
+   #+end_quote
+5. Can you change the MAC address of a device?
+   #+begin_quote
+   In the simulation tool yes, in reality no - the MAC address is
+   composed of two permanent parts: For the producer and the product.
+   #+end_quote
+
+6. Sketch the steps of our last lab exercise!
+   #+begin_quote
+   1) Open Cisco Packet Tracer app on the PC
+   2) Login with Cisco net academy using your Google account
+   3) Create a simple 2-host network (PC and server)
+   4) Set the MAC & IP address for PC (10.1.1.1), server (10.1.1.2)
+   5) Ping each device from the other
+   6) Open a web page on the PC using HTTP and HTTPS services
+   7) Switch off the HTTP service and try to connect again
+   #+end_quote
+
+7. Revisit your actions:
+   - Open the .pkt file in your app: tinyurl.com/demo-pkt
+   - =ping= the server from the PC
+   - =ping= the PC from the server
+   - Open a web page on the PC using the server
+   - Open a web page on the server using the PC
+
 
 ** DONE Projects - sprint review coming soon
 #+attr_html: :width 600px: 
 [[../img/projects.png]]
 
 
-** DONE DataCamp review questions and answers (test 2)
+** DONE Test 1
 
-1) What is the difference between *classification* and *regression*?
-   Provide examples of each.
+- Tests are not time limited per attempt
+- Only the first attempt is graded
+- Subsequent attempts are for drilling (final exam)
+- Tests are open book: use all resources that you can find
+- Tests were created with the help of ChatGPT
+- All course materials used up to now were used
+- Test 1 deadline is Friday 31 Jan (max 100%)
+- Test 1 is available only until Friday 7 Feb (max 50%)
+
+
+** DONE DataCamp review: CLoud Computing - Deployment
+
+1. Why is "cloud deployment" an issue and what is it?
    #+begin_quote
-   - *Classification* predicts a category, such as "Yes" or "No" (e.g.,
-     "Is this email spam?").
-   - *Regression* predicts a continuous value, such as a temperature or
-     stock price (e.g., "What will the temperature be tomorrow?").
+   The cloud computing environment can be hacked into.
+
+   Deployment means choosing between a private, a public or a hybrid
+   cloud. 
    #+end_quote
 
-2) Which *data structures* are suited to classification and regression
-   in R?
+2. How is Lyon's cloud computing environment deployed?
    #+begin_quote
-   - *Categorical* values are best stored as *factor* vectors with *levels*.
-   - *Continuous* values are best stored as *arrays* (like *numeric*
-     vectors, matrices)
-   - Both of these can be stored as *data frames*.
+   The infrastructure is hybrid:
+   - Sensitive data (students, grades, personnel) are private
+   - Some services are open to the public (Remote Desktop Service)
    #+end_quote
 
-   #+begin_src R :results output
-     class(matrix())
+3. What's "cloud bursting"?
+   #+begin_quote
+   The private cloud is over capacity and resources are temporarily
+   moved to the public cloud.
+   #+end_quote
+   
+4. What's the GDPR? What does it say?
+   #+begin_quote
+   General Data Protection Regulation in countries of the European
+   Union. A major pain in the butt for corporations. Very expensive.
+
+   - Users must give explicit consent to data collection
+   - Users must be notified of data breaches
+   - Personal information must be anonymized and encrypted
+   - Personal data cannot leave EU borders unless protected
+   - Violations incur fine of up to 4% of worldwide annual revenue
+
+   In the case of Amazon, that's $22 bn of $574 bn total, or $3 bn of
+   the revenue of AWS ($90 bn).
+   #+end_quote
+
+5. What are considered "personal data"? Why are they protected?
+   #+begin_quote
+   - Home address
+   - First and last name
+   - Email address
+   - Location data
+   - IP address
+   - Racial or ethnic origin
+   - Political opinions
+   - Sexual orientation
+   - Health-related data
+
+   Personal data can identify a person leading to potential identity
+   theft with regard to any or all of the categories above.
+   #+end_quote
+   
+
+** TODO Review: TCP/IP model
+
+1. Why do we need another model besides the OSI model at all?
+   #+begin_quote
+   - OSI was theoretical while TCP/IP was developed on real world
+     networking needs.
+   - OSI only supports wired communication, TCP/IP adds wireless
+     communication.
+   - TCP/IP was developed and adopted alongside the internet while the
+     OSI model remains a conceptual reference.
+   #+end_quote
+
+2. What are the four layers of TCP/IP?
+   #+begin_quote
+   1. *Network access:* Physical connection/data framing (MAC address).
+   2. *Internet:* Packet addressing and routing (IP address)
+   3. *Host-to-Host*: TCP and UDP protocols for data management.
+   4. *Application*: HTTP, SMTP, FTP protocols and applications.
+   #+end_quote
+
+3. Remember one Linux command at each level of the TCP/IP model?
+   #+begin_src bash :results output :exports both
+     arp -n # network: mapping IP to MAC addresses
+     hostname -I # internet: IP address of your PC
+     netstat -tul | head -n 10 # host-to-host: TCP and UDP connections
+     wget -O ../src/init.el tinyurl.com/lyon-emacs
+     file ../src/init.el
    #+end_src
 
-   #+RESULTS:
-   : [1] "matrix" "array" 
+   On my computer at home:
+   #+begin_example
+   Address                  HWtype  HWaddress           Flags Mask            Iface
+   192.168.1.254            ether   6c:4b:b4:6d:65:21   C                     enp4s0
+   192.168.68.52            ether   ae:4b:fd:96:36:90   C                     wlo1
+   192.168.68.1             ether   60:83:e7:71:cb:50   C                     wlo1
+   192.168.68.53                    (incomplete)                              wlo1
+   192.168.1.250 192.168.68.54 2600:1702:4ba0:4b0::49 2600:1702:4ba0:4b0:1028:b5ef:db96:7a53 2600:1702:4ba0:4b0:952e:b307:998b:9078 
+   Active Internet connections (only servers)
+   Proto Recv-Q Send-Q Local Address           Foreign Address         State      
+   tcp        0      0 localhost:ipp           0.0.0.0:*               LISTEN     
+   tcp        0      0 localhost:domain        0.0.0.0:*               LISTEN     
+   tcp6       0      0 [::]:60000              [::]:*                  LISTEN     
+   tcp6       0      0 localhost:ipp           [::]:*                  LISTEN     
+   tcp6       0      0 [::]:1716               [::]:*                  LISTEN     
+   udp        0      0 mdns.mcast.net:mdns     0.0.0.0:*                          
+   udp        0      0 mdns.mcast.net:mdns     0.0.0.0:*                          
+   udp        0      0 mdns.mcast.net:mdns     0.0.0.0:*                          
+   ../src/init.el: Lisp/Scheme program, ASCII text, with CRLF line terminators
+   #+end_example
 
-3) What if you want to predict a *label* but the *predictors* have all
-   different lengths (e.g., because of missing observations)?
-   #+begin_quote
-   When predictors have different lengths or missing observations,
-   common approaches include:
-   1. *imputation* (filling in missing values using statistical methods,
-      such as mean, median, or regression),
-   2. using *algorithms* that can handle missing data directly (e.g.,
-      decision trees: skipping missing values during training, or
-      averaging at split during prediction),
-   3. *transforming* the data to a fixed size (e.g., by aggregating or
-      padding).
-   4. *ignoring* if the information in the predictors is less relevant.
-   #+end_quote
+* Week 4: Cisco networks
 
-4) What is the role of a *confusion matrix* in evaluating a model's
-   performance?
-   #+begin_quote
-   To understand the power of a model beyond accuracy score.
-   #+end_quote
+** WAITING C Programming Basics Review: Control & Functions & Pointers
 
-5) There are 3 red ('fraudulent') and 27 blue ('legitimate') dots in
-   the picture. How does the confusion matrix look like?
-   #+attr_html: :width 250px: 
-   [[../img/fraud.png]]
-
-   #+attr_html: :width 400px: 
-   [[../img/confused.png]]
-   
-6) Where would "false positives" be found in the image, and which
-   color would they have?
-   #+begin_quote
-   "False positive" = cases that were predicted to be fraudulent (pink
-   area) but were actually legitimate (blue): blue dots at the bottom.
-   #+end_quote
-
-7) So is this model: Accurate? Sensitive? Specific?
-   #+begin_quote
-   - It's accurate: 28/30 points are correctly classified.
-   - It's moderately sensitive of the transactions true nature (true
-     pos/(true pos + false neg)): focus on left half of the matrix.
-   - It's not very specific for identifying fraud. (true neg/(true
-     neg + false pos)): focus on right half of the matrix.
-   #+end_quote
-
-8) Provide a scenario where either accuracy or sensitivity is
-   important, but not both.
-  #+begin_quote
-  - *Accuracy*: all classes are equally important. Example: handwriting
-    recognition system. Misclassification is equally important for all
-    digits.
-  - *Sensitivity*: identifying true positives is more important than
-    minimizing false negatives. Example: medical diagnosis. Healthy
-    individuals may be flagged for testing (false positives
-  #+end_quote
-
-9) What is *overfitting*, and how can it be identified in a model's
-   performance?
-   #+begin_quote
-   Overfitting occurs when a model performs well on training data but
-   poorly on testing data, indicating that it memorized the training
-   data instead of generalizing.  This can be identified by testing
-   the model on a separate dataset and evaluating its performance.
-   #+end_quote
-
-10) What are some common techniques for *dimensionality reduction*, and
-    why are they useful in machine learning?
-    #+begin_quote
-    Common techniques include *removing* irrelevant features, *combining*
-    correlated features (e.g., height and weight into BMI), or
-    *collapsing* features into a single underlying factor.
-    #+end_quote
-
-
-** TODO Model training, generalization, and evaluation
-
-- Everybody: What did you learn in the last couple of sessions?
-
-- Summarize:
-
-  1) 
-
-- What (if anything) surprised / amazed / shocked you?
-
-  1) 
-
-** TODO Sample answers
-
-- What did you learn: Limits of machine learning
-  
-  1) ML models are... 
-     #+begin_quote
-     ...highly inflexible - strictly parametrized and subject to an
-     immutable workflow.
-     #+end_quote
-
-  2) The ML workflow always includes:
-     #+begin_quote
-     1. data set preparation and analysis
-     2. data transformation
-     3. model training & customization
-     4. model testing & evaluation
-     #+end_quote
-     
-  3) Manual examples you saw included: 
-     #+begin_quote
-     Medical diagnosis (decision tree) and Nile data (workflow)
-          #+end_quote
-
-  4) =Nile= data were: 
-     #+begin_quote
-     1. stored in an external file (=write=)
-     2. read into memory (=read.table=)
-     3. transformed to a time-series (=ts=)
-     4. modeled statistically (=summary=)
-     5. modeled graphically (=boxplot=, =plot=)
-     #+end_quote
-
-  5) What remains:
-     #+begin_quote
-     Training 
-     #+end_quote
-
-- What surprised/amazed/shocked me:
-  #+begin_quote
-  1. So many new project ideas (check the Google Chat).
-  2. AI changes the game somewhat but not much (MLOps).
-  3. Most ML isn't generative AI but traditional stats.
-  4. High attendance & classroom spirits despite the cold.
-  #+end_quote
-
-** TODO Home assignment: Fitting a linear model to compute g 
-
-** NEXT R Review: Data structures / Managing / Exploring
-
-- The DataCamp lessons & our classroom work require "Intermediate R".
-
-- Download and work through: [[https://tinyurl.com/R-data-structures][tinyurl.com/R-data-structures]] (raw).
+1. Using Emacs, create an Org-mode source file.
+2. Solve the problem using pseudocode.
+3. Solve the problem in C using only one =main= function.
+4. Solve the problem using a function =fizzbuzz=.
+5. Solve the problem using pointers and pointer arithmetic.
 
 
