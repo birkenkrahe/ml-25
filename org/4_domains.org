@@ -1,0 +1,283 @@
+#+title: Introduction to Networks
+#+author: Marcus Birkenkrahe
+#+SEQ_TODO: TODO NEXT IN_PROGRESS | DONE
+#+startup: overview hideblocks indent entitiespretty:
+#+property: header-args:C :main yes :includes <stdio.h> :results output :exports both:
+#+property: header-args:python :session *Python* :python python3 :results output :exports both:
+#+src R :file :session *R* :results graphics output file :exports both:
+#+property: header-args:C++ :main yes :includes <iostream> :results output :exports both:
+* Objectives                                                 :lecture:csc410:
+
+The following topics are covered:
+
+- [ ] The Internet Protocol
+- [ ] IPv4 addresses and IPv6 addresses
+- [ ] Domain names (DNS)
+- [ ] LANs, subnets and WANs
+- [ ] Internet protocol routing
+- [ ] Network address translation
+- [ ] The client-server paradigm
+- [ ] Network sockets
+
+Next: Listing your IP addresses programmatically from C
+
+* Internet Protocol
+
+- One "protocol" (set of rules to facilitate network traffic) is
+  overwhelmingly common today: IP. It comes in two versions, IPv4 and
+  IPv6. IPv4 is ubiquitous, and IPv6 is growing.
+
+- IPv4 uses 32-bit addresses or max. 2^32 uniquely identifiable
+  systems:
+  #+begin_src R
+    2^32
+  #+end_src
+
+- These 4.3 bn addresses were not initially assigned efficiently
+  (nobody knew how much this show would grow!) and providers today
+  are forced to ration IPv4 addresses.
+
+- IPv6 was designed 1998 to replace IPv4. It uses a 128-bit address,
+  or theoretically 2^128 addresses for uniquely identifiable systems:
+  #+begin_src R
+    2^128
+  #+end_src
+
+- That is about 10^14 times larger than the number of stars in the
+  observable universe, and 10^16 times larger than the estimated
+  number of grains of sand on Earth's beaches[fn:2].
+
+- Every desktop and smartphone operating system supports both IPv4 and
+  IPv6 (so-called dual-stack configuration).
+
+* What is an address? IPv4 vs. IPv6
+
+- All Internet Protocol (IP) traffic routes to an address - like phone
+  calls that must be dialed to phone numbers.
+
+- IPv4 addresses are 32 bits long. They are divided into four 8-bit (1
+  byte word) sections. Each section is displayed as a decimal number
+  between 0 and 255 and delineated by a period.
+
+- Examples
+  #+begin_example
+  0.0.0.0
+  127.0.0.1
+  10.0.0.0
+  172.16.0.5
+  192.168.0.1
+  192.168.50.1
+  255.255.255.255
+  #+end_example
+
+- Each section is limited to the numbers from 0 to 255:
+  #+begin_src R
+    2^8
+  #+end_src
+
+- A special address, the *loopback address*, is reserved at
+  =127.0.0.1=. To the computer, it means "establish a connection to
+  myself" (that's why we can =ping= the PC from itself).
+
+- You can see this in the file =/etc/hosts/=, or by tracing the path
+  with =traceroute=, or by entering =ping 127.0.0.1=, or by opening
+  =127.0.0.1= in your browser
+
+- The last suggestion (opening it in your browser may not work -
+  do you know why?[fn:1]).
+
+* Viewing IP addresses
+
+- One machine can have many IP addresses to accommodate multiple
+  physical devices, virtual networks, etc. To see active addresses on
+  your Linux machine, run:
+  
+  #+begin_src bash :results output :exports both
+  ip address show
+  #+end_src
+
+  #+RESULTS:
+  #+begin_example
+  1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+      link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+      inet 127.0.0.1/8 scope host lo
+         valid_lft forever preferred_lft forever
+      inet6 ::1/128 scope host 
+         valid_lft forever preferred_lft forever
+  2: wlp0s20f3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+      link/ether 04:56:e5:25:d2:5d brd ff:ff:ff:ff:ff:ff
+      inet 10.1.4.142/22 brd 10.1.7.255 scope global dynamic noprefixroute wlp0s20f3
+         valid_lft 83565sec preferred_lft 83565sec
+      inet6 fe80::28f6:cc78:32ae:3b68/64 scope link noprefixroute 
+         valid_lft forever preferred_lft forever
+  #+end_example
+
+  On my machine at home:
+  #+begin_example
+  1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+      link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+      inet 127.0.0.1/8 scope host lo
+         valid_lft forever preferred_lft forever
+      inet6 ::1/128 scope host 
+         valid_lft forever preferred_lft forever
+  2: enp4s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+      link/ether 74:56:3c:b9:74:2d brd ff:ff:ff:ff:ff:ff
+      inet 192.168.1.250/24 brd 192.168.1.255 scope global dynamic noprefixroute enp4s0
+         valid_lft 84518sec preferred_lft 84518sec
+      inet6 2600:1702:4ba0:4b0::49/128 scope global dynamic noprefixroute 
+         valid_lft 3381sec preferred_lft 3381sec
+      inet6 2600:1702:4ba0:4b0:dcb5:815a:4d77:4c15/64 scope global temporary dynamic 
+         valid_lft 3421sec preferred_lft 3421sec
+      inet6 2600:1702:4ba0:4b0:952e:b307:998b:9078/64 scope global dynamic mngtmpaddr noprefixroute 
+         valid_lft 3421sec preferred_lft 3421sec
+      inet6 fe80::3411:8f1:989f:c525/64 scope link noprefixroute 
+         valid_lft forever preferred_lft forever
+  3: wlo1: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+      link/ether 28:c5:d2:33:f1:c6 brd ff:ff:ff:ff:ff:ff
+      altname wlp0s20f3
+      inet 192.168.68.54/22 brd 192.168.71.255 scope global dynamic noprefixroute wlo1
+         valid_lft 5318sec preferred_lft 5318sec
+      inet6 fe80::7c2f:481f:e10a:abe8/64 scope link noprefixroute 
+         valid_lft forever preferred_lft forever
+  #+end_example
+
+- Output is grouped by physical interface and contains information
+  from the internet & the physical layers. On my machine at home:
+  #+begin_example
+  1: lo ... inet 127.0.0.1/8
+  2: enp4s0 ... inet 192.168.1.250/24
+  3: wlo1 ... inet 192.168.68.54/22
+  #+end_example
+
+- Let's understand the =inet= notation, which is called CIDR (Classless
+  Inter-Domain Routing). 
+
+* Subnets
+#+attr_html: :width 500px: 
+#+caption: Subnet (LAN) with three hosts and a router
+[[../img/subnet.png]]
+
+- A subnet is a group of hosts with IP addresses in a particular
+  range, usually on the same physical network, like:
+  #+begin_quote
+  =10.23.2.1.= ... =10.23.2.254=
+  =10.23.1.1.= ... =10.23.255.254=
+  #+end_quote
+
+- A subnet is defined with two pieces:
+
+  1. A network (routing) prefix
+
+  2. A subnet (network/routing) mask
+
+- The *network prefix* is /common/ to all addresses in the subnet -
+  together with the subnet mask, it gives you all IP addresses in the
+  range. The *subnet mask* masks these common locations.
+
+- In the example, that's =10.23.2.0= with a subnet mask
+  =255.255.255.0=. To see how it works, look at the binary form:
+  #+begin_example
+  10.23.2.0:      00001010 00010111 00000010 00000000
+  255.255.255.0:  11111111 11111111 11111111 00000000
+  #+end_example
+
+- The subnet mask switches those bits on (1) that constitute the
+  network prefix, and switches those off (0) that are not.
+
+- For example, the Host A in the figure with the IP address
+  =10.23.2.4= has the subnet address =00000100=.
+
+* CIDR - Classless Inter-Domain Routing
+
+- Most tools will list subnets in CIDR notation:
+  #+begin_example
+  10.23.2.0/255.255.255.0 = 10.23.2.0/24
+  #+end_example
+
+- CIDR notation identifies the subnet mask by the number of leading 1s
+  in the subnet mask: for =255.255.255.0=, that is 24 1-bits + 8 0-bits.
+
+- Examples:
+  | Long form       | CIDR form |
+  |-----------------+-----------|
+  | =255.0.0.0=       | =/8=        |
+  | =255.255.0.0=     | =/16=       |
+  | =255.240.0.0=     | =/12=       |
+  | =255.255.255.0=   | =/24=       |
+  | =255.255.255.192= | =/26=       |
+
+- Show this for =/16=:
+  #+begin_src sh :results output
+    echo 'obase=2; 255' | bc  # use the bash calculator
+    echo 'obase=2; 255' | bc  
+  #+end_src
+
+  #+RESULTS:
+  : 11111111
+  : 11111111
+
+- Show this for =/12=:
+  #+begin_src sh :results output
+    echo 'obase=2; 255' | bc  # use the bash calculator
+    echo 'obase=2; 240' | bc  
+  #+end_src
+
+  #+RESULTS:
+  : 11111111
+  : 11110000
+
+* The default gateway
+
+- The entry for ~default~ in the routing table matches any address on the
+  internet in CIDR, it's ~0.0.0.0./0~ for IPv4.
+  #+begin_src bash :results output
+    netstat -r | grep default
+  #+end_src
+
+  #+RESULTS:
+  : default         _gateway        0.0.0.0         UG        0 0          0 wlp0s20f3
+
+- The *routing table* is a set of rules that determine where network
+  packets should be sent based on their destination addresses. It is
+  checked by the computer when a message request is made, to find the
+  best route.
+
+- The default route is used when no other rules match the destination
+  address: this route points to the gateway router that connects your
+  network to the rest of the internet.
+
+- Example Routing Table
+  #+begin_example
+
+  Destination     Gateway         Interface
+  ------------------------------------------------
+  192.168.1.0/24 Local LAN       eth0
+  10.0.0.0/16    192.168.1.1     eth0
+  0.0.0.0/0      192.168.1.1     eth0  (default)
+  #+end_example
+
+- If you send data to *192.168.1.50*, it stays on the local network.
+- If you send data to *10.0.5.10*, it goes through *192.168.1.1*. (gateway)
+- If you send data to *8.8.8.8 (Google DNS)*, there's no direct match —
+  so it follows the *default route (0.0.0.0/0)* to *192.168.1.1*, which is
+  likely the router connecting to the internet.
+
+* IN_PROGRESS Domain names
+
+- The Internet Protocol can only route packets to an IP address, not a
+  name. Hence, domain names must be resolved into IP addresses.
+
+- Domain name resolution is done by the DNS (Domain Name System)
+  server.
+
+* Footnotes
+[fn:2] I sometimes wonder if we're meant to deal with large numbers
+that lie entirely outside of our imagination. I suppose one could use
+this as an argument that we are built to be augmented by machines.
+
+[fn:1] Because you may not have a web server running on your
+computer. Remember that web pages must be served to the browser to be
+found via address. You can of course *render* any HTML page using a
+browser (but then instead of an address, the status line shows a file
+location). Do you remember how to start a minimal web server? Which
+part of the command are you allowed to forget?
