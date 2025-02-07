@@ -94,9 +94,9 @@ stored in a vector =coef= (try calling it as a function on your model.
   #+end_src
 
   #+RESULTS:
-  : function (formula, data, subset, weights, na.action, method = "qr",
-  :     model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE,
-  :     contrasts = NULL, offset, ...)
+  : function (formula, data, subset, weights, na.action, method = "qr", 
+  :     model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, 
+  :     contrasts = NULL, offset, ...) 
   : NULL
 
 - I recognize  first two arguments at least, =formula= is something
@@ -124,12 +124,12 @@ stored in a vector =coef= (try calling it as a function on your model.
   #+end_src
 
   #+RESULTS:
-  :
+  : 
   : Call:
   : lm(formula = mpg ~ wt, data = mtcars)
-  :
+  : 
   : Coefficients:
-  : (Intercept)           wt
+  : (Intercept)           wt  
   :      37.285       -5.344
 
 - The intercept (at zero weight) is 37.285, and the slope of the
@@ -188,11 +188,12 @@ stored in a vector =coef= (try calling it as a function on your model.
     .. ..- attr(*, "order")= int 1
     .. ..- attr(*, "intercept")= int 1
     .. ..- attr(*, "response")= int 1
-    .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv>
+    .. ..- attr(*, ".Environment")=<environment: R_
+
     .. ..- attr(*, "predvars")= language list(mpg, wt)
     .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
     .. .. ..- attr(*, "names")= chr [1:2] "mpg" "wt"
-   $ model        :'data.frame':        32 obs. of  2 variables:
+   $ model        :'data.frame':	32 obs. of  2 variables:
     ..$ mpg: num [1:32] 21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
     ..$ wt : num [1:32] 2.62 2.88 2.32 3.21 3.44 ...
     ..- attr(*, "terms")=Classes 'terms', 'formula'  language mpg ~ wt
@@ -205,7 +206,8 @@ stored in a vector =coef= (try calling it as a function on your model.
     .. .. ..- attr(*, "order")= int 1
     .. .. ..- attr(*, "intercept")= int 1
     .. .. ..- attr(*, "response")= int 1
-    .. .. ..- attr(*, ".Environment")=<environment: R_GlobalEnv>
+    .. .. ..- attr(*, ".Environment")=<environment: R_
+
     .. .. ..- attr(*, "predvars")= language list(mpg, wt)
     .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
     .. .. .. ..- attr(*, "names")= chr [1:2] "mpg" "wt"
@@ -235,9 +237,9 @@ stored in a vector =coef= (try calling it as a function on your model.
   #+end_src
 
   #+RESULTS:
-  : (Intercept)
+  : (Intercept) 
   :    37.28513
-  :        wt
+  :        wt 
   : -5.344472
 
 - And now I can compute the =mpg= for a weight =wt= beyond the maximum,
@@ -251,8 +253,8 @@ stored in a vector =coef= (try calling it as a function on your model.
 
   #+RESULTS:
   : [1] 6.424
-  : (Intercept)
-  :    2.952241
+  :       wt 
+  : 234.1752
 
 - There is no "theoretical" value here, since we don't have a car of
   that weight with a given mileage. Another exercise: predict the
@@ -332,6 +334,8 @@ stored in a vector =coef= (try calling it as a function on your model.
     t <- 1:4
   #+end_src
 
+  #+RESULTS:
+
 - These are just like =mpg= and =wt= in the last example: distance changes
   as a function of time, d = f(t).
 
@@ -342,12 +346,12 @@ stored in a vector =coef= (try calling it as a function on your model.
   #+end_src
 
   #+RESULTS:
-  :
+  : 
   : Call:
   : lm(formula = d ~ t)
-  :
+  : 
   : Coefficients:
-  : (Intercept)            t
+  : (Intercept)            t  
   :      -9.270        9.274
 
 - I can now compute =d= for =t= = 5 using the coefficients =a= and =b= which I
@@ -360,9 +364,9 @@ stored in a vector =coef= (try calling it as a function on your model.
   #+end_src
 
   #+RESULTS:
-  : (Intercept)
+  : (Intercept) 
   :       -9.27
-  :     t
+  :     t 
   : 9.274
 
 - There is a function =coef= that extracts the coefficients without
@@ -374,11 +378,11 @@ stored in a vector =coef= (try calling it as a function on your model.
   #+end_src
 
   #+RESULTS:
-  : (Intercept)           t
+  : (Intercept)           t 
   :      -9.270       9.274
-  : (Intercept)
+  : (Intercept) 
   :       -9.27
-  :     t
+  :     t 
   : 9.274
 
 - And the distance =d = a + bt= is:
@@ -389,7 +393,7 @@ stored in a vector =coef= (try calling it as a function on your model.
   #+end_src
 
   #+RESULTS:
-  : (Intercept)
+  : (Intercept) 
   :        37.1
 
 - In this case, because we know the theoretical value of g at t=5, we
@@ -475,12 +479,12 @@ might want to add additional features, like now. Let's start over:
    #+end_src
 
    #+RESULTS:
-   :
+   : 
    : Call:
    : lm(formula = x ~ t2, data = df)
-   :
+   : 
    : Coefficients:
-   : (Intercept)           t2
+   : (Intercept)           t2  
    :    0.003953     1.854806
 
 4. Now, for t = 5: predicted =x_pred= (using t squared!)
@@ -493,7 +497,7 @@ might want to add additional features, like now. Let's start over:
    #+end_src
 
    #+RESULTS:
-   : (Intercept)
+   : (Intercept) 
    :    46.37411
 
 5. Actual for t = 5 with g = 3.73, and difference
