@@ -59,8 +59,8 @@ Most of this material can be found in Lantz, Machine Learning with R
 
 * TODO Factors
 
-1) Create a ~factor~ vector named ~gender~ for the three patients, with
-   the values "MALE" or "FEMALE".
+1) Create a ~factor~ vector named ~sex~ for the three patients, with the
+   values "MALE" or "FEMALE", and print it to check.
    #+begin_src R
 
    #+end_src
