@@ -472,5 +472,5 @@ influences the prediction? Can the prediction be validated, and how?
 
 - Download and work through: [[https://tinyurl.com/R-data-structures][tinyurl.com/R-data-structures]] (raw).
 
-- Upload your result then follow the review.
+- Upload your result then let's review together.
 

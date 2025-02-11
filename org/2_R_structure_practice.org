@@ -59,11 +59,18 @@ Most of this material can be found in Lantz, Machine Learning with R
 
 * TODO Factors
 
-1) Create a ~factor~ vector named ~sex~ for the three patients, with the
-   values "MALE" or "FEMALE", and print it to check.
+1) Create a ~factor~ vector named ~sex~ for the three patients, with
+   the values "MALE" or "FEMALE", and print it to check.
    #+begin_src R
-
+     subject_name
+     sex <- factor(c("MALE","FEMALE","MALE"))
+     sex
    #+end_src
+
+   #+RESULTS:
+   : [1] "John Doe"     "Jane Doe"     "Steve Graves"
+   : [1] MALE   FEMALE MALE  
+   : Levels: FEMALE MALE
 
 2) Create a ~factor~ for blood type called ~blood~. John, Jane and Steve
    have blood type ~"0"~, ~"AB"~ and ~"A"~, respectively. Since there are
@@ -88,7 +95,7 @@ Most of this material can be found in Lantz, Machine Learning with R
 * TODO Lists
 
 1) Create a ~list~ named ~subject_1~ with /named/ components for all of the
-   first patient's data: ~name~, ~temperature~, ~flu_status~, ~gender~,
+   *first* patient's data: ~subject_name~, ~temperature~, ~flu_status~, ~sex~,
    ~blood~, and ~symptoms~. Print the list.
    #+begin_src R
 
@@ -107,8 +114,8 @@ Most of this material can be found in Lantz, Machine Learning with R
 
 * TODO Data frames
 
-1) Combine the features ~subject_name~, ~temperature~, ~flu_status~, ~gender~,
-   ~blood~ and ~symptoms~ into a data frame.
+1) Combine the features ~subject_name~, ~temperature~, ~flu_status~, ~sex~,
+   ~blood~ and ~symptoms~ into a data frame named =pt_data=. Print it.
    #+begin_src R
 
    #+end_src
@@ -150,26 +157,30 @@ Most of this material can be found in Lantz, Machine Learning with R
 
    #+end_src
 
-8) Name the patient records according to the patient's names, John
-   Doe, Jane Doe and Steve Graves, then print ~df~.
+8) Using =df=, name the patient records according to the patient's
+   names: =John=, =Jane=, and =Steve=, then print =df=
    #+begin_src R
 
    #+end_src
 
-9) Extract the ~temperature~ of ~John Doe~ from the data frame ~df~ using
+9) Extract the ~temperature~ of ~John~ from the data frame ~df~ using
    the row and column names.
    #+begin_src R
 
    #+end_src
 
-10) Extract ~gender~ and ~blood~ type of John Doe and Steve Graves from
-    the data frame ~df~.
+   #+RESULTS:
+
+10) Extract ~sex~ and ~blood~ type of John and Steve from the data frame
+    ~df~.
     #+begin_src R
 
     #+end_src
 
-11) Extract ~gender~ and ~blood~ type of John Doe and Steve Graves from
-    the data frame ~pt_data~ by *removing* all data that you do not want.
+    #+RESULTS:
+
+11) Extract ~sex~ and ~blood~ type of John and Steve from the data frame
+    ~pt_data~ by *removing* all data that you do not want.
     #+begin_src R
 
     #+end_src
@@ -186,6 +197,8 @@ Most of this material can be found in Lantz, Machine Learning with R
 
     #+end_src
 
+    #+RESULTS:
+
 14) Change the display of digits so that both temperature columns show
     only one digit after the decimal point.
     #+begin_src R
@@ -197,5 +210,5 @@ Most of this material can be found in Lantz, Machine Learning with R
 Well done! You've reached the end of this in-class practice file.
 
 If you've completed all steps, you can now upload the Org-mode file to
-Canvas (see ~Assignments > In-class practice~).
+Canvas (see ~Assignments > In-class practice > R Basics Review~).
 
