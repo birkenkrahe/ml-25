@@ -20,7 +20,7 @@ Most of this material can be found in Lantz, Machine Learning with R
 2) Go with the cursor on the headline and hange the ~TODO~ label to ~DONE~
    by entering ~S-<right>~ ("Shift + right-arrow").
 
-* TODO Vectors
+* NEXT Vectors
 
 1) Construct a set of vectors containing data on three medical
    patients:
@@ -62,15 +62,8 @@ Most of this material can be found in Lantz, Machine Learning with R
 1) Create a ~factor~ vector named ~sex~ for the three patients, with
    the values "MALE" or "FEMALE", and print it to check.
    #+begin_src R
-     subject_name
-     sex <- factor(c("MALE","FEMALE","MALE"))
-     sex
-   #+end_src
 
-   #+RESULTS:
-   : [1] "John Doe"     "Jane Doe"     "Steve Graves"
-   : [1] MALE   FEMALE MALE  
-   : Levels: FEMALE MALE
+   #+end_src
 
 2) Create a ~factor~ for blood type called ~blood~. John, Jane and Steve
    have blood type ~"0"~, ~"AB"~ and ~"A"~, respectively. Since there are
