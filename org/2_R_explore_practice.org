@@ -23,7 +23,7 @@ Most of this material can be found in Lantz, Machine Learning with R
 * TODO Getting the data
 
 Download the raw file ~usedcars.csv~ from this location and put it into
-a dataframe ~usedcars~: [[https://tinyurl.com/yp5r3kw7][tinyurl.com/yp5r3kw7]]
+a dataframe ~usedcars~: https://tinyurl.com/usedcars-csv
 #+begin_src R
 
 #+end_src
@@ -107,11 +107,4 @@ a dataframe ~usedcars~: [[https://tinyurl.com/yp5r3kw7][tinyurl.com/yp5r3kw7]]
    #+begin_src R :results graphics file :file color_model.png
 
    #+end_src   
-
-* TODO Wow! Congratulations!
-
-Well done! You've reached the end of this in-class practice file.
-
-If you've completed all steps, you can now upload the Org-mode file to
-Canvas (see ~Assignments > Classroom practice)~.
 
