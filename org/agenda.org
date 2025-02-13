@@ -461,12 +461,14 @@ influences the prediction? Can the prediction be validated, and how?
 
 * Week 5: R Review - ML models
 
-- [ ] *Test 2:* Counted late submissions bc of network isues
-- [ ] *Test 3* due tonight (max 100%)
+- [X] *Test 2:* Counted late submissions bc of network isues
+- [X] *Test 3* due Friday (max 100%)
+- [ ] *DataCamp* assignments: I relaxed the deadlines
 - [ ] *R Basics review:* vectors, factors, lists, data frames
-- [ ] *Lecture*: Machine Learning Models
+- [ ] *R Basics review:* Managing data
+- [ ] *R Basics review:* Exploring data
 
-** TODO R Review: Data structures / Managing / Exploring
+** TODO R Review: Data structures
 
 - The DataCamp lessons & our classroom work require "Intermediate R".
 
@@ -474,3 +476,12 @@ influences the prediction? Can the prediction be validated, and how?
 
 - Upload your result then let's review together.
 
+** TODO R Review: Manage and explore
+
+- Download and work through:  [[https://tinyurl.com/R-manage-practice][tinyurl.com/R-manage-practice]]
+
+- Download and work through:  [[https://tinyurl.com/R-explore-practice][tinyurl.com/R-explore-practice]]
+
+* Week 6: Machine Learning Models - kNN classification
+
+- [ ] *Lecture*: Machine Learning Models

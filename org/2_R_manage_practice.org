@@ -52,11 +52,13 @@ Most of this material can be found in Lantz, Machine Learning with R
 6) You can save all data from your work session with ~save.image()~. The
    result will be saved in a file ~.RData~.
    1. Create ~x <- 1:100~, ~y <- c(TRUE,FALSE)~
-   2. Run ~save.image()~
-   3. Check that the file exists with ~shell~
-   4. Remove all objects from your session with ~rm~ and check with ~ls~
-   5. Load ~.RData~
-   6. Check your session variable list with ~ls~
+   2. Run ~save.image()~ to save session to =.RData=
+   3. Check that the file exists with the Linux command =ls= from R
+   4. Check the file type with the Linux command =file= from R
+   5. Remove all objects from your session with ~rm~ and check with ~ls~
+   6. Load ~.RData~
+   7. Check your session variable list with =ls=
+   8. Print =x= and =y=
    #+begin_src R
 
    #+end_src
@@ -64,31 +66,36 @@ Most of this material can be found in Lantz, Machine Learning with R
 * TODO Importing data from CSV files
 
 The (raw) file with patient data is available online here:
-https://raw.githubusercontent.com/birkenkrahe/ml/main/data/pt_data.csv
+https://tinyurl.com/pt-data
 
-1) Read the CSV file into a dataframe ~pt_data~ and confirm its
-   structure.
+1) Read the CSV file into a dataframe ~pt_data~, check its structure,
+   and print the data.
    #+begin_src R
 
    #+end_src
 
 2) What are the default parameters of ~read.csv~ regarding existence of
-   a ~header~, the import of ~characters~ as ~factor~, and the separator?
+   a ~header~, the import of ~characters~ as ~factor~, and the =separator=?
    #+begin_src R
 
    #+end_src
 
-3) Write the dataframe ~pt_data~ to a CSV file ~pt_data.csv~ in your PC's
-   ~Download~ directory, set the parameter ~row.names~ to ~FALSE~, and check
-   that the file is there.
+3) Did you find any information on =factor= or =character= data? Find out
+   how you can import the CSV data so that the =character= vectors are
+   imported as =factor= vectors right away.
+
+4) Re-import the CSV data with the =character= vectors as =factor= using
+   =read.table= this time - fix errors if you notice any.
+   #+begin_src R
+
+   #+end_src
+   
+5) Using =write.csv=, write the dataframe ~pt_data~ to a CSV file
+   ~pt_data.csv~ in your PC's ~Download~ directory (set the parameter
+   ~row.names~ to =FALSE=), check that the file is there (from R), and
+   check the file type, too. Then print the file - all from within R.
    #+begin_src R
 
    #+end_src
 
-* TODO Wow! Congratulations!
-
-Well done! You've reached the end of this in-class practice file.
-
-If you've completed all steps, you can now upload the Org-mode file to
-Canvas (see ~Assignments > In-class practice~).
 
