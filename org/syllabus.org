@@ -10,8 +10,8 @@
 - Office: Derby Science Building 210
 - Phone: (870) 307-7254 
 - Office Hours: Mon/Wed/Fri 16:15-16:45, Tue/Thu 16:00-16:30
-- Textbook: Machine Learning With R (3e) by Brett Lantz, Packt
-  Publishing, 2019 ([[https://www.packtpub.com/product/machine-learning-with-r-third-edition/9781788295864][Online: packtpub.com, ebook]])
+- Textbook (optional): Machine Learning With R (3e) by Brett Lantz,
+  Packt Publishing, 2019 ([[https://www.packtpub.com/product/machine-learning-with-r-third-edition/9781788295864][Online: packtpub.com, ebook]])
 
 * Standard and course policies
 
@@ -124,17 +124,18 @@ For *important dates*, see the 2024-2025 Academic Calendar at:
 |------+-----------------------------------------------------------|
 |    1 | What is Machine Learning?                                 |
 |    2 | Machine Learning Models                                   |
-|    3 | Lazy Learning – Classification Using Nearest Neighbors    |
-|    4 | Probabilistic Learning – Classification Using Naive Bayes |
-|    5 | Divide and Conquer – Classification Using Decision Trees  |
-|    6 | Divide and Conquer – Classification Using Rules           |
-|    7 | Forecasting Numeric Data – Regression Methods             |
-|    8 | Regression Trees and Model Trees                          |
-|    9 | Finding Patterns – Market Basket Analysis                 |
-|   10 | Finding Groups of Data – Clustering with k-means          |
-|   11 | Unsupervised Learning                                     |
-|   12 | Hierarchical Clustering                                   |
-|   13 | Dimensionality reduction with PCA                         |
-|   14 | Case studies and course review                            |
-|   15 | Project Presentations                                     |
-|   16 | Final exam week                                           |
+|    3 | Deep Learning                                             |
+|    4 | Lazy Learning – Classification Using Nearest Neighbors    |
+|    5 | Probabilistic Learning – Classification Using Naive Bayes |
+|    6 | Divide and Conquer – Classification Using Decision Trees  |
+|    7 | Divide and Conquer – Classification Using Rules           |
+|    8 | Forecasting Numeric Data – Regression Methods             |
+|    9 | Regression Trees and Model Trees                          |
+|   10 | Finding Patterns – Market Basket Analysis                 |
+|   11 | Finding Groups of Data – Clustering with k-means          |
+|   12 | Unsupervised Learning                                     |
+|   13 | Hierarchical Clustering                                   |
+|   14 | Dimensionality reduction with PCA                         |
+|   15 | Case studies and course review                            |
+|   16 | Project Presentations                                     |
+|   17 | Final exam week                                           |

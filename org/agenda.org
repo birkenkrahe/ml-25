@@ -459,11 +459,11 @@ influences the prediction? Can the prediction be validated, and how?
 - Provide plots in =ggplot= and/or base R
 - Provide notebook in Org-mode or another format
 
-* Week 5: R Review - ML models
+* Week 5: R Review (Basics + Managing data)
 
 - [X] *Test 2:* Counted late submissions bc of network isues
 - [X] *Test 3* due Friday (max 100%)
-- [ ] *DataCamp* assignments: I relaxed the deadlines
+- [X] *DataCamp* assignments: I relaxed the deadlines
 - [ ] *R Basics review:* vectors, factors, lists, data frames
 - [ ] *R Basics review:* Managing data
 - [ ] *R Basics review:* Exploring data
@@ -482,6 +482,92 @@ influences the prediction? Can the prediction be validated, and how?
 
 - Download and work through:  [[https://tinyurl.com/R-explore-practice][tinyurl.com/R-explore-practice]]
 
-* Week 6: Machine Learning Models - kNN classification
+* Week 6: R Review: Exploring data & Machine Learning Models
 
+- [ ] *Test 4* live until Friday, 28 Feb (Mar 4) for 100% (50%)
+- [ ] *R Basics:* Explore data (finish)
 - [ ] *Lecture*: Machine Learning Models
+- [ ] *Project* feedback in class - what are your takeaways?
+
+** Review questions
+
+1. When downloading data, what're we looking for?
+   #+begin_quote
+   1. Data types (~logical~, ~numeric~, ~character~)
+   2. What is the numbers of rows and columns (~dim~)
+   3. Special characters/encoding
+   4. Are integers really integers (and not logical/categorical/double)?
+   5. Are characters really strings (and not finite clusters/factors)?
+   6. Where do the data come from? (Paper?)
+   7. Who collected the data? (Author? Government?)
+   8. When were the data collected?
+   9. What is the provenance (not the provenience)? Different versions?
+   10. Are (all) the data real or are any synthetic (imputed, randomized)?
+   #+end_quote
+
+2. What's the interquartile range? How is it computed?
+   #+begin_quote
+   ~IQR~ is the difference between the 3rd (75%) and the 1st (25%)
+   quartile (percentile) - any data point that falls between 25% and
+   75% of all the points.
+   #+end_quote
+   #+begin_src R :session *R* :results output :exports both
+   args(IQR)
+   #+end_src
+
+3. What's the =type= parameter in =IQR=? Why does it exist?
+   #+begin_quote
+   ~type~: an integer selecting a quantile algorithm.
+   
+   There are (ca. 20) different ~quantile~ algorithms because in a
+   finite dataset, quantiles often fall between data points. The
+   differences are especially prominent for small sample sizes.
+   #+end_quote
+
+4. What's an outlier?
+   #+begin_quote
+   A common definition is "any data point that lies outside of IQR *
+   1.5 on either side of the IQR = points below Q1-1.5 * IQR, and
+   points above Q3 + 1.5 * IQR.
+
+  *Why 1.5?* It's a heuristic balancing robustness and sensitivity in
+  stats analysis. It assumes a normal-like distribution but because it
+  uses the median (not the mean) it's robust against skewedness. It is
+  easy to compute, works well, and is non-parametric.
+   #+end_quote
+
+5. What's the difference?
+   #+begin_example
+   1. length(which(data > outlier))
+   2. sum(data > outlier)
+   #+end_example
+   #+begin_quote
+   1. computes a ~logical~ index vector and returns its ~length~
+   2. computes a ~logical~ vector and returns its ~sum~
+   #+end_quote
+   #+begin_src R :session *R* :results output :exports both
+     which(c(1,2,3,4) > 2)
+     length(which(c(1,2,3,4) > 2))
+     c(1,2,3,4) > 2
+     sum(c(1,2,3,4) > 2)
+   #+end_src
+
+   #+RESULTS:
+   : [1] 3 4
+   : [1] 2
+   : [1] FALSE FALSE  TRUE  TRUE
+   : [1] 2
+
+6. Which plot type (almost) represents the ~summary~? And what's in the
+   ~summary~ that's not in this plot?
+   #+attr_html: :width 400px: 
+   [[../img/spread.png]]
+   
+   #+begin_src R :session *R* :results output :exports both
+   summary(mtcars$mpg)
+   #+end_src
+
+   #+RESULTS:
+   :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   :   10.40   15.43   19.20   20.09   22.80   33.90
+
