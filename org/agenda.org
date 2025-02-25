@@ -482,13 +482,13 @@ influences the prediction? Can the prediction be validated, and how?
 
 - Download and work through:  [[https://tinyurl.com/R-explore-practice][tinyurl.com/R-explore-practice]]
 
-* Week 6: R Review: Exploring data & Machine Learning Models
+* Week 6: R Review: Exploring data
 
-- [ ] *Test 4* live until Friday, 28 Feb (Mar 4) for 100% (50%)
-- [ ] *R Basics:* Explore data (finish)
+- [X] *Test 4* live until Friday, 28 Feb (Mar 4) for 100% (50%)
+- [X] *R Basics:* Explore data (finish)
+- [X] *Project* feedback in class - what are your takeaways?
 - [ ] *Lecture*: Machine Learning Models
-- [ ] *Project* feedback in class - what are your takeaways?
-
+  
 ** Review questions
 
 1. When downloading data, what're we looking for?
@@ -515,6 +515,10 @@ influences the prediction? Can the prediction be validated, and how?
    args(IQR)
    #+end_src
 
+   #+RESULTS:
+   : function (x, na.rm = FALSE, type = 7) 
+   : NULL
+
 3. What's the =type= parameter in =IQR=? Why does it exist?
    #+begin_quote
    ~type~: an integer selecting a quantile algorithm.
@@ -530,13 +534,13 @@ influences the prediction? Can the prediction be validated, and how?
    1.5 on either side of the IQR = points below Q1-1.5 * IQR, and
    points above Q3 + 1.5 * IQR.
 
-  *Why 1.5?* It's a heuristic balancing robustness and sensitivity in
+  *Why 1.5?* It's a *heuristic* balancing robustness and sensitivity in
   stats analysis. It assumes a normal-like distribution but because it
   uses the median (not the mean) it's robust against skewedness. It is
   easy to compute, works well, and is non-parametric.
    #+end_quote
 
-5. What's the difference?
+5. What's the difference? What's the output?
    #+begin_example
    1. length(which(data > outlier))
    2. sum(data > outlier)
@@ -546,28 +550,60 @@ influences the prediction? Can the prediction be validated, and how?
    2. computes a ~logical~ vector and returns its ~sum~
    #+end_quote
    #+begin_src R :session *R* :results output :exports both
-     which(c(1,2,3,4) > 2)
+     which(c(100,200,300,400) > 200)
      length(which(c(1,2,3,4) > 2))
      c(1,2,3,4) > 2
-     sum(c(1,2,3,4) > 2)
+     sum(c(1,2,3,4) > 2)   #  more dangerous bc `sum` not generic
    #+end_src
 
    #+RESULTS:
    : [1] 3 4
    : [1] 2
-   : [1] FALSE FALSE  TRUE  TRUE
+   : [1] FALSE FALSE  TgRUE  TRUE
    : [1] 2
 
+   #+begin_src R :results output
+     methods(summary)
+     methods(sum)
+   #+end_src
+
+   #+RESULTS:
+   #+begin_example
+    [1] summary.aov                    summary.aovlist*              
+    [3] summary.aspell*                summary.check_packages_in_dir*
+    [5] summary.connection             summary.data.frame            
+    [7] summary.Date                   summary.default               
+    [9] summary.ecdf*                  summary.factor                
+   [11] summary.glm                    summary.infl*                 
+   [13] summary.lm                     summary.loess*                
+   [15] summary.manova                 summary.matrix                
+   [17] summary.mlm*                   summary.nls*                  
+   [19] summary.packageStatus*         summary.POSIXct               
+   [21] summary.POSIXlt                summary.ppr*                  
+   [23] summary.prcomp*                summary.princomp*             
+   [25] summary.proc_time              summary.srcfile               
+   [27] summary.srcref                 summary.stepfun               
+   [29] summary.stl*                   summary.table                 
+   [31] summary.tukeysmooth*           summary.warnings              
+   see '?methods' for accessing help and source code
+   no methods found
+   #+end_example
+
 6. Which plot type (almost) represents the ~summary~? And what's in the
-   ~summary~ that's not in this plot?
+   ~summary~ that's not in this type of plot?
    #+attr_html: :width 400px: 
    [[../img/spread.png]]
    
    #+begin_src R :session *R* :results output :exports both
-   summary(mtcars$mpg)
+   summary(mtcars$mpg) # boxplot does not contain the `mean`
    #+end_src
 
    #+RESULTS:
    :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
    :   10.40   15.43   19.20   20.09   22.80   33.90
+
+* Week 7: Machine Learning Models & k-NN algorithm
+
+- [ ] *Tests & Assignments*: Removing 1 point per late day. Easier for
+  me, kinder to you. All close one week after the deadline though.
 

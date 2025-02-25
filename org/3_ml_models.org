@@ -1,0 +1,656 @@
+#+TITLE: ML IN PRACTICE - TYPES OF MODELS
+#+AUTHOR: Marcus Birkenkrahe
+#+STARTUP: overview hideblocks indent inlineimages
+#+OPTIONS: toc:nil num:nil ^:nil
+#+PROPERTY: header-args:R :session *R* :results output :exports both :noweb yes
+#+attr_latex: :width 400px
+#+caption: The big cat is ready to pounce
+[[../img/leopard.jpg]]
+* ML in practice - process
+#+attr_latex: :width 400px
+#+caption: DataCamp "Understanding ML" course
+[[../img/1_dc_ml_flow.png]]
+
+1. *Data collection*: The data collection step involves gathering the
+   learning material an algorithm will use to generate actionable
+   knowledge. In most cases, the data will need to be combined into a
+   single source, such as a text file, spreadsheet, or database.
+
+2. *Data exploration and preparation*: The quality of any machine
+   learning project is based largely on the quality of its input
+   data. Thus, it is important to learn more about the data and its
+   nuances during a practice called data exploration. Additional work
+   is required to prepare the data for the learning process. This
+   involves fixing or cleaning so-called "messy" data, eliminating
+   unnecessary data, and recoding the data to conform to the learner's
+   expected inputs.
+
+3. *Model training*: By the time the data has been prepared for
+   analysis, you are likely to have a sense of what you are capable of
+   learning from the data. The specific machine learning task chosen
+   will inform the selection of an appropriate algorithm, and the
+   algorithm will represent the data in the form of a model.
+
+4. *Model evaluation*: Each machine learning model results in a biased
+   solution to the learning problem, which means that it is important
+   to evaluate how well the algorithm learned from its
+   experience. Depending on the type of model used, you might be able
+   to evaluate the accuracy of the model using a test dataset, or you
+   may need to develop measures of performance specific to the
+   intended application.
+
+5. *Model improvement*: If better performance is needed, it becomes
+   necessary to utilize more advanced strategies to augment the
+   model's performance. Sometimes it may be necessary to switch to a
+   different type of model altogether. You may need to supplement your
+   data with additional data or perform additional preparatory work,
+   as in step two of this process.
+
+6. *Model deployment*: if the model appears to be performing well, it
+   can be deployed for its intended task. As the case may be, you
+   might utilize your model to provide score data for predictions
+   (possibly in real time); for projections of financial data; to
+   generate useful insight for marketing or research; or to automate
+   tasks, such as mail delivery or flying aircraft. The successes and
+   failures of the deployed model might even provide additional data
+   to train your next-generation learner.
+
+* Units of observation vs. analysis
+
+- A *unit of observation* is the smallest entity with measured
+  properties of interest for a study.
+
+- *Examples:* The unit of observation is in the form of persons, objects
+  or things, transactions, time points, geographic regions, or
+  measurements.
+
+- Sometimes, units of observation are combined to form units, such as
+  person-years, which denote cases where the same person is tracked
+  over multiple years, and each person-year comprises a person's data
+  for one year.
+
+- When *visualizing data*, you always need to add the unit to the axis
+  label information! Example: ="distance [ft]".=
+
+- The *unit of analysis* is the smallest unit from which inference is
+  made. This is not always the same as the unit of observation.
+
+- Example: data observed from people (= unit of observation) might
+  be used to analyze trends across countries (= unit of analysis).
+  #+begin_quote
+  A study collects voting data from people (person = unit of
+  observation) in order to sketch demographic trends (age = unit of
+  analysis).
+  #+end_quote
+
+- Distinguish *examples*, instances of the unit of observation for which
+  properties were recorded, and *features*, the recorded properties or
+  attributes of examples that may be useful for ML
+  #+begin_quote
+  In the voter analysis, a specific election is an instance, during
+  which voter features (age, sex, birthplace) may be recorded.
+  #+end_quote
+
+* Use cases: spam / cancer detection
+
+Distinguish:
+1) Unit of observation (smallest recorded entity - tables)
+2) example/instance (entity example - records/rows)
+3) unit of analysis (entity features - attributes/columns)
+
+
+- *Spam email identification*:
+  #+begin_quote
+  1) Unit of observation: email messages
+  2) Examples or instances: specific individual messages
+  3) Features: words, punctuation marks used in the messages etc.
+  #+end_quote
+
+- *Cancer detection*:
+  #+begin_quote
+  1) Unit of observation: patients
+  2) Examples or instance: a random sample of cancer patients
+  3) Features: genomic markers from biopsied cells, and patient
+  characteristics like weight, height, blood pressure etc.
+  #+end_quote
+
+* Structured vs. unstructured data & the limits of machine learning
+#+attr_latex: :width 400px
+#+caption: "Examples" = vehicles for sale, "features" = car properties
+[[../img/3_table.jpg]]
+
+- Humans can consume /unstructured/ data - free-form text, pictures,
+  sound, and they can handle cases with many or few features
+
+- Computers required data to be /structured/ - each example of the
+  phenomenon has the same features, which are organized in data
+  structures like tables or matrices or data frames
+
+- In data tables, matrices or data frames, rows correspond to examples
+  or records or observations of features, which correspond to columns
+
+- Data entries can have different types: /numeric-discrete/,
+  /numeric-continuous/, /categorical-nominal/, or /categorical-ordinal/
+
+- Clarity about features, observations, and data types is crucial for
+  selecting the best learning algorithm
+
+- *Stop!* What about natural language processing? What about computer
+  vision? Can't machines process spoken and written human language as
+  well as images with ease nowadays?
+  #+begin_quote
+  No, and especially not without significant loss of meaning. The
+  essence of machine learning from language data is *tokenization*: All
+  text has to be *split up* and *encoded*, reducing meaning to *discrete*
+  symbols that lose context, nuance, richness of human intent.
+
+  The essence of machine learning from data distributions (patterns)
+  is *stochastization*: Extracting probabilistic relationships among
+  tokens, reducing meaning to statistical dependencies, and replacing
+  *understanding* with predictive *approximation*.
+  #+end_quote
+
+* Types of ml algorithms
+#+attr_latex: :width 400px
+[[../img/3_ml_models.png]]
+
+Machine learning algorithms are divided into categories according to
+their purpose. Understanding the categories of learning algorithms is
+an essential first step toward using data to drive the desired action.
+
+* Predictive models-supervised learning-classification
+
+- *Predictive models* involve prediction of one value using other values
+  in the same dataset. The algorithm models the relationship between
+  the target feature (*predicted*) and the other features (*predictors*).
+
+- These models do not need to be forecasting models (for the future),
+  they can also predict past events or work in real-time.
+
+- The process of training a predictive model is called *supervised
+  learning*. The "supervision" refers to the fact that the target
+  values let the learner (the machine) know how well it's doing.
+
+- Given a set of data, a *supervised learning algorithm* optimizes a
+  *function* (the *model*) to find the combination of *feature* input values
+  that result in the *target* output.
+
+- *Classification* means predicting which category an example belongs
+  to. The corresponding supervised ML algorithm is a *classifier*, e.g.
+  1) An email message is spam.
+  2) A person has cancer.
+  3) A football team will win or loose.
+  4) An applicant will default on a loan.
+
+- The classification target feature is the *class*, which is divided
+  into category values called *levels*, which may be nominal or ordinal.
+
+- The most widely used supervised learning algorithm for *numeric
+  prediction*, especially forecasting, is...
+  #+begin_quote
+  ... *linear regression* - fitting a linear model to numeric data.
+  #+end_quote
+
+- Since *discrete* numbers can be converted to *categories*, the boundary
+  between classification and numeric prediction models is blurry.
+
+* Descriptive models-unsupervised learning-clustering
+
+- *Descriptive models* are used to summarize data in new and interesting
+  ways. No single feature is more important than any other.
+
+- Because there is no target to be supervised, the process of training
+  a descriptive model is called *unsupervised learning*.
+
+- An example is *pattern discovery* in *data mining* to identify useful
+  associations (correlations) within data.
+  #+begin_src R :file ../img/mtcars.png :session *R* :results file graphics output :exports both
+    plot(mtcars) # pair-plot of `mtcars` dataset.
+  #+end_src
+
+- Application: *market basket analysis* of transactional purchase data
+  in retail: if the retailer learns that swimming trunks are purchased
+  at the same time as sunscreen, it could use this information when
+  marketing both products, e.g. reposition them in the store, run a
+  promotion etc.
+
+- *Clustering* is descriptive modeling - it means dividing a dataset
+  into homogenous groups. This can be used for *segmentation analysis*
+  to identify groups of individuals with similar behavior or
+  demographics, e.g. to create a "people like you have
+  bought this item, too" type of promotion.
+
+* Extended example: Titanic data
+
+- Could the Titanic data set be used for pattern discovery?
+  #+begin_src R
+    data("Titanic")
+    titanic <- as.data.frame(Titanic)
+    str(titanic)
+  #+end_src
+
+  #+RESULTS:
+  : 'data.frame':       32 obs. of  5 variables:
+  :  $ Class   : Factor w/ 4 levels "1st","2nd","3rd",..: 1 2 3 4 1 2 3 4 1 2 ...
+  :  $ Sex     : Factor w/ 2 levels "Male","Female": 1 1 1 1 2 2 2 2 1 1 ...
+  :  $ Age     : Factor w/ 2 levels "Child","Adult": 1 1 1 1 1 1 1 1 2 2 ...
+  :  $ Survived: Factor w/ 2 levels "No","Yes": 1 1 1 1 1 1 1 1 1 1 ...
+  :  $ Freq    : num  0 0 35 0 0 0 17 0 118 154 ...
+
+- Answer:
+  1) You can analyse relationships between survival and sex:
+     #+begin_src R :session *R* :results output :exports both
+       survival_sex <- xtabs(Freq ~ Sex + Survived, data=titanic)
+       survival_sex # raw numbers
+       prop.table(survival_sex, margin=1) # percentages
+     #+end_src
+
+  2) You can analyse relationships between survival and passenger
+     class:
+     #+begin_src R :session *R* :results output :exports both
+       survival_class <- xtabs(Freq ~ Class + Survived, data=titanic)
+       survival_class # raw numbers
+       prop.table(survival_class, margin=1) # percentages
+     #+end_src
+
+  3) You can plot these relationships to see it at a glance: What type
+     of plot do you expect from a 3-way cross-tabulation?
+     #+begin_src R :file survival_sex.png :session *R* :results file graphics output :exports both
+       plot(survival_sex) # mosaic plot
+     #+end_src
+
+     #+begin_src R :file survival_class.png :session *R* :results file graphics output :exports both
+       plot(survival_class) # mosaic plot
+     #+end_src
+
+  4) What would be a better plot?
+     #+begin_src R :file survival_sex_bar.png :session *R* :results file graphics output :exports both
+       barplot(survival_sex)
+     #+end_src
+
+  5) With some customization:
+     #+begin_src R :file survival_sex_bar_nice.png :session *R* :results file graphics output :exports both
+       barplot(t(survival_sex),
+               beside=FALSE,
+               col=c("red","green"),
+               main="Titanic Survival by Sex",
+               xlab="Sex",
+               ylab="Count",
+               legend.text=TRUE,
+               args.legend=list(x = "topright",
+                                legend = c("Died", "Survived"),
+                                fill = c("red", "green")))
+     #+end_src
+
+     #+begin_src R :file survival_class_bar_nice.png :session *R* :results file graphics output :exports both
+       barplot(t(survival_class),
+               beside = FALSE,
+               col = c("red", "green"),
+               main = "Survival by Class",
+               xlab = "Class",
+               ylab = "Count",
+               legend.text = TRUE,
+               args.legend = list(x = "topleft",
+                                  legend = c("Died", "Survived"),
+                                  fill = c("red", "green")))
+     #+end_src
+
+* Meta-learners / Ensembles / Reinforcement learning / Adversarial Attacks
+
+- *"Meta-learners"* are models that learn how to learn more effectively by
+  using the result of past learning to inform additional learning.
+
+- *Ensembles* are algorithms that work in teams, and algorithms that
+  evolve over time in a process called *reinforcement learning* (take
+  the course from Dr. Dall'Olio in Fall 2025!)
+
+- *Adversarial learning* involves learning about a model's weaknesses in
+  order to harden it against malicious attacks: inputs are
+  deliberately perturbed to deceive the model - alter input to fool an
+  already trained model, inject malicious data into training.
+
+- Example: A small pixel modification an cause a deep learning model
+  to misclassify an image with high confidence.
+
+- The popular *ChatGPT* model is a natural-language processing (NLP)
+  variant of the GPT-3 (Generative Pretained Transformer 3) model,
+  which was trained in massive amount of text data to generate
+  human-like responses to a given input.
+  #+attr_latex: :width 400px
+  #+captions; ChatGPT output next to Google.com output in browser
+  [[../img/ml_chatgpt.png]]
+
+  The image shows ChatGPT output via Google Chrome extension (right)
+  next to "classic" Google search engine output (left).
+
+  Update 2025: GenAI is now semi-integrated into search everywhere.
+
+- Architecture comparison by Stephen Wolfram (who created the "Wolfram
+  language" - not unlike R - that sits under "Mathematica" as a
+  symbolic computation package.
+  #+attr_latex: :width 400px
+  #+captions; ChatGPT mechanics vs. Wolfram|Alpha mechanics
+  [[../img/ChatGPT-hero-v4.png]]
+
+  Image: Wolfram language vs. ChatGPT ([[https://writings.stephenwolfram.com/2023/01/wolframalpha-as-the-way-to-bring-computational-knowledge-superpowers-to-chatgpt/][Wolfram, 2023]]). I don't agree
+  with the author's conclusion that "human language is somehow simpler
+  and more 'law like' in it structure than we thought". I think the
+  opposite is the case and ChatGPT shows exactly that. But the article
+  still does its job in explaining the mechanics of neural nets and
+  transformer technology.
+
+* Algorithms
+
+- List of Supervised Learning algorithms (Lantz 4e, 2024):
+  |-------------------------+--------------------+---------|
+  | NAME                    | TYPE               | CHAPTER |
+  |-------------------------+--------------------+---------|
+  | k-NN algorithm          | Classification     |       3 |
+  | Naive Bayes             | Classification     |       4 |
+  | Decision trees          | Classification     |       5 |
+  | Linear regression       | Numeric prediction |       6 |
+  | Regression trees        | Numeric prediction |       6 |
+  | Model trees             | Numeric prediction |       6 |
+  | Neural networks         | Dual use           |       7 |
+  | Support Vector Machines | Dual use           |       7 |
+  |-------------------------+--------------------+---------|
+
+- List of Unsupervised Learning algorithms:
+  |--------------------+-------------------+---------|
+  | NAME               | TYPE              | CHAPTER |
+  |--------------------+-------------------+---------|
+  | Association rules  | Pattern detection |       8 |
+  | k-means clustering | Clustering        |       9 |
+  |--------------------+-------------------+---------|
+
+- Meta-learning algorithms:
+  |----------------+----------+-----|
+  | NAME           | TYPE     | CH. |
+  |----------------+----------+-----|
+  | Bagging        | Dual use |  14 |
+  | Boosting       | Dual use |  14 |
+  | Random forests | Dual use |  14 |
+  |----------------+----------+-----|
+
+- The textbook by Lantz (2019) is useful to (p)re-read about these
+  algorithms before or after we cover them in class (or in DataCamp)
+  but the new edition (4th, 2024) is massive (twice as long) and might
+  be Tidyverse infested...I'll spend the rest of the term updating my
+  2022-23 material. ML in R & Python is algorithmically developing
+  pretty fast though not as fast for traditional machine learning.
+
+* ML with R - R packages
+
+- R is free, open source software (FOSS) for statistical programming
+
+- Many ML algorithms must be installed on top of base R as packages
+
+- Both base R and packages can be obtained from CRAN, the
+  Comprehensive R Archive Network (CRAN), at [[https://cran.r-project.org][cran.r-project.org]]
+
+- There is a [[https://cran.r-project.org/web/views/MachineLearning.html][separate /task view/ for ML on CRAN]]
+  #+attr_latex: :width 400px
+  [[../img/3_ml_taskview.png]]
+
+* Installing the =gmodels= package
+
+- The =gmodels= package contains a variety of functions for model
+  fitting and data analysis. See CRAN for details:
+  [[https://cran.r-project.org/package=gmodels][cran.r-project.org/package=gmodels]]
+
+- Look at that page: What should you be looking for?
+  #+begin_quote
+  - Version and publication date
+  - Dependencies: packages imported
+  - License: GPL-2 (GNU General Public License Version 2)
+  - Source code directory
+  - README
+  - CRAN checks (checksums)
+  #+end_quote
+
+- When installing the package with ~install.packages~, required
+  /dependencies/ (other packages) will also be installed
+
+- When installing, pick a mirror near you for greater download speed
+  or (better) put "https://cloud.r-project.org/" into your ~~/.Rprofile~
+  #+begin_example R
+  options(repos=c("https://mirrors.nics.utk.edu/cran/"))
+  options(crayon.enabled = FALSE)
+  options(prompt="> ")
+  message("*** Loaded .Rprofile ***")
+  #+end_example
+
+- The /default/ location will be announced at the end of the install, or
+  your system may ask you to specify a location (accept the default)
+
+- You could also specify a location to install using the ~lib~ parameter:
+  #+begin_example R
+  > install.packages("gmodels", lib = "/path/to/library")
+  #+end_example
+
+- To load the package, use the ~library~ function. To see it in the work
+  environment, use ~search()~, and to detach it from the current
+  session, use ~detach~:
+  #+begin_src R
+    library(gmodels)
+    search()
+    detach("package:gmodels", unload=TRUE)
+    search()
+  #+end_src
+
+* Test-driving the =gmodels= package with the =Titanic= data
+
+- Test =CrossTable= using the =Titanic= data set.
+  1) Load the package =gmodels=
+  2) Search for the package in the environment
+  3) Check for =CrossTable= using =environment=
+  4) Check the arguments of the function
+  5) Load =Titanic= data
+  6) Save =Titanic= as ~data.frame~ =titanic=
+  7) Print the structure of =titanic=
+  #+begin_src R
+    library(gmodels)
+    search()
+    environment(CrossTable)
+    args(CrossTable)
+    data("Titanic")
+    titanic <- as.data.frame(Titanic)
+    str(titanic)
+  #+end_src
+
+  #+RESULTS:
+  #+begin_example
+   [1] ".GlobalEnv"        "package:gmodels"   "ESSR"              "package:stats"    
+   [5] "package:graphics"  "package:grDevices" "package:utils"     "package:datasets" 
+   [9] "package:methods"   "Autoloads"         "package:base"
+  <environment: namespace:gmodels>
+  function (x, y, digits = 3, max.width = 5, expected = FALSE, 
+      prop.r = TRUE, prop.c = TRUE, prop.t = TRUE, prop.chisq = TRUE, 
+      chisq = FALSE, fisher = FALSE, mcnemar = FALSE, resid = FALSE, 
+      sresid = FALSE, asresid = FALSE, missing.include = FALSE, 
+      format = c("SAS", "SPSS"), dnn = NULL, ...) 
+  NULL
+  'data.frame':	32 obs. of  5 variables:
+   $ Class   : Factor w/ 4 levels "1st","2nd","3rd",..: 1 2 3 4 1 2 3 4 1 2 ...
+   $ Sex     : Factor w/ 2 levels "Male","Female": 1 1 1 1 2 2 2 2 1 1 ...
+   $ Age     : Factor w/ 2 levels "Child","Adult": 1 1 1 1 1 1 1 1 2 2 ...
+   $ Survived: Factor w/ 2 levels "No","Yes": 1 1 1 1 1 1 1 1 1 1 ...
+   $ Freq    : num  0 0 35 0 0 0 17 0 118 154 ...
+  #+end_example
+
+- Run =gmodels::CrossTable= on =titanic= check for =Age= of =Survived=:
+  #+begin_src R
+    CrossTable(titanic$Sex,titanic$Survived)
+  #+end_src
+
+  #+RESULTS:
+  #+begin_example
+
+
+     Cell Contents
+  |-------------------------|
+  |                       N |
+  | Chi-square contribution |
+  |           N / Row Total |
+  |           N / Col Total |
+  |         N / Table Total |
+  |-------------------------|
+
+
+  Total Observations in Table:  32
+
+
+               | titanic$Survived
+   titanic$Sex |        No |       Yes | Row Total |
+  -------------|-----------|-----------|-----------|
+          Male |         8 |         8 |        16 |
+               |     0.000 |     0.000 |           |
+               |     0.500 |     0.500 |     0.500 |
+               |     0.500 |     0.500 |           |
+               |     0.250 |     0.250 |           |
+  -------------|-----------|-----------|-----------|
+        Female |         8 |         8 |        16 |
+               |     0.000 |     0.000 |           |
+               |     0.500 |     0.500 |     0.500 |
+               |     0.500 |     0.500 |           |
+               |     0.250 |     0.250 |           |
+  -------------|-----------|-----------|-----------|
+  Column Total |        16 |        16 |        32 |
+               |     0.500 |     0.500 |           |
+  -------------|-----------|-----------|-----------|
+  #+end_example
+
+- What do you notice?
+  #+begin_quote
+  There are only 32 observations counted, Male and Female deaths are
+  perfectly balanced, and ChiSquare=0 means that sex and survival are
+  not statistically correlated in the data...Better have a look:
+  #+end_quote
+  #+begin_src R
+    titanic 
+  #+end_src
+
+- Solution:
+  #+begin_quote
+  By default, =gmodels::CrossTable= ignores =titanic$Freq= and treats each
+  row as a single observation. One way of dealing with this is to
+  replicate each row according to the frequency count.
+  #+end_quote
+  #+begin_src R
+    ## Expand the data by repeating rows based on Freq then drop Freq
+    titanic_expanded <- titanic[rep(1:nrow(titanic), 
+                                    times=titanic$Freq), 
+                                1:4] ## drop Freq feature
+    rownames(titanic_expanded) <- NULL
+    titanic_expanded |> head()
+  #+end_src
+
+  #+RESULTS:
+  :   Class  Sex   Age Survived
+  : 1   3rd Male Child       No
+  : 2   3rd Male Child       No
+  : 3   3rd Male Child       No
+  : 4   3rd Male Child       No
+  : 5   3rd Male Child       No
+  : 6   3rd Male Child       No
+
+  #+begin_src R
+    ## Now run CrossTable on the expanded dataset & drop the chisq test
+    CrossTable(titanic_expanded$Sex, 
+               titanic_expanded$Survived, 
+               prop.chisq = FALSE)
+  #+end_src
+
+  #+RESULTS:
+  #+begin_example
+
+
+     Cell Contents
+  |-------------------------|
+  |                       N |
+  |           N / Row Total |
+  |           N / Col Total |
+  |         N / Table Total |
+  |-------------------------|
+
+
+  Total Observations in Table:  2201 
+
+
+                       | titanic_expanded$Survived 
+  titanic_expanded$Sex |        No |       Yes | Row Total | 
+  ---------------------|-----------|-----------|-----------|
+                  Male |      1364 |       367 |      1731 | 
+                       |     0.788 |     0.212 |     0.786 | 
+                       |     0.915 |     0.516 |           | 
+                       |     0.620 |     0.167 |           | 
+  ---------------------|-----------|-----------|-----------|
+                Female |       126 |       344 |       470 | 
+                       |     0.268 |     0.732 |     0.214 | 
+                       |     0.085 |     0.484 |           | 
+                       |     0.057 |     0.156 |           | 
+  ---------------------|-----------|-----------|-----------|
+          Column Total |      1490 |       711 |      2201 | 
+                       |     0.677 |     0.323 |           | 
+  ---------------------|-----------|-----------|-----------|
+  #+end_example
+  
+* The RStudio IDE
+
+- RStudio is an additional interface to R available at
+  https://www.rstudio.com aka 'posit' (the company that pushes the
+  unfathomably named, slow, over-complicated, but popular "Tidyverse")
+
+- RStudio includes:
+  1) an integrated code editor
+  2) an R command-line console
+  3) a file browser
+  4) code output, plot, graphics
+  5) project and package management
+  6) integration with source / version control tools
+  7) database connection maangement
+  8) compilation of R output to HTML, PDF, WORD
+
+- RStudio Notebook formats allow for literate programming (but Emacs +
+  ESS + Org-mode is more flexible and extensible):
+  #+attr_latex: :width 400px
+  #+caption: RStudio implementation of an R practice file
+  [[../img/3_rstudio1.png]]
+
+* Summary
+
+- The ML model is used for prescriptive or descriptive purposes
+
+- ML purposes can be: category classification, numeric prediction,
+  pattern detection, and clustering
+
+- Algorithms are chosen based on input data and learning task
+
+- R supports ML through community-authored, FOSS packages that need to
+  be installed and loaded
+
+- Properly using packages, especially for machine learning with its
+  added layers of model-related abstraction, requires detective work.
+
+* References
+
+- Anderson (2017). Twenty years on from Deep Blue vs Kasparov: how a
+  chess match started the big data revolution. [[https://theconversation.com/twenty-years-on-from-deep-blue-vs-kasparov-how-a-chess-match-started-the-big-data-revolution-76882][@theconversation.com.]]
+
+- Hosseini, Z., Hytönen, K., & Kinnunen, J. (2022). Improving Online
+  Content Quality Through Technological Pedagogical Content Design
+  (TPCD). In S. Vachkova, & S. S. Chiang (Eds.), Education and City:
+  Quality Education for Modern Cities, vol 3. European Proceedings of
+  Educational Sciences (pp. 284-296). European
+  Publisher. https://doi.org/10.15405/epes.22043.25
+
+- Lantz (2019). Machine Learning with R. Packt.
+
+- Lardinois (February 8, 2023). Hands-on with Bing's new ChatGPT-like
+  features. [[https://techcrunch.com/2023/02/08/hands-on-with-the-new-bing/][Online: techcrunch.com]].
+
+- Roiger (2020). Just Enough R!. CRC Press.
+
+- Serrano (2021). Grokking Machine Learning.
+
+
