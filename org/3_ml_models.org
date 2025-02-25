@@ -617,6 +617,18 @@ an essential first step toward using data to drive the desired action.
   #+caption: RStudio implementation of an R practice file
   [[../img/3_rstudio1.png]]
 
+* Why R for ML?
+
+*Why?*
+- (Even) more intuitive to learn than Python
+- Calculator-like interface and usage
+- Few types of data structures, spreadsheet-like
+- Packages easier to install and update (no OS dependencies)
+
+*Why not?*
+- R is slower and more memory-hungry
+- R is supported by posit (formerly RStudio)
+
 * Summary
 
 - The ML model is used for prescriptive or descriptive purposes
