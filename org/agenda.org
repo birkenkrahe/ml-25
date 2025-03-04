@@ -3,14 +3,12 @@
 #+subtitle: DSC 305 - Machine Learning
 #+SEQ_TODO: TODO NEXT IN_PROGRESS | DONE CANCELLED
 #+startup: overview hideblocks indent entitiespretty
-:PROPERTIES:
-:header-args:C:      :main yes :includes <stdio.h> :results output :exports both
-:header-args:python: :session *Python* :python python3 :results output :exports both
-:header-args:R:      :session *R* :results graphics output file :exports both
-:header-args:C++:    :main yes :includes <iostream> :results output :exports both
-:END:
-* Week 1: Overview
-#+attr_html: :width 600px: 
+#+property: :header-args:C:      :main yes :includes <stdio.h> :results output :exports both
+#+property: :header-args:python: :session *Python* :python python3 :results output :exports both
+#+property: :header-args:R:      :session *R* :results graphics output file :exports both
+#+property: :header-args:C++:    :main yes :includes <iostream> :results output :exports both
+* DONE Week 1: Overview
+#+attr_html: :width 600px:
 #+caption: Salvador Dali, The Persistence of Memory (1931)
 [[../img/cover.jpg]]
 
@@ -131,7 +129,7 @@ influences the prediction? Can the prediction be validated, and how?
    computation" ([[https://youtu.be/PQ-xzwj_p_4?si=vD6-OoHcIwMWHnmh][BigThink, 2014]]) - shared in the group chat.
    #+end_quote
 
-* Week 2: Introduction to machine learning
+* DONE Week 2: Introduction to machine learning
 
 - [ ] Extending and testing a decision tree model
 - [ ] *Lecture*: Introduction to machine learning
@@ -199,7 +197,7 @@ influences the prediction? Can the prediction be validated, and how?
    temporal nature of data (time-series), multi-modality (emotion,
    emphasis, intonation), and lack of annotated data.
    #+end_quote
-   
+
 4. Which ethical issues with ML can you think of?
    #+begin_quote
    1) Privacy (training/test data)
@@ -251,7 +249,7 @@ influences the prediction? Can the prediction be validated, and how?
 
 9. Is there a limit to the features that can (or should) be used?
    #+begin_quote
-   There is no theoretical limit, quite the opposite. 
+   There is no theoretical limit, quite the opposite.
    #+end_quote
 
 10. What should you maximize, and what should you minimize: Sample or
@@ -261,7 +259,7 @@ influences the prediction? Can the prediction be validated, and how?
     cannot manipulate the population because it's a real world fact.
     #+end_quote
 
-* Week 3: Machine learning models overview
+* DONE Week 3: Machine learning models overview
 
 - [X] *Projects:* Enter your ideas now - sprint review: Fri 7-Feb
 - [X] *Review*: DataCamp - Understanding Machine Learning Models
@@ -271,7 +269,7 @@ influences the prediction? Can the prediction be validated, and how?
 - [X] Next up: R review
 
 ** Projects - sprint review coming soon
-#+attr_html: :width 600px: 
+#+attr_html: :width 600px:
 [[../img/projects.png]]
 
 ** DataCamp review questions and answers (test 2)
@@ -299,7 +297,7 @@ influences the prediction? Can the prediction be validated, and how?
    #+end_src
 
    #+RESULTS:
-   : [1] "matrix" "array" 
+   : [1] "matrix" "array"
 
 3) What if you want to predict a *label* but the *predictors* have all
    different lengths (e.g., because of missing observations)?
@@ -324,12 +322,12 @@ influences the prediction? Can the prediction be validated, and how?
 
 5) There are 3 red ('fraudulent') and 27 blue ('legitimate') dots in
    the picture. How does the confusion matrix look like?
-   #+attr_html: :width 250px: 
+   #+attr_html: :width 250px:
    [[../img/fraud.png]]
 
-   #+attr_html: :width 400px: 
+   #+attr_html: :width 400px:
    [[../img/confused.png]]
-   
+
 6) Where would "false positives" be found in the image, and which
    color would they have?
    #+begin_quote
@@ -348,14 +346,14 @@ influences the prediction? Can the prediction be validated, and how?
 
 8) Provide a scenario where either accuracy or sensitivity is
    important, but not both.
-  #+begin_quote
-  - *Accuracy*: all classes are equally important. Example: handwriting
-    recognition system. Misclassification is equally important for all
-    digits.
-  - *Sensitivity*: identifying true positives is more important than
-    minimizing false negatives. Example: medical diagnosis. Healthy
-    individuals may be flagged for testing (false positives
-  #+end_quote
+   #+begin_quote
+   - *Accuracy*: all classes are equally important. Example: handwriting
+     recognition system. Misclassification is equally important for all
+     digits.
+   - *Sensitivity*: identifying true positives is more important than
+     minimizing false negatives. Example: medical diagnosis. Healthy
+     individuals may be flagged for testing (false positives
+   #+end_quote
 
 9) What is *overfitting*, and how can it be identified in a model's
    performance?
@@ -406,8 +404,8 @@ influences the prediction? Can the prediction be validated, and how?
 ** Sample answers
 
 - What did you learn: Limits of machine learning
-  
-  1) ML models are... 
+
+  1) ML models are...
      #+begin_quote
      ...highly inflexible - strictly parametrized and subject to an
      immutable workflow.
@@ -420,13 +418,13 @@ influences the prediction? Can the prediction be validated, and how?
      3. model training & customization
      4. model testing & evaluation
      #+end_quote
-     
-  3) Manual examples you saw included: 
+
+  3) Manual examples you saw included:
      #+begin_quote
      Medical diagnosis (decision tree) and Nile data (workflow)
-          #+end_quote
+     #+end_quote
 
-  4) =Nile= data were: 
+  4) =Nile= data were:
      #+begin_quote
      1. stored in an external file (=write=)
      2. read into memory (=read.table=)
@@ -448,10 +446,10 @@ influences the prediction? Can the prediction be validated, and how?
   4. High attendance & classroom spirits despite the cold.
   #+end_quote
 
-* Week 4: Modeling assignment, Deep Learning
+* DONE Week 4: Modeling assignment, Deep Learning
 
-** TODO Home assignment: Fitting a linear model to compute g 
-#+attr_html: :width 400px: 
+** TODO Home assignment: Fitting a linear model to compute g
+#+attr_html: :width 400px:
 [[../img/newton.jpg]]
 
 - Different ways to solve this problem
@@ -459,7 +457,7 @@ influences the prediction? Can the prediction be validated, and how?
 - Provide plots in =ggplot= and/or base R
 - Provide notebook in Org-mode or another format
 
-* Week 5: R Review (Basics + Managing data)
+* DONE Week 5: R Review (Basics + Managing data)
 
 - [X] *Test 2:* Counted late submissions bc of network isues
 - [X] *Test 3* due Friday (max 100%)
@@ -482,13 +480,13 @@ influences the prediction? Can the prediction be validated, and how?
 
 - Download and work through:  [[https://tinyurl.com/R-explore-practice][tinyurl.com/R-explore-practice]]
 
-* Week 6: R Review: Exploring data
+* DONE Week 6: R Review: Exploring data
 
 - [X] *Test 4* live until Friday, 28 Feb (Mar 4) for 100% (50%)
 - [X] *R Basics:* Explore data (finish)
 - [X] *Project* feedback in class - what are your takeaways?
 - [ ] *Lecture*: Machine Learning Models
-  
+
 ** Review questions
 
 1. When downloading data, what're we looking for?
@@ -512,17 +510,17 @@ influences the prediction? Can the prediction be validated, and how?
    75% of all the points.
    #+end_quote
    #+begin_src R :session *R* :results output :exports both
-   args(IQR)
+     args(IQR)
    #+end_src
 
    #+RESULTS:
-   : function (x, na.rm = FALSE, type = 7) 
+   : function (x, na.rm = FALSE, type = 7)
    : NULL
 
 3. What's the =type= parameter in =IQR=? Why does it exist?
    #+begin_quote
    ~type~: an integer selecting a quantile algorithm.
-   
+
    There are (ca. 20) different ~quantile~ algorithms because in a
    finite dataset, quantiles often fall between data points. The
    differences are especially prominent for small sample sizes.
@@ -534,10 +532,10 @@ influences the prediction? Can the prediction be validated, and how?
    1.5 on either side of the IQR = points below Q1-1.5 * IQR, and
    points above Q3 + 1.5 * IQR.
 
-  *Why 1.5?* It's a *heuristic* balancing robustness and sensitivity in
-  stats analysis. It assumes a normal-like distribution but because it
-  uses the median (not the mean) it's robust against skewedness. It is
-  easy to compute, works well, and is non-parametric.
+   *Why 1.5?* It's a *heuristic* balancing robustness and sensitivity in
+   stats analysis. It assumes a normal-like distribution but because it
+   uses the median (not the mean) it's robust against skewedness. It is
+   easy to compute, works well, and is non-parametric.
    #+end_quote
 
 5. What's the difference? What's the output?
@@ -569,41 +567,380 @@ influences the prediction? Can the prediction be validated, and how?
 
    #+RESULTS:
    #+begin_example
-    [1] summary.aov                    summary.aovlist*              
+    [1] summary.aov                    summary.aovlist*
     [3] summary.aspell*                summary.check_packages_in_dir*
-    [5] summary.connection             summary.data.frame            
-    [7] summary.Date                   summary.default               
-    [9] summary.ecdf*                  summary.factor                
-   [11] summary.glm                    summary.infl*                 
-   [13] summary.lm                     summary.loess*                
-   [15] summary.manova                 summary.matrix                
-   [17] summary.mlm*                   summary.nls*                  
-   [19] summary.packageStatus*         summary.POSIXct               
-   [21] summary.POSIXlt                summary.ppr*                  
-   [23] summary.prcomp*                summary.princomp*             
-   [25] summary.proc_time              summary.srcfile               
-   [27] summary.srcref                 summary.stepfun               
-   [29] summary.stl*                   summary.table                 
-   [31] summary.tukeysmooth*           summary.warnings              
+    [5] summary.connection             summary.data.frame
+    [7] summary.Date                   summary.default
+    [9] summary.ecdf*                  summary.factor
+   [11] summary.glm                    summary.infl*
+   [13] summary.lm                     summary.loess*
+   [15] summary.manova                 summary.matrix
+   [17] summary.mlm*                   summary.nls*
+   [19] summary.packageStatus*         summary.POSIXct
+   [21] summary.POSIXlt                summary.ppr*
+   [23] summary.prcomp*                summary.princomp*
+   [25] summary.proc_time              summary.srcfile
+   [27] summary.srcref                 summary.stepfun
+   [29] summary.stl*                   summary.table
+   [31] summary.tukeysmooth*           summary.warnings
    see '?methods' for accessing help and source code
    no methods found
    #+end_example
 
 6. Which plot type (almost) represents the ~summary~? And what's in the
    ~summary~ that's not in this type of plot?
-   #+attr_html: :width 400px: 
+   #+attr_html: :width 400px:
    [[../img/spread.png]]
-   
+
    #+begin_src R :session *R* :results output :exports both
-   summary(mtcars$mpg) # boxplot does not contain the `mean`
+     summary(mtcars$mpg) # boxplot does not contain the `mean`
    #+end_src
 
    #+RESULTS:
-   :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
    :   10.40   15.43   19.20   20.09   22.80   33.90
 
-* Week 7: Machine Learning Models & k-NN algorithm
+* DONE Week 7: Machine Learning Models & k-NN algorithm
 
-- [ ] *Tests & Assignments*: Removing 1 point per late day. Easier for
+- [X] *Tests & Assignments*: Removing 1 point per late day. Easier for
   me, kinder to you. All close one week after the deadline though.
 
+- [X] *Project* review and 2nd sprint preview (short)
+
+- [X] *Featured model*: k-nearest-neighbor (knn) models
+
+** Project review - Issues and Tips (almost like DSC 205)
+
+1) What is the central purpose of a project proposal?
+   #+begin_quote
+   To get buy-in from the project sponsor (that's me). Prove to him
+   that this is something worth spending a week's time on. Sell a
+   product: You + your work, to solve a problem within the framework
+   of the project.
+   #+end_quote
+
+2) What's the purpose of a sprint review?
+   #+begin_quote
+   To present your progress (or lack thereof) to the project owner or
+   sponsor, and to the other projects, to highlight issues, enter in a
+   conversation with the project owner, and to identify the steps for
+   the next sprint. This last step was not asked (I should have -
+   let's do it now).
+   #+end_quote
+
+3) How much time should you put into the project per week?
+   #+begin_quote
+   The syllabus does not mention the project separately (too hard to
+   do the accounting), but it says: You should spend no less than 25
+   minutes per day on this course (outside of class), or no less than
+   2.5 hours per week. I spend at least 1 hour per day per class (or >
+   4 hours per day). If you have 5-6 classes, you should spend 3-4
+   hours per day studying for them.
+
+   Within that schedule, at least 1 hour (10 min per day) should go
+   towards your project - in practice more like 1/2 day every 2
+   weeks - for a total of no less than 24-32 hours (3-4 days).
+
+   Many proposals look as if you spent too little time on the
+   proposals. Reading and working through references alone takes time.
+   #+end_quote
+
+4) What are inline references and what are they good for?
+   #+begin_quote
+   Inline references are abbreviated references that need to be
+   written out fully in the reference section. They back up claims
+   that made in the text that are non-trivial and not generally known
+   to be true.
+
+   Examples:
+   - "Agents are not typically taught..."
+   - "This approach is common..."
+   - "It is pointless to try to..."
+   - "Datasets are not publicly available..."
+
+   If you don't need inline references, you make no non-trivial
+   claims, which could mean that you're not specific enough or that
+   you have not researched the background of your problem.
+   #+end_quote
+
+5) What is AMA citation and did you cite consistently?
+   #+begin_quote
+   An AMA citation refers to the citation style outlined in the
+   American Medical Association (AMA) Manual of Style, which is
+   commonly used in medicine, healthcare, and biological sciences. The
+   AMA citation style follows a numbered system where references are
+   listed in the order they appear in the text.
+
+   Examples:
+   - [Journal Paper] Smith J, Doe A. Neural networks and phase
+     transitions. J Comput Neurosci. 2023;45(2):123-135.
+     doi:10.1001/jcn.2023.456
+   - [Book] Bishop CM. Pattern Recognition and Machine
+     Learning. Springer; 2006.
+   - [Website] National Institutes of Health. Artificial intelligence
+     in medicine. NIH. Published January 10, 2024. Accessed February
+     25, 2025. https://www.nih.gov/ai-medicine
+   - [Conf Paper] Johnson K, Lee R. Category theory in neural network
+     phase transitions. In: Proceedings of the AI & Math Conference;
+     2024; New York, NY. Springer; 2024:210-225.
+
+   Who used AMA? I noticed a lot of inconsistencies, and unncecessary
+   URLs etc. Many more references than ever (!) but often in shambles.
+   #+end_quote
+
+6) How colloquial should a proposal be? How subjective in tone?
+   #+begin_quote
+   You need to balance personal, practical and professional tone in
+   anything you write to anyone for school or business. How much
+   depends totally on the audience and the problem.
+
+   There is only one rule for project documentation:
+   Personal/subjective remarks need to have a place of their own, and
+   they must not bleed into the professional/practical
+   documentation. Otherwise you spoil your professional appearance,
+   and you make it very hard for anyone except whom you were thinking
+   of to understand what's going on.
+   #+end_quote
+
+7) Do you need references? Which ones, and why?
+   #+begin_quote
+   The only situation where you don't need any references is when you
+   are working on something that nobody has ever worked on so that
+   your choice of topic and method are completely original.
+
+   So you do need them. As many scientific ones (peer-reviewed) as
+   possible. You must make an assessment of the validity of your
+   sources, and you need to be able to answer for them.
+   #+end_quote
+
+8) Do you have to improve your proposal based on the feedback?
+   #+begin_quote
+   Yes, you should, and you should touch base with me if anything in
+   the feedback is unclear. The feedback should be more formal than it
+   is - basically I'm only checking if you fulfilled the requirements
+   to the letter (e.g. completeness, consistent references etc.)
+   and/or in spirit, if it's doable, and if you've done everything you
+   could at this point.
+
+   A formal feedback would require a formal list of weighted criteria
+   (a rubric). This is what you'll be facing in business not
+   academia. Academia is terribly weak this way and much less
+   resilient - you can see this in the science funding drama that is
+   currently unfolding around us: scientists often don't bother
+   justifying their ends, especially if they feel justified by their
+   means.
+
+   I don't bother with a formal framework mainly because otherwise I
+   would have to spend a lot more time on the projects (like a manager
+   would whose main job is managing projects, pennies, and people). So
+   this is your show and responsibility much more than it would be in
+   the real world.
+
+   Do you have to share your improved proposal with me, unasked?
+   Absolutely, if you've got any doubts if you did it right, or if you
+   just want to show off a good piece of work (that's never wrong -
+   you may want a letter of reference from me one day). This shows
+   both diligence and resilience.
+   #+end_quote
+
+9) Should you look at the proposals of others?
+   #+begin_quote
+   Absolutely. Cristian's proposals are the most polished ones. In
+   DSC 305, Matthew's proposal has the most meat (data sets and code
+   examples attached). Donna's proposal reflects the greatest range
+   of ambitions. Gavin's and Isaac's proposals are pithy and to the
+   point. Fowler's proposals are fairly personal.
+
+   You should make up your own mind about these. They're all
+   interesting, and they all have slight issues here and there.
+
+   You might even give the authors tips based on your experience or
+   your views.
+   #+end_quote
+
+10) Do you need an AI disclaimer?
+    #+begin_quote
+    It would be good! Matthew designed one that I asked the AI to
+    rewrite and I think it worked quite well (Ariel also had something
+    like this in his proposal):
+
+    "In researching for this project, I may have been exposed to
+    AI-generated content in search results and news feeds. However, I
+    affirm that this work is my own and was completed with academic
+    integrity, without relying on AI to circumvent my responsibilities
+    as a student."
+
+    If you don't have a disclaimer because you used AI directly, you
+    needed to (and still need to) document as much as possible
+    (including perhaps by sharing links to your conversation) why and
+    how you used the AI.
+    #+end_quote
+
+** Litmaps and NotebookLM
+
+1) Create a Litmap for your ML project right now and search for a
+   relevant paper.
+
+2) Create a NotebookLM for your ML project right now and upload your
+   proposal.
+
+** DataCamp review: kNN classification
+
+1. What is the primary goal of classification in supervised learning?
+   #+begin_quote
+   Assigning labels to data based on learned patterns.
+   #+end_quote
+
+2. In the k-Nearest Neighbors (kNN) algorithm, how is similarity
+   between data points measured?
+   #+begin_quote
+   Using distance metrics like Euclidean distance. There are many
+   other measures of similarity & the math theory is HARD.
+   #+end_quote
+
+3. Which R library is commonly used to apply the kNN algorithm?
+   #+begin_quote
+   =class= - there are many others, e.g. =caret= (classification and
+   regression training), =kkNN= (Kernel kNN), =FNN= (Fast Nearest
+   Neighbor), =mlr3= (Machine Learning in R), and =tidymodels=.
+
+   | Library    | Function            | Features                                  |
+   |------------+---------------------+-------------------------------------------|
+   | *class*      | ~knn()~               | Simple kNN, no hyperparameter tuning      |
+   | *caret*      | ~train(method="knn")~ | Easy tuning, part of unified ML framework |
+   | *kknn*       | ~kknn()~              | Weighted kNN, flexible distance functions |
+   | *FNN*        | ~knn()~               | Fastest nearest neighbor search           |
+   | *mlr3*       | ~lrn("classif.kknn")~ | Modular OOP machine learning framework    |
+   | *tidymodels* | ~nearest_neighbor()~  | Tidyverse-compatible machine learning     |
+
+   #+end_quote
+
+   #+begin_src R :session *R*  :results output :exports both
+     ## Load the class library
+     library(class)
+
+     ## Example dataset: Iris dataset
+     data(iris)
+
+     ## Prepare training and testing sets
+     classify <- function(x) {
+       set.seed(123)  ## For reproducibility
+       index <- sample(1:nrow(x), 0.7 * nrow(x))  ## 70% training data
+       train_data <- x[index, 1:4]  ## Select feature columns
+       test_data <- x[-index, 1:4]  ## Select feature columns for testing
+       train_labels <- x[index, 5]  ## Species labels
+       test_labels <- x[-index, 5]  ## True labels for testing
+       ## Apply kNN with k = 3
+       pred <- knn(train = train_data, test = test_data, cl = train_labels, k = 3)
+       ## Check accuracy
+       accuracy <- sum(pred == test_labels) / length(test_labels)
+       ## return accuracy
+       return (accuracy)
+     }
+     accuracy_result <- classify(iris)
+     print(paste("Accuracy:", round(accuracy_result * 100, 2), "%"))
+   #+end_src
+
+   #+RESULTS:
+   : [1] "Accuracy: 97.78 %"
+
+#+begin_src R :session *R* :results output
+  str(iris)
+#+end_src
+
+#+RESULTS:
+: 'data.frame':	150 obs. of  5 variables:
+:  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+:  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+:  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+:  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+:  $ Species     : Factor w/ 3 levels "setosa","versicolor",..: 1 1 1 1 1 1 1 1 1 1 ...
+
+#+begin_src R :session *R* :results output graphics file :file iris.png
+  plot(iris)
+#+end_src
+
+#+RESULTS:
+[[file:iris.png]]
+
+4. How does increasing the value of 'k' in kNN affect the model?
+   #+begin_quote
+   It smooths the decision boundary but may reduce sensitivity to
+   small patterns.
+   #+end_quote
+
+5. Why is data normalization important in kNN?
+   #+begin_quote
+   It ensures that all features contribute equally to distance
+   calculations.
+   #+end_quote
+
+6. Which function is used to normalize data in R for kNN?
+   #+begin_src R :results output
+     ## Define a min-max normalization function
+     normalize <- function(x) {
+       return((x - min(x)) / (max(x) - min(x)))
+     }
+
+     ## Example dataset: Creating a sample vector
+     sample_data <- c(10, 20, 30, 40, 50, 60, 70, 80, 90, 100)
+
+     ## Applying normalization
+     normalized_data <- normalize(sample_data)
+
+     ## Print the original and normalized data
+     print("Original Data:")
+     print(sample_data)
+     print("Normalized Data:")
+     print(round(normalized_data*100,2))
+   #+end_src
+
+   #+RESULTS:
+   : [1] "Original Data:"
+   :  [1]  10  20  30  40  50  60  70  80  90 100
+   : [1] "Normalized Data:"
+   :  [1]   0.00  11.11  22.22  33.33  44.44  55.56  66.67  77.78  88.89 100.00
+
+7. What type of data does kNN assume?
+   #+begin_quote
+   Numeric data.
+   #+end_quote
+
+8. What is the primary drawback of using a very small 'k' in kNN?
+   #+begin_quote
+   The model becomes sensitive to noise and outliers.
+   #+end_quote
+
+9. What is the purpose of training and testing data in kNN?
+   #+begin_quote
+   To train the model on known data and evaluate its accuracy on
+   unseen data.
+   #+end_quote
+
+10. What happens when kNN is applied without normalizing features that
+    have different scales?
+    #+begin_quote
+    Features with larger ranges dominate distance calculations (not
+    for all measures).
+    #+end_quote
+
+* Week 8:
+
+** TODO Lecture + codealong + practice: kNN classifier algorithms
+
+1) [X] Lecture
+2) [ ] Practice (demo: cancer classification with k-NN)
+3) [ ] Exercise (classroom)
+4) [ ] Test 5 - deadline March 18
+
+** TODO Review
+
+1. Which of these is labeled/unlabeled and why? 
+   1) Basketball Player Movement Data with movement cluster target
+   2) Soccer Player Performance data with "position" target label
+
+2. What does the "training" in knn consist of?
+   1) identify classes (groupings)
+   2) build feature space (labeled/coordinated)
+   3) identify target class (unlabeled/uncoordinated)
+   4) identify target class data structure
