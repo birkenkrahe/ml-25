@@ -1,0 +1,120 @@
+#+TITLE: k-NEAREST-NEIGBORS - Coding kNN from Scratch
+#+AUTHOR: [author] [pledge]
+#+SUBTITLE: Case Study - Supervised lazy learner classifiers
+#+STARTUP: overview hideblocks indent inlineimages
+#+OPTIONS: toc:nil num:nil ^:nil
+#+PROPERTY: header-args:R :session *R* :results output :exports both :noweb yes
+* README
+
+Exercise to recreate [[https://github.com/birkenkrahe/ml-25/blob/main/pdf/4_knn_manual.pdf][the manual k-NN example]] using R.
+
+Fill in your name and pledge at the top.
+
+Solve this in any way you like - there is starter code provided.
+
+* Bonus Exercise: Coding kNN from Scratch
+** Goal
+
+Write R code to recreate the manual example with k=1 for points
+A, B, C, and a test point P in both 2D and 3D. Cnalculate distances and
+predict P’s class.
+
+** Background
+
+You’ve seen the manual example:
+- Points: A = (0, 0), B = (1, 1), C = (2, 0) in 2D; A = (0, 0, 0), B =
+  (1, 1, 1), C = (2, 0, 0.5) in 3D.
+- Classes: A = 0, B = 1, C = 1.
+- Test point: P = (0.5, 0.5) in 2D, P = (0.5, 0.5, 0.5) in 3D.
+- Task: Find the nearest neighbor (k=1) to P in 2D and 3D.
+
+** Tips
+
+- Use ~data.frame()~ to create a table of coordinates.
+- ~rownames()~ sets row names (e.g., "A", "B", "C").
+- ~factor()~ creates class labels (levels = 0, 1).
+- ~dist()~ computes Euclidean distances between points; ~as.matrix()~
+  turns it into a matrix.
+- ~rbind()~ adds a row to a data frame.
+- Subset with ~df[rows, cols]~ (e.g., ~df[,-3]~ drops column 3).
+- Extract matrix elements with ~mat["row", "col"]~.
+
+** Starter Code
+
+Fill in the blanks after each `##` comment to complete the code.
+
+1) Create the 2D data frame for A,B,C:
+   #+begin_src R :results output :exports both :session *R*
+     options(digits = 3)
+
+     ## Create a 2D data frame with x, y coordinates for A(0,0), B(1,1),
+     ## C(2,0)
+
+     ## Name the rows "A", "B", "C"
+
+     ## Define a factor `cl` with classes 0 (A), 1 (B), 1 (C)
+
+     ## Add `cl` as a column to the 2D data frame
+
+     ## Print the 2D data frame to check
+
+     ## Compute the 2D distance matrix (drop the class column) and store as
+     ## `knn2`
+
+     ## Print `knn2` to see distances
+
+   #+end_src
+
+2) Create the 3D data frame for A,B,C:
+   #+begin_src R :session *R* :results output :exports both
+     ## Create a 3D data frame with x, y, z for A(0,0,0), B(1,1,1),
+     ## C(2,0,0.5)
+
+     ## Name the rows "A", "B", "C"
+
+     ## Add the same `cl` factor to the 3D data frame
+
+     ## Print the 3D data frame to check
+
+     ## Compute the 3D distance matrix (drop the class column) and store as
+     ## `knn3`
+
+     ## Print `knn3` to see distances
+
+   #+end_src
+
+3) Drop a fourth point P into the 2D and the 3D scenario, and update the
+   distance matrix.
+   #+begin_src R :session *R* :results output :exports both
+     ## Add point P(0.5, 0.5) to the 2D data frame (class = NA)
+
+     ## Add point P(0.5, 0.5, 0.5) to the 3D data frame (class = NA)
+
+     ## Update `knn2` with distances including P (drop class column)
+
+     ## Update `knn3` with distances including P (drop class column)
+
+     ## Print both updated matrices
+
+   #+end_src
+
+4) Predict the class of point P in 2D and 3D for k=1. 
+   #+begin_src R :session *R* :results output :exports both
+     ## Predict P’s class in 2D (k=1): Find the smallest distance from P to
+     ## A, B, C in `knn2`
+
+     ## Predict P’s class in 3D (k=1): Find the smallest distance from P to
+     ## A, B, C in `knn3`
+
+     ## Print the predicted classes for P in 2D and 3D
+
+   #+end_src
+
+** Expected Output
+
+- 2D distances for P: A = 0.707, B = 0.707, C = 1.581 → Nearest = A or
+  B (tie, so class 0 or 1).
+- 3D distances for P: A = 0.866, B = 0.866, C = 1.581 → Nearest = A or
+  B (tie, so class 0 or 1).
+- Check your matrices against the manual example!
+

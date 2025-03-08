@@ -1,0 +1,116 @@
+#+TITLE: k-NEAREST-NEIGBORS - Visualize the Curse of Dimensionality
+#+AUTHOR: [author] [pledge]
+#+SUBTITLE: Case Study - Supervised lazy learner classifiers
+#+STARTUP: overview hideblocks indent inlineimages
+#+OPTIONS: toc:nil num:nil ^:nil
+#+PROPERTY: header-args:R :session *R* :results output :exports both :noweb yes
+* README
+
+Exercise to visualize the "Curse of Dimensionality" using [[https://github.com/birkenkrahe/ml-25/blob/main/pdf/4_knn_manual.pdf][the manual
+k-NN example]] using R.
+
+Fill in your name and pledge at the top.
+
+Solve this in any way you like - there is starter code provided.
+
+* Bonus Exercise: Visualizing the Curse of Dimensionality
+
+** Goal
+
+Create a stacked barplot in R to visualize how the differences between
+pairwise distances shrink from 2D to 3D, showing the "curse of
+dimensionality." Use points A, B, C.
+
+** Background
+
+- Points: A = (0, 0), B = (1, 1), C = (2, 0) in 2D; A = (0, 0, 0), B =
+  (1, 1, 1), C = (2, 0, 0.5) in 3D.
+- The curse means distances grow, but their differences shrink,
+  reducing discriminatory power.
+- You’ll compute distances (AB, AC, BC), their absolute differences,
+  and stack them to show shrinkage.
+
+** Tips
+
+- ~matrix()~ creates a matrix (e.g., ~matrix(data, nrow, ncol, byrow = TRUE)~).
+- ~dist()~ computes distances; ~as.matrix()~ makes a full matrix.
+- ~abs()~ gives absolute values.
+- ~rbind()~ combines rows; ~t()~ transposes a matrix (swaps rows and columns).
+- ~barplot()~ with ~beside = FALSE~ stacks bars; use ~col~ for colors, ~ylim~ for y-axis.
+- ~text(x, y, label)~ adds text to a plot.
+
+** Starter Code
+
+Fill in after each `##` comment in the blocks below.
+
+*** 1. 2D Points and Distances
+#+begin_src R :results output :exports both
+options(digits = 3)
+
+## Create a 2D matrix for A(0,0), B(1,1), C(2,0), use byrow = TRUE
+
+## Name rows "A", "B", "C"
+
+## Compute 2D distance matrix, store as `knn2`
+
+## Extract distances AB, AC, BC into `dist_2d`
+
+## Print `dist_2d`
+
+#+end_src
+
+*** 2. 3D Points and Distances
+#+begin_src R :results output :exports both
+## Create a 3D matrix for A(0,0,0), B(1,1,1), C(2,0,0.5), use byrow = TRUE
+
+## Name rows "A", "B", "C"
+
+## Compute 3D distance matrix, store as `knn3`
+
+## Extract distances AB, AC, BC into `dist_3d`
+
+## Print `dist_3d`
+
+#+end_src
+
+*** 3. Compute Absolute Differences
+#+begin_src R :results output :exports both
+## Compute absolute differences for 2D: |AB - AC|, |BC - AB|, |AC - BC|
+
+## Compute absolute differences for 3D: |AB - AC|, |BC - AB|, |AC - BC|
+
+## Print both
+
+#+end_src
+
+*** 4. Combine into Matrix
+#+begin_src R :results output :exports both
+## Combine into a matrix `diff_mat`, rows = differences, columns = "2D", "3D"
+## Transpose it so columns are dimensions
+
+#+end_src
+
+*** 5. Create Stacked Barplot
+#+begin_src R :results graphics file :file curse.png :exports both
+## Create a stacked barplot of the transposed `diff_mat`
+## Stack bars, use colors "lightblue", "lightgreen", "lightcoral"
+## Set y-axis 0 to 1.5, label axes and title
+## Add legend at "topright", no box
+## Save to "curse.png"
+
+#+end_src
+
+*** 6. Add Range Text
+#+begin_src R :results graphics file :file curse.png :exports both
+## Add text to the plot showing the range (max - min) for 2D and 3D
+## Place text at x = 0.7, y = 1.3 for 2D; x = 1.9, y = 1.3 for 3D
+
+#+end_src
+
+
+** Expected Output
+
+- 2D differences: 0.586, 0, 0.586 (range = 0.586)
+- 3D differences: 0.330, 0.232, 0.562 (range = 0.330)
+- Barplot: 2D stack taller than 3D, with range text showing shrinkage.
+
