@@ -1,9 +1,9 @@
+#+TITLE: Machine Learning
 #+AUTHOR: Marcus Birkenkrahe
-#+SUBTITLE: DSC 305 Machine Learning Spring 2025
+#+SUBTITLE: Lyon College, DSC 305, Spring 2025
 #+STARTUP: overview hideblocks indent entitiespretty:
 #+OPTIONS: toc:nil num:nil ^:nil:
 * The Curse of Dimensionality
-* Task
 
 The fact that similarity (or distance) at higher dimensions loses its
 discriminatory power is a fundamental mathematical property of higher
@@ -13,7 +13,7 @@ the distances between them become uniform.
 Let's demonstrate this in 2D and 3D for a few points only, and then
 plot the respective distance functions for a larger sample.
 
-* Setup - Manual example
+* Setup
 - Points:
   - A: Class 0
   - B: Class 1
