@@ -260,7 +260,7 @@ Overhead scales different for fixed vs. variable costs:
   #+end_src
 
   #+RESULTS: remove_id
-  : diagnosis radius_mean texture_mean perimeter_mean
+  :   diagnosis radius_mean texture_mean perimeter_mean
   : 1         B       12.32        12.39          78.85
   : 2         B       10.60        18.95          69.28
   : 3         B       11.04        16.83          70.92
@@ -277,9 +277,9 @@ Overhead scales different for fixed vs. variable costs:
   #+end_src
 
   #+RESULTS:
-  :
-  :    Benign Malignant
-  :       357       212
+  : 
+  :   B   M 
+  : 357 212
 
 - kNN like many other ML classifiers require the target feature (aka
   class) to be coded as ~factor~ with ~levels~.
@@ -321,6 +321,13 @@ Overhead scales different for fixed vs. variable costs:
     cat("masses in the Wisconsin data set:\n")
     round(prop.table(table(wbcd$diagnosis)) * 100, digits = 1)
   #+end_src
+
+  #+RESULTS:
+  : Relative percentages of breast cancer
+  : masses in the Wisconsin data set:
+  : 
+  :    Benign Malignant 
+  :      62.7      37.3
 
 * Exploring the predictors
 
@@ -446,6 +453,11 @@ Overhead scales different for fixed vs. variable costs:
     args(lapply)
   #+end_src
 
+  #+RESULTS:
+  : [1] TRUE
+  : function (X, FUN, ...) 
+  : NULL
+
 - Example: What are the mean values of the variables in the ~airquality~
   data frame?
   #+begin_src R
@@ -457,7 +469,7 @@ Overhead scales different for fixed vs. variable costs:
 
   #+RESULTS:
   #+begin_example
-  'data.frame': 153 obs. of  6 variables:
+  'data.frame':	153 obs. of  6 variables:
    $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
    $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
    $ Wind   : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
@@ -489,7 +501,7 @@ Overhead scales different for fixed vs. variable costs:
   #+end_src
 
   #+RESULTS:
-  :    Benign Malignant
+  :    Benign Malignant 
   :  13.37980  21.13481
 
 * Applying ~normalize~ to the data frame
@@ -516,9 +528,9 @@ Overhead scales different for fixed vs. variable costs:
   #+end_src
 
   #+RESULTS:
-  :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+  :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   :  0.0000  0.1174  0.1729  0.2169  0.2711  1.0000
-  :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+  :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   :  0.0000  0.3046  0.3904  0.3948  0.4755  1.0000
 
 * Simulating new patient scenario
@@ -578,6 +590,10 @@ Overhead scales different for fixed vs. variable costs:
     str(wbcd_test_labels[1:3])
   #+end_src
 
+  #+RESULTS:
+  :  Factor w/ 2 levels "Benign","Malignant": 1 1 1
+  :  Factor w/ 2 levels "Benign","Malignant": 1 1 1
+
 * Getting the k-NN algorithm
 
 - For the k-NN algorithm, the training phase involves no model
@@ -626,9 +642,9 @@ Overhead scales different for fixed vs. variable costs:
   ,* DONE (class)
 
   The downloaded source packages are in
-          ‘/tmp/Rtmpf0OPGx/downloaded_packages’
-   [1] ".GlobalEnv"        "package:class"     "ESSR"              "package:stats"     "package:graphics"
-   [6] "package:grDevices" "package:utils"     "package:datasets"  "package:methods"   "Autoloads"
+          ‘/tmp/Rtmp9zFrzd/downloaded_packages’
+   [1] ".GlobalEnv"        "package:class"     "ESSR"              "package:stats"     "package:graphics" 
+   [6] "package:grDevices" "package:utils"     "package:datasets"  "package:methods"   "Autoloads"        
   [11] "package:base"
   #+end_example
 
@@ -638,10 +654,10 @@ Overhead scales different for fixed vs. variable costs:
   #+end_src
 
   #+RESULTS:
-  : function (train, test, cl, k = 1, l = 0, prob = FALSE, use.all = TRUE)
+  : function (train, test, cl, k = 1, l = 0, prob = FALSE, use.all = TRUE) 
   : NULL
 
-- Look at the ~help~ for ~knn~:
+- Look at the ~help~ for ~knn~ (on console - don't use ~help~ in Org-mode):
   #+begin_example R
     help(knn)
   #+end_example
@@ -727,21 +743,36 @@ Overhead scales different for fixed vs. variable costs:
 
   #+RESULTS:
   #+begin_example
-  Installing package into 'C:/Users/birkenkrahe/AppData/Local/R/win-library/4.2'
-  (as 'lib' is unspecified)
-  trying URL 'https://cloud.r-project.org/bin/windows/contrib/4.2/gmodels_2.18.1.1.zip'
-  Content type 'application/zip' length 114262 bytes (111 KB)
-  downloaded 111 KB
+  Installing package into ‘/home/aletheia/R/x86_64-pc-linux-gnu-library/4.1’
+  (as ‘lib’ is unspecified)
+  trying URL 'https://mirrors.nics.utk.edu/cran/src/contrib/gmodels_2.19.1.tar.gz'
+  Content type 'application/x-gzip' length 42102 bytes (41 KB)
+  ==================================================
+  downloaded 41 KB
 
-  package 'gmodels' successfully unpacked and MD5 sums checked
+  ,*** Loaded .Rprofile ***
+  ,* installing *source* package ‘gmodels’ ...
+  ,** package ‘gmodels’ successfully unpacked and MD5 sums checked
+  ,** using staged installation
+  ,** R
+  ,** byte-compile and prepare package for lazy loading
+  ,*** Loaded .Rprofile ***
+  ,** help
+  ,*** installing help indices
+  ,** building package indices
+  ,*** Loaded .Rprofile ***
+  ,** testing if installed package can be loaded from temporary location
+  ,*** Loaded .Rprofile ***
+  ,** testing if installed package can be loaded from final location
+  ,*** Loaded .Rprofile ***
+  ,** testing if installed package keeps a record of temporary installation path
+  ,* DONE (gmodels)
 
-  The downloaded binary packages are in
-          C:\Users\birkenkrahe\AppData\Local\Temp\RtmpM3iUNS\downloaded_packages
-   [1] ".GlobalEnv"        "package:gmodels"   "package:class"
-   [4] "ESSR"              "package:stats"     "package:graphics"
-   [7] "package:grDevices" "package:utils"     "package:datasets"
-  [10] "package:stringr"   "package:httr"      "package:methods"
-  [13] "Autoloads"         "package:base"
+  The downloaded source packages are in
+          ‘/tmp/Rtmp9zFrzd/downloaded_packages’
+   [1] ".GlobalEnv"        "package:gmodels"   "package:class"     "ESSR"              "package:stats"    
+   [6] "package:graphics"  "package:grDevices" "package:utils"     "package:datasets"  "package:methods"  
+  [11] "Autoloads"         "package:base"
   #+end_example
 
 - Look at the arguments of the function ~CrossTable~:
@@ -750,11 +781,11 @@ Overhead scales different for fixed vs. variable costs:
   #+end_src
 
   #+RESULTS:
-  : function (x, y, digits = 3, max.width = 5, expected = FALSE,
-  :     prop.r = TRUE, prop.c = TRUE, prop.t = TRUE, prop.chisq = TRUE,
-  :     chisq = FALSE, fisher = FALSE, mcnemar = FALSE, resid = FALSE,
-  :     sresid = FALSE, asresid = FALSE, missing.include = FALSE,
-  :     format = c("SAS", "SPSS"), dnn = NULL, ...)
+  : function (x, y, digits = 3, max.width = 5, expected = FALSE, 
+  :     prop.r = TRUE, prop.c = TRUE, prop.t = TRUE, prop.chisq = TRUE, 
+  :     chisq = FALSE, fisher = FALSE, mcnemar = FALSE, resid = FALSE, 
+  :     sresid = FALSE, asresid = FALSE, missing.include = FALSE, 
+  :     format = c("SAS", "SPSS"), dnn = NULL, ...) 
   : NULL
 
 - Fortunately, we only need two arguments (x,y). We also exclude the
@@ -781,24 +812,24 @@ Overhead scales different for fixed vs. variable costs:
   |-------------------------|
 
 
-  Total Observations in Table:  100
+  Total Observations in Table:  100 
 
 
-                   | wbcd_test_pred
-  wbcd_test_labels |    Benign | Malignant | Row Total |
+                   | wbcd_test_pred 
+  wbcd_test_labels |    Benign | Malignant | Row Total | 
   -----------------|-----------|-----------|-----------|
-            Benign |        61 |         0 |        61 |
-                   |     1.000 |     0.000 |     0.610 |
-                   |     0.968 |     0.000 |           |
-                   |     0.610 |     0.000 |           |
+            Benign |        61 |         0 |        61 | 
+                   |     1.000 |     0.000 |     0.610 | 
+                   |     0.968 |     0.000 |           | 
+                   |     0.610 |     0.000 |           | 
   -----------------|-----------|-----------|-----------|
-         Malignant |         2 |        37 |        39 |
-                   |     0.051 |     0.949 |     0.390 |
-                   |     0.032 |     1.000 |           |
-                   |     0.020 |     0.370 |           |
+         Malignant |         2 |        37 |        39 | 
+                   |     0.051 |     0.949 |     0.390 | 
+                   |     0.032 |     1.000 |           | 
+                   |     0.020 |     0.370 |           | 
   -----------------|-----------|-----------|-----------|
-      Column Total |        63 |        37 |       100 |
-                   |     0.630 |     0.370 |           |
+      Column Total |        63 |        37 |       100 | 
+                   |     0.630 |     0.370 |           | 
   -----------------|-----------|-----------|-----------|
   #+end_example
 
@@ -854,6 +885,15 @@ What do these results mean?
     wbcd_test_pred==wbcd_test_labels
   #+end_src
 
+  #+RESULTS:
+  :   [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+  :  [17]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
+  :  [33]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+  :  [49]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+  :  [65]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+  :  [81]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+  :  [97]  TRUE  TRUE  TRUE  TRUE
+
 * Improving model performance
 
 - Perform an alternative rescaling of numeric features (z-score)
@@ -863,6 +903,7 @@ What do these results mean?
 * [[https://lyon.instructure.com/courses/1021/assignments/8758][Upload the completed practice file to Canvas]]
 #+attr_latex: :width 400px
 [[../img/5_upload.png]]
+
 * Bonus exercises - improve the model performance
 
 You find these exercises in GitHub as ~4_knn_exercise_1.org~ and
