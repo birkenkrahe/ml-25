@@ -924,23 +924,168 @@ influences the prediction? Can the prediction be validated, and how?
     for all measures).
     #+end_quote
 
-* Week 8:
+* DONE Week 8: kNN & Literature Review
 
-** TODO Lecture + codealong + practice: kNN classifier algorithms
+** Literature Review: Fake Papers and the Sokal Hoax
+
+- Post with specific hints on uncovering fake papers in the chat
+  ([[https://blog.litmaps.com/p/have-you-cited-a-fake-paper-heres][Litmap]])
+
+- Apart from the obvious (fake citations), it's hard for you to do.
+
+- "Fake" does not just mean "made up": all research is made up to some
+  extent - when evidence is collected, a methodology is used, which
+  may be so flawed that the research findings are completely wrong.
+
+- "Fake" may also mean "in bad faith" (cutting corners, or
+  intellectually dishonest). This is an issue in the humanities.
+
+- The first person to cover this phenomenon with great effect was Alan
+  Sokal, a physics professor from NYU ([[https://physics.nyu.edu/sokal/weinberg.html][Weinberg, 1996]]) with
+  "Transgressing the boundaries - Toward a transformative hermeneutics
+  of quantum gravity" ([[https://physics.nyu.edu/sokal/transgress_v2/transgress_v2_singlefile.html][1995]]).
+
+- [[https://www.theatlantic.com/ideas/archive/2018/10/new-sokal-hoax/572212/][In a more recent example (2018)]], three researchers faked 20 papers
+  in fashionable disciplines ("gender studies", "queer studies", "fat
+  studies"), of which only 30% were rejected.
+
+- What do we learn from this?
+  #+begin_quote
+  1. Fake papers go beyond fabrication.
+  2. Ideological alignment must not go over scientific validity.
+  3. There is a tension between academic freedom and accountability.
+  #+end_quote
+
+- What can you do about it with regard to your research project?
+  #+begin_quote
+  1. Keep the topic - your research question - small and specific.
+  2. Limit your sources to well validated sources (many citations,
+     clear writing).
+  3. Know your few sources well (research them!)
+  4. Value primary data (that you take) above all else, and pay
+     special attention to the origin of your secondary data.
+  5. Consider alternate methodologies and have good reasons why you
+     pick one way of doing things (not just "because I could").
+  6. Don't be too sure, don't publish prematurely, and show your work
+     to many (trustworthy) people for feedback.
+  #+end_quote
+
+** Lecture + codealong + practice: kNN classifier algorithms
 
 1) [X] Lecture
 2) [ ] Practice (demo: cancer classification with k-NN)
-3) [ ] Exercise (classroom)
-4) [ ] Test 5 - deadline March 18
+3) [ ] Exercises (classroom or home)
+4) [ ] Test 5 - deadline March 21
 
-** TODO Review
+** Review - kNN
 
-1. Which of these is labeled/unlabeled and why? 
-   1) Basketball Player Movement Data with movement cluster target
-   2) Soccer Player Performance data with "position" target label
+1. What is the main characteristic of k-Nearest Neighbors (k-NN) as a
+   classifier that you should remember?
+   #+begin_quote
+   k-NN does not build a model but classifies based on similarity to
+   training examples.
+   #+end_quote
 
-2. What does the "training" in knn consist of?
-   1) identify classes (groupings)
-   2) build feature space (labeled/coordinated)
-   3) identify target class (unlabeled/uncoordinated)
-   4) identify target class data structure
+2. Why is k-NN referred to as a "lazy learner"?
+   #+begin_quote
+   k-NN does not generalize from training data but stores it verbatim
+   and makes predictions at query time.
+   #+end_quote
+
+3. What is the role of the parameter *k* in k-NN?
+   #+begin_quote
+   The parameter *k* determines the number of nearest neighbors
+   considered for classification.
+   #+end_quote
+
+4. Why is k-NN susceptible to the "curse of dimensionality"?
+   #+begin_quote
+   As the number of features increases, distance calculations become
+   less meaningful, making classification less effective, because all
+   pairs of points become roughly similar (the range of distances gets
+   compressed relative to the overall scale of the space). To cover
+   the same neighborhood in a high-dimensional space you need
+   exponentially more data points. 
+
+   Remember: spread & uniformity & sparsity. This is going to become
+   an assignment, comparing kNN for 2-dim vs. 20-dim with/out R.
+   #+end_quote
+
+5. What type of data normalization is commonly used before applying k-NN?
+   #+begin_quote
+   Min-max normalization or z-score standardization (involving the
+   standard deviation - point density) is used to ensure features have
+   comparable scales.
+   #+end_quote
+
+6. How does k-NN handle categorical data?
+   #+begin_quote
+   Categorical data is converted to numerical form using techniques
+   like dummy coding, e.g. assigning 0 and 1 to binary categories.
+   #+end_quote
+
+7. What is a major weakness of k-NN regarding computational efficiency?
+   #+begin_quote
+   k-NN requires storing and comparing all training examples, making
+   classification slow, especially with large datasets.
+   #+end_quote
+
+8. What is the primary similarity measure used in k-NN?
+   #+begin_quote
+   The Euclidean distance is commonly used, though other metrics like
+   Manhattan or cosine similarity may also be applied. In R, check
+   =help(dist)=. In Python, see doc for ~Scikit-learn~, ~SciPy~ etc.
+   #+end_quote
+
+9. How does k-NN determine the class of a test instance?
+   #+begin_quote
+   It assigns the class that appears most frequently among the *k*
+   nearest neighbors of the test instance.
+   #+end_quote
+
+10. What happens if *k* is too large in k-NN?
+   #+begin_quote
+   A large *k* may cause overgeneralization, making the classifier
+   biased towards the majority class and reducing sensitivity to local
+   patterns (example of "bias-variance tradeoff").
+   #+end_quote
+
+* Week 9: kNN Case Study & Naive Bayes 
+
+- [ ] *Tests*: Former rule (50% after the deadline) reinstalled (because
+  there aren't enough days left in the term for the other rule :-) But
+  you can complete the tests now at any time for 50% of the points
+  until May 2nd (term ends May 9th).
+
+- [ ] *Test 5* is live: 50 questions on projects & fake publications &
+  knn. Uses lectures and review sessions (available in GitHub) as
+  usual. Deadline March 21 (2 weeks).
+
+- [ ] *DataCamp assignments:* Extended deadlines for "Logistic
+  Regression" (March 21) and "Classification Trees" (April 4) -
+  because of spring break (March 22-March 30).
+
+- [ ] *kNN bonus exercises:* Two bonus exercies explore normalization
+  and choice of k-value for kNN algorithms in the context of the
+  breast cancer data. You get my sample solutions upon submission.
+
+- [ ] *New bonus kNN exercises*: I posted two new (bonus) exercises for
+  kNN both about the "curse of dimensionality", a major issue with kNN
+  in higher-dimensional feature spaces. Sample solutions available.
+
+- [ ] *Curse of dimensionality*: New PDF posted in chat - read before
+  attempting the bonus exercises.
+
+- [ ] *Outlook:*
+  1) Naive Bayes (w9-w10)
+  2) Regression analysis (w11-w12)
+  3) k-means clustering (w13-w14)
+  4) Projects (w15-w16)
+
+- [ ] *kNN case study*: code along! This time, your brain won't hurt
+  because it's hard but because we keep going at it again and again...
+  
+- *Lesson for life:* You learn something only when you make yourself
+  solve a problem even though your brain hurts (BSc). You build a
+  skill only by going over the same terrain again and again (different
+  pain) until you know it like the back of your hand (PhD).

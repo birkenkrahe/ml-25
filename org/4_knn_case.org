@@ -13,42 +13,43 @@ We will investigate the utility of ML for detecting cancer by applying
 the k-NN algorithm to measurements of biopsied cells from women with
 abnormal breast masses.
 
-To code along with the lecture, download ~4_knn_practice.org~ from
-GitHub, complete the file and upload it to Canvas by the deadline.
+To code along with the lecture, download [[https://tinyurl.com/knn-case-study][tinyurl.com/knn-case-study]]
+from GitHub, complete the file and upload it to Canvas by the
+deadline.
 
 * Rationale
 #+attr_latex: :width 400px
 #+caption: Fine needle aspiration using ultrasound (Source: Collins)
 [[../img/5_biopsy.jpeg]]
 
-- Routine breast cancer screening looks for abnormal lumps or masses
+- Routine breast cancer screening looks for abnormal lumps or masses.
 
-- Small cell samples are extracted via [[https://www.cancer.org/cancer/breast-cancer/screening-tests-and-early-detection/breast-biopsy/fine-needle-aspiration-biopsy-of-the-breast.html][fine-needle aspiration biopsy]]
+- Small cell samples are extracted via [[https://www.cancer.org/cancer/breast-cancer/screening-tests-and-early-detection/breast-biopsy/fine-needle-aspiration-biopsy-of-the-breast.html][fine-needle aspiration biopsy]].
 
-- Cells are examined to determine if the mass is benign or malignant
+- Cells are examined to determine if the mass is benign or malignant.
 
-- Machine learning could automate cancerous cell identification
+- Machine learning could automate cancerous cell identification.
 
-- Potential benefits: efficiency/time savings, detection accuracy
+- Potential benefits: efficiency/time savings, detection accurac.y
 
 * ML workflow
 #+attr_latex: :width 400px
 #+caption: General machine learning process (Source: Lantz, 2019)
 [[../img/1_lantz_3.jpg]]
 
-- Collecting the data (Data)
+1. Collecting the data (Data).
 
-- Exploring and preparing the data (D)
+2. Exploring and preparing the data (Data).
 
-- Normalizing (rescaling) numeric data (A)
+3. Normalizing (rescaling) numeric data (Abstraction).
 
-- Creating training and test data sets (A)
+4. Creating training and test data sets (Abstraction).
 
-- Training a model on the data (G)
+5. Training a model on the data (Generalization).
 
-- Evaluating model performance (E)
+6. Evaluating model performance (Evaluation).
 
-- Improving model performance (E)
+7. Improving model performance (Evaluation).
 
 * Collecting the data
 #+attr_latex: :width 400px
@@ -56,12 +57,12 @@ GitHub, complete the file and upload it to Canvas by the deadline.
 [[../img/5_ductal_carcinoma.jpg]]
 
 - Measurements from digitized images of fine-needle aspirate of a
-  breast mass
+  breast mass.
 
 - The data values represent characteristics of the cell nuclei present
-  in the digital image
+  in the digital image.
 
-- Data were donated by researchers of the University of Wisconsin
+- Data were donated by researchers of the University of Wisconsin.
 
 * Getting the data
 #+attr_latex: :width 400px
@@ -69,24 +70,43 @@ GitHub, complete the file and upload it to Canvas by the deadline.
 [[../img/5_uci.png]]
 
 - Origin: [[http://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+%28Diagnostic%29][Univ of CA at Irvine (UCI) ML Repository]]
+  ([[https://tinyurl.com/uci-cancer-data][tinyurl.com/uci-cancer-data]])
 
-- Breast cancer data included 569 *examples* (aka instances, rows) of
-  cancer biopsies (our data have header and randomized records)
+- Look at the data now and write down what you learnt.
 
-- For each example 32 *features* (aka attributes, columns) were
-  recorded:
-  1) *Identity* number
-  2) Cancer *diagnosis* (~M~ for "malignant" or ~B~ for "benign")
-  3) 30 Numeric laboratory measurements: *mean*, *standard error*, and
-     *largest* value for 10 different cell nuclei characteristics:
-     Radius, texture, perimeter, area, smoothness, compactness,
-     concavity, concave points, symmetry, and fractal dimension.
+- Summary:
+  #+begin_quote
+  - Breast cancer data included 569 *examples* (aka instances, rows) of
+    cancer biopsies (our data have header and randomized records)
 
-- Unless you're an oncologist, you won't know how each feature relates
-  to benign or malignant masses. What does this mean for the
-  data?[fn:1]
+  - For each example 32 *features* (aka attributes, columns) were
+    recorded:
+    1) *Identity* number
+    2) Cancer *diagnosis* (~M~ for "malignant" or ~B~ for "benign")
+    3) 30 Numeric laboratory measurements: *mean*, *standard error*, and
+       *largest* value for 10 different cell nuclei characteristics:
+       Radius, texture, perimeter, area, smoothness, compactness,
+       concavity, concave points, symmetry, and fractal dimension.
+    4) *No missing values*.
 
-* Importing the data
+  - Origin: Scientific (?) paper published in 1993 in "Electronic
+    imaging" (no link)
+
+  - "Baseline model performance" graph (accuracy/precision):
+    + Xgboost (Extreme Gradient Boosting) boosts other models
+      (typically decision trees).
+    + Support Vector Classification (classification with hyperplanes).
+
+  - So why is kNN not mentioned here?[fn:1]
+
+  - Data and header data are separated (important for import).
+  #+end_quote
+
+  - Unless you're an oncologist, you won't know how each feature relates
+    to benign or malignant masses. What does this mean for the
+    data?[fn:2]
+
+* Importing the data - or not?
 
 - Import the CSV data file to a dataframe ~wbcd~ from url=[[http://bit.ly/3khqmkp][bit.ly/3khqmkp]]
   1) assume that the data have a header
@@ -97,66 +117,138 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   #+end_src
 
   #+RESULTS:
-  : function (file, header = TRUE, sep = ",", quote = "\"", dec = ".", 
-  :     fill = TRUE, comment.char = "", ...) 
+  : function (file, header = TRUE, sep = ",", quote = "\"", dec = ".",
+  :     fill = TRUE, comment.char = "", ...)
   : NULL
 
+- Is there anything that could stop us from downloading the data for a
+  analysis using R?
+  #+begin_quote
+  Answer: Remember that R loads all data into memory (RAM), which is
+  limited, especially on a fat OS (Windoze), and given the necessary
+  overhead (1-2 MB for 200 KB of data).
+  #+end_quote
+
+* What about memory overhead?
+
+- What about the overhead? Will 200KB of data become 200KB of memory?
+  #+begin_quote
+
+Overview:
+| Component            | Description                              | R Contribution        | Python (Pandas) Contribution    |
+|----------------------+------------------------------------------+-----------------------+---------------------------------|
+| Raw Data Inflation   | Text to 64-bit float/int (e.g., 6B → 8B) | Numeric: ~1–2x        | Numeric: ~1–2x, Strings: ~5–10x |
+| Column Metadata      | Names, types per column                  | ~48B × columns        | ~100B × columns                 |
+| Structure Base       | Base ~data.frame~ or ~DataFrame~ cost        | ~100–200B             | ~1KB                            |
+| Row Index            | Index storage (if applicable)            | Negligible (implicit) | ~8B × rows (~4–8KB)             |
+| String Handling      | Overhead for string columns (e.g., ~M~)    | Minimal (factorized)  | High (~50B × strings)           |
+| Alignment/Padding    | Memory alignment waste                   | Minor (~0–10%)        | Minor (~0–10%)                  |
+| Fixed Overhead Total | Sum of non-data costs                    | ~1–2KB (small files)  | ~5–10KB (small files)           |
+
+Total:
+| Language | Disk Size | In-Memory Size | Total Overhead |
+|----------+-----------+----------------+----------------|
+| R        | 112 KB    | 141.6 KB       | 29.6 KB        |
+| Python   | 112 KB    | 178.3 KB       | 66.3 KB        |
+
+Overhead scales different for fixed vs. variable costs:
+- Linearly with rows (data) and columns (metadata)
+- Sublinearly for base structure
+- 1.5x for numeric data, 2-5x for string-heavy datasets in Python
+  (less in R)
+
+  #+end_quote
+
+* What about Python vs. R?
+
+- For Python, it depends on the library you use: ~pandas~ loads the
+  entire dataset into memory. But you can stream the data chunk-wise
+  into memory:
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    import pandas as pd
+    for chunk in pd.read_csv("../data/wisc_bc_data.csv",
+                             chunksize=100,
+                             usecols=[0,1,2,3,4]):
+        print(chunk.head(100)) # process 100 rows at a time
+        break
+  #+end_src
+
+- Python's ~read_csv~ is more flexible:
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    import pandas as pd
+    df = pd.read_csv("../data/wisc_bc_data.csv", usecols=[0, 1, 2, 3, 4],
+                     nrows=5)  # Only read 5 rows
+    print(df)
+  #+end_src
+
+- What if you want to check the file itself to see if there's a header
+  (which you really should)? Without downloading (or trying to browse)
+  the entire dataset?
+  #+begin_quote
+  In both R and Python you can also read the data line by line.  
+  #+end_quote
+
+- More efficient in R:
+  #+begin_src R :session *R* :results output :exports both
+    ## Open a connection to the URL
+    con <- url("https://raw.githubusercontent.com/birkenkrahe/ml/main/data/wisc_bc_data.csv", "r")
+
+    ## Read the first 5 lines
+    lines <- readLines(con, n = 5)
+
+    ## Close the connection
+    close(con)
+
+    ## Print the lines
+    print(lines)
+  #+end_src
+
+- Quite the ordeal in Python:
+  #+begin_src python :results output :exports both :session *Python* :python python3
+    import requests
+    import csv
+    from io import StringIO
+
+    # Fetch the CSV from the URL
+    response = requests.get("https://raw.githubusercontent.com/birkenkrahe/ml/main/data/wisc_bc_data.csv")
+    response.raise_for_status()
+
+    # Treat the text as a file-like object
+    with StringIO(response.text) as f:
+        reader = csv.reader(f)
+        # Iterate over the first 5 rows (including header)
+        for i, row in enumerate(reader):
+            if i >= 5:  # Stop after 5 rows
+                break
+            print(",".join(row))  # Print each row as a comma-separated string
+  #+end_src
+
+- Alternatively: The command-line is your friend! 
+  #+begin_src bash :results output :exports both
+    url="https://raw.githubusercontent.com/birkenkrahe/ml/main/data/wisc_bc_data.csv"
+    curl -s $url | head -n 5 # fetch first 5 lines
+  #+end_src
+
+* Importing the data
+
+- Now let's do it:
   #+name: get_wbcd
-  #+begin_src R
+  #+begin_src R :results none
     wbcd <- read.csv(
       file="http://bit.ly/3khqmkp",
       stringsAsFactors=FALSE)
   #+end_src
-
-  #+RESULTS: get_wbcd
 
 - Check the structure of the data frame:
   #+begin_src R
     str(wbcd)
   #+end_src
 
-  #+RESULTS:
-  #+begin_example
-  'data.frame':	569 obs. of  32 variables:
-   $ id               : int  87139402 8910251 905520 868871 9012568 906539 925291 87880 862989 89827 ...
-   $ diagnosis        : chr  "B" "B" "B" "B" ...
-   $ radius_mean      : num  12.3 10.6 11 11.3 15.2 ...
-   $ texture_mean     : num  12.4 18.9 16.8 13.4 13.2 ...
-   $ perimeter_mean   : num  78.8 69.3 70.9 73 97.7 ...
-   $ area_mean        : num  464 346 373 385 712 ...
-   $ smoothness_mean  : num  0.1028 0.0969 0.1077 0.1164 0.0796 ...
-   $ compactness_mean : num  0.0698 0.1147 0.078 0.1136 0.0693 ...
-   $ concavity_mean   : num  0.0399 0.0639 0.0305 0.0464 0.0339 ...
-   $ points_mean      : num  0.037 0.0264 0.0248 0.048 0.0266 ...
-   $ symmetry_mean    : num  0.196 0.192 0.171 0.177 0.172 ...
-   $ dimension_mean   : num  0.0595 0.0649 0.0634 0.0607 0.0554 ...
-   $ radius_se        : num  0.236 0.451 0.197 0.338 0.178 ...
-   $ texture_se       : num  0.666 1.197 1.387 1.343 0.412 ...
-   $ perimeter_se     : num  1.67 3.43 1.34 1.85 1.34 ...
-   $ area_se          : num  17.4 27.1 13.5 26.3 17.7 ...
-   $ smoothness_se    : num  0.00805 0.00747 0.00516 0.01127 0.00501 ...
-   $ compactness_se   : num  0.0118 0.03581 0.00936 0.03498 0.01485 ...
-   $ concavity_se     : num  0.0168 0.0335 0.0106 0.0219 0.0155 ...
-   $ points_se        : num  0.01241 0.01365 0.00748 0.01965 0.00915 ...
-   $ symmetry_se      : num  0.0192 0.035 0.0172 0.0158 0.0165 ...
-   $ dimension_se     : num  0.00225 0.00332 0.0022 0.00344 0.00177 ...
-   $ radius_worst     : num  13.5 11.9 12.4 11.9 16.2 ...
-   $ texture_worst    : num  15.6 22.9 26.4 15.8 15.7 ...
-   $ perimeter_worst  : num  87 78.3 79.9 76.5 104.5 ...
-   $ area_worst       : num  549 425 471 434 819 ...
-   $ smoothness_worst : num  0.139 0.121 0.137 0.137 0.113 ...
-   $ compactness_worst: num  0.127 0.252 0.148 0.182 0.174 ...
-   $ concavity_worst  : num  0.1242 0.1916 0.1067 0.0867 0.1362 ...
-   $ points_worst     : num  0.0939 0.0793 0.0743 0.0861 0.0818 ...
-   $ symmetry_worst   : num  0.283 0.294 0.3 0.21 0.249 ...
-   $ dimension_worst  : num  0.0677 0.0759 0.0788 0.0678 0.0677 ...
-  #+end_example
-
 - The variable ~id~ is a unique identifier for each patient in the data.
 
 - Regardless of ML method, ID variables *should always be excluded*: a
   model that includes an ID column will suffer from overfitting and
-  generalize poor data - can you think why?[fn:2].
+  generalize poor data - can you think why?[fn:3].
 
 - Overwrite the data frame with itself after removing the first
   column, then check the first four examples and features only:
@@ -168,14 +260,7 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   #+end_src
 
   #+RESULTS: remove_id
-  :   diagnosis radius_mean texture_mean perimeter_mean
-  : 1         B       12.32        12.39          78.85
-  : 2         B       10.60        18.95          69.28
-  : 3         B       11.04        16.83          70.92
-  : 4         B       11.28        13.39          73.00
-
-  #+RESULTS:
-  :   diagnosis radius_mean texture_mean perimeter_mean
+  : diagnosis radius_mean texture_mean perimeter_mean
   : 1         B       12.32        12.39          78.85
   : 2         B       10.60        18.95          69.28
   : 3         B       11.04        16.83          70.92
@@ -192,9 +277,9 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   #+end_src
 
   #+RESULTS:
-  : 
-  :   B   M 
-  : 357 212
+  :
+  :    Benign Malignant
+  :       357       212
 
 - kNN like many other ML classifiers require the target feature (aka
   class) to be coded as ~factor~ with ~levels~.
@@ -219,7 +304,7 @@ GitHub, complete the file and upload it to Canvas by the deadline.
 
 - We visualize the frequencies of the two diagnoses in a barplot,
   coloring the benign results green, and the malignant results red:
-  #+begin_src R :results graphics file :file ../data/5_diagnosis.png
+  #+begin_src R :results graphics file :file 5_diagnosis.png
     barplot(table(wbcd$diagnosis),
             col=c("green","red"),
             main=
@@ -227,7 +312,7 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   #+end_src
 
   #+RESULTS:
-  [[file:data/5_diagnosis.png]]
+  [[file:5_diagnosis.png]]
 
 - To obtain the relative percentage of the diagnosis results, we look
   at the proportions table:
@@ -236,13 +321,6 @@ GitHub, complete the file and upload it to Canvas by the deadline.
     cat("masses in the Wisconsin data set:\n")
     round(prop.table(table(wbcd$diagnosis)) * 100, digits = 1)
   #+end_src
-
-  #+RESULTS:
-  : Relative percentages of breast cancer
-  : masses in the Wisconsin data set:
-  : 
-  :    Benign Malignant 
-  :      62.7      37.3
 
 * Exploring the predictors
 
@@ -267,17 +345,17 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   #+end_src
 
   #+RESULTS:
-  :   radius_mean       area_mean      smoothness_mean  
-  :  Min.   : 6.981   Min.   : 143.5   Min.   :0.05263  
-  :  1st Qu.:11.700   1st Qu.: 420.3   1st Qu.:0.08637  
-  :  Median :13.370   Median : 551.1   Median :0.09587  
-  :  Mean   :14.127   Mean   : 654.9   Mean   :0.09636  
-  :  3rd Qu.:15.780   3rd Qu.: 782.7   3rd Qu.:0.10530  
+  :   radius_mean       area_mean      smoothness_mean
+  :  Min.   : 6.981   Min.   : 143.5   Min.   :0.05263
+  :  1st Qu.:11.700   1st Qu.: 420.3   1st Qu.:0.08637
+  :  Median :13.370   Median : 551.1   Median :0.09587
+  :  Mean   :14.127   Mean   : 654.9   Mean   :0.09636
+  :  3rd Qu.:15.780   3rd Qu.: 782.7   3rd Qu.:0.10530
   :  Max.   :28.110   Max.   :2501.0   Max.   :0.16340
 
 - What do you notice when looking at the values? Remember that
   distance calculation for k-NN depends on the measurement scale of
-  the input.[fn:3]
+  the input.[fn:4]
   #+begin_src R
     range(wbcd["area_mean"])
     range(wbcd["smoothness_mean"])
@@ -303,7 +381,7 @@ GitHub, complete the file and upload it to Canvas by the deadline.
 
   #+RESULTS: restart
   :  Factor w/ 2 levels "Benign","Malignant": 1 1 1 1 1 1 1 2 1 1 ...
-  
+
 * Interlude: ~function~
 
 - We normalize the data using the min-max normalization formula, which
@@ -368,21 +446,18 @@ GitHub, complete the file and upload it to Canvas by the deadline.
     args(lapply)
   #+end_src
 
-  #+RESULTS:
-  : [1] TRUE
-  : function (X, FUN, ...) 
-  : NULL
-
 - Example: What are the mean values of the variables in the ~airquality~
   data frame?
   #+begin_src R
     str(airquality)
-    lapply(X=airquality[1:4],FUN=mean, na.rm=TRUE)
+    lapply(X=airquality[1:4],
+           FUN=mean,
+           na.rm=TRUE)
   #+end_src
 
   #+RESULTS:
   #+begin_example
-  'data.frame':	153 obs. of  6 variables:
+  'data.frame': 153 obs. of  6 variables:
    $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
    $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
    $ Wind   : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
@@ -414,7 +489,7 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   #+end_src
 
   #+RESULTS:
-  :    Benign Malignant 
+  :    Benign Malignant
   :  13.37980  21.13481
 
 * Applying ~normalize~ to the data frame
@@ -441,9 +516,9 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   #+end_src
 
   #+RESULTS:
-  :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
   :  0.0000  0.1174  0.1729  0.2169  0.2711  1.0000
-  :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  :    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
   :  0.0000  0.3046  0.3904  0.3948  0.4755  1.0000
 
 * Simulating new patient scenario
@@ -503,10 +578,6 @@ GitHub, complete the file and upload it to Canvas by the deadline.
     str(wbcd_test_labels[1:3])
   #+end_src
 
-  #+RESULTS:
-  :  Factor w/ 2 levels "Benign","Malignant": 1 1 1
-  :  Factor w/ 2 levels "Benign","Malignant": 1 1 1
-
 * Getting the k-NN algorithm
 
 - For the k-NN algorithm, the training phase involves no model
@@ -522,12 +593,44 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   #+end_src
 
   #+RESULTS:
-  : Warning: package 'class' is in use and will not be installed
-  :  [1] ".GlobalEnv"        "package:class"     "ESSR"             
-  :  [4] "package:stats"     "package:graphics"  "package:grDevices"
-  :  [7] "package:utils"     "package:datasets"  "package:stringr"  
-  : [10] "package:httr"      "package:methods"   "Autoloads"        
-  : [13] "package:base"
+  #+begin_example
+  Installing package into ‘/home/aletheia/R/x86_64-pc-linux-gnu-library/4.1’
+  (as ‘lib’ is unspecified)
+  trying URL 'https://mirrors.nics.utk.edu/cran/src/contrib/class_7.3-23.tar.gz'
+  Content type 'application/x-gzip' length 22058 bytes (21 KB)
+  ==================================================
+  downloaded 21 KB
+
+  ,*** Loaded .Rprofile ***
+  ,* installing *source* package ‘class’ ...
+  ,** package ‘class’ successfully unpacked and MD5 sums checked
+  ,** using staged installation
+  ,** libs
+  gcc -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c class.c -o class.o
+  gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o class.so class.o -L/usr/lib/R/lib -lR
+  installing to /home/aletheia/R/x86_64-pc-linux-gnu-library/4.1/00LOCK-class/00new/class/libs
+  ,** R
+  ,** inst
+  ,** byte-compile and prepare package for lazy loading
+  ,*** Loaded .Rprofile ***
+  ,** help
+  ,*** installing help indices
+  ,** building package indices
+  ,*** Loaded .Rprofile ***
+  ,** testing if installed package can be loaded from temporary location
+  ,*** Loaded .Rprofile ***
+  ,** checking absolute paths in shared objects and dynamic libraries
+  ,** testing if installed package can be loaded from final location
+  ,*** Loaded .Rprofile ***
+  ,** testing if installed package keeps a record of temporary installation path
+  ,* DONE (class)
+
+  The downloaded source packages are in
+          ‘/tmp/Rtmpf0OPGx/downloaded_packages’
+   [1] ".GlobalEnv"        "package:class"     "ESSR"              "package:stats"     "package:graphics"
+   [6] "package:grDevices" "package:utils"     "package:datasets"  "package:methods"   "Autoloads"
+  [11] "package:base"
+  #+end_example
 
 - Look at the arguments of ~knn~:
   #+begin_src R
@@ -535,7 +638,7 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   #+end_src
 
   #+RESULTS:
-  : function (train, test, cl, k = 1, l = 0, prob = FALSE, use.all = TRUE) 
+  : function (train, test, cl, k = 1, l = 0, prob = FALSE, use.all = TRUE)
   : NULL
 
 - Look at the ~help~ for ~knn~:
@@ -590,7 +693,7 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   #+end_src
 
 - What data structure do you expect as a result, and what will be its
-  size?[fn:4] How can you check?
+  size?[fn:5] How can you check?
   #+begin_src R
     str(wbcd_test_pred)
     str(wbcd_train_labels)
@@ -634,10 +737,10 @@ GitHub, complete the file and upload it to Canvas by the deadline.
 
   The downloaded binary packages are in
           C:\Users\birkenkrahe\AppData\Local\Temp\RtmpM3iUNS\downloaded_packages
-   [1] ".GlobalEnv"        "package:gmodels"   "package:class"    
-   [4] "ESSR"              "package:stats"     "package:graphics" 
-   [7] "package:grDevices" "package:utils"     "package:datasets" 
-  [10] "package:stringr"   "package:httr"      "package:methods"  
+   [1] ".GlobalEnv"        "package:gmodels"   "package:class"
+   [4] "ESSR"              "package:stats"     "package:graphics"
+   [7] "package:grDevices" "package:utils"     "package:datasets"
+  [10] "package:stringr"   "package:httr"      "package:methods"
   [13] "Autoloads"         "package:base"
   #+end_example
 
@@ -647,11 +750,11 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   #+end_src
 
   #+RESULTS:
-  : function (x, y, digits = 3, max.width = 5, expected = FALSE, 
-  :     prop.r = TRUE, prop.c = TRUE, prop.t = TRUE, prop.chisq = TRUE, 
-  :     chisq = FALSE, fisher = FALSE, mcnemar = FALSE, resid = FALSE, 
-  :     sresid = FALSE, asresid = FALSE, missing.include = FALSE, 
-  :     format = c("SAS", "SPSS"), dnn = NULL, ...) 
+  : function (x, y, digits = 3, max.width = 5, expected = FALSE,
+  :     prop.r = TRUE, prop.c = TRUE, prop.t = TRUE, prop.chisq = TRUE,
+  :     chisq = FALSE, fisher = FALSE, mcnemar = FALSE, resid = FALSE,
+  :     sresid = FALSE, asresid = FALSE, missing.include = FALSE,
+  :     format = c("SAS", "SPSS"), dnn = NULL, ...)
   : NULL
 
 - Fortunately, we only need two arguments (x,y). We also exclude the
@@ -678,24 +781,24 @@ GitHub, complete the file and upload it to Canvas by the deadline.
   |-------------------------|
 
 
-  Total Observations in Table:  100 
+  Total Observations in Table:  100
 
 
-                   | wbcd_test_pred 
-  wbcd_test_labels |    Benign | Malignant | Row Total | 
+                   | wbcd_test_pred
+  wbcd_test_labels |    Benign | Malignant | Row Total |
   -----------------|-----------|-----------|-----------|
-            Benign |        61 |         0 |        61 | 
-                   |     1.000 |     0.000 |     0.610 | 
-                   |     0.968 |     0.000 |           | 
-                   |     0.610 |     0.000 |           | 
+            Benign |        61 |         0 |        61 |
+                   |     1.000 |     0.000 |     0.610 |
+                   |     0.968 |     0.000 |           |
+                   |     0.610 |     0.000 |           |
   -----------------|-----------|-----------|-----------|
-         Malignant |         2 |        37 |        39 | 
-                   |     0.051 |     0.949 |     0.390 | 
-                   |     0.032 |     1.000 |           | 
-                   |     0.020 |     0.370 |           | 
+         Malignant |         2 |        37 |        39 |
+                   |     0.051 |     0.949 |     0.390 |
+                   |     0.032 |     1.000 |           |
+                   |     0.020 |     0.370 |           |
   -----------------|-----------|-----------|-----------|
-      Column Total |        63 |        37 |       100 | 
-                   |     0.630 |     0.370 |           | 
+      Column Total |        63 |        37 |       100 |
+                   |     0.630 |     0.370 |           |
   -----------------|-----------|-----------|-----------|
   #+end_example
 
@@ -859,22 +962,28 @@ You find these exercises in GitHub as ~4_knn_exercise_1.org~ and
 
 * Footnotes
 
-[fn:1]The data contain expertise bias from the oncologists who
+[fn:1]kNN can struggle with high-dimensional data (here: the number of
+potentially relevant features). The dataset was also created to
+showcase different methods (Multi-Surface method Tree MSM-T and
+SVM). However, a 2000 paper (Salzberg et al.) achieved 97.5% accuracy
+with kNN.
+
+[fn:2]The data contain expertise bias from the oncologists who
 labelled them, i.e. who made the measurements, and potential
 mislabelling of the diagnosis label. The extent of these can only be
 estimated from reading the research papers that accompany the data and
 contain information about the methodology of data collection and
 coding.
 
-[fn:2] The identity column is a perfect predictor of the output
+[fn:3] The identity column is a perfect predictor of the output
 variable. The model will learn to associate specific IDs with certain
 outcomes, instead of learning general patterns that apply to all data:
 this is overfitting.
 
-[fn:3]  Area has a much larger range than smoothness - it will
+[fn:4]  Area has a much larger range than smoothness - it will
 dominate the distance calculation and could confuse our classifier. We
 need to rescale, normalize or standardize the values.
 
-[fn:4] A ~factor~ vector, of course: one entry for each of the 100
+[fn:5] A ~factor~ vector, of course: one entry for each of the 100
 values of the test data set, classified according to one of the
 levels/labels.
