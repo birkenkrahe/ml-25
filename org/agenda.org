@@ -1115,20 +1115,6 @@ Questions:
   #+end_example
 
 - Code along!
-
-- Summary:
-  #+begin_quote
-  1. Case study demonstrating kNN application
-  2. Data cleaning: Handling missing values
-  3. Feature scaling: Normalization or standardization
-  4. kNN steps: Load data, split data, fit model, predict outcomes
-  5. Metrics: Accuracy, precision, recall, or mean squared error
-  6. Scatter plots of data points
-  7. Decision boundaries to show class separation
-  8. Sensitivity to *k* value, Optimization via cross-validation
-  9. Impact of noisy data or irrelevant features
-  10. kNN strengths/limitations: Simplicity, no training/size-limit
-  #+end_quote
   
 
 
