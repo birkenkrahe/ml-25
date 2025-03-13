@@ -849,7 +849,7 @@ influences the prediction? Can the prediction be validated, and how?
 #+end_src
 
 #+RESULTS:
-: 'data.frame':	150 obs. of  5 variables:
+: 'data.frame': 150 obs. of  5 variables:
 :  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
 :  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
 :  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
@@ -925,7 +925,6 @@ influences the prediction? Can the prediction be validated, and how?
     #+end_quote
 
 * DONE Week 8: kNN & Literature Review
-
 ** Literature Review: Fake Papers and the Sokal Hoax
 
 - Post with specific hints on uncovering fake papers in the chat
@@ -1005,7 +1004,7 @@ influences the prediction? Can the prediction be validated, and how?
    pairs of points become roughly similar (the range of distances gets
    compressed relative to the overall scale of the space). To cover
    the same neighborhood in a high-dimensional space you need
-   exponentially more data points. 
+   exponentially more data points.
 
    Remember: spread & uniformity & sparsity. This is going to become
    an assignment, comparing kNN for 2-dim vs. 20-dim with/out R.
@@ -1044,48 +1043,92 @@ influences the prediction? Can the prediction be validated, and how?
    #+end_quote
 
 10. What happens if *k* is too large in k-NN?
-   #+begin_quote
-   A large *k* may cause overgeneralization, making the classifier
-   biased towards the majority class and reducing sensitivity to local
-   patterns (example of "bias-variance tradeoff").
-   #+end_quote
+    #+begin_quote
+    A large *k* may cause overgeneralization, making the classifier
+    biased towards the majority class and reducing sensitivity to local
+    patterns (example of "bias-variance tradeoff").
+    #+end_quote
 
-* Week 9: kNN Case Study & Naive Bayes 
+* Week 9: kNN case study - breast cancer diagnosis
+#+attr_html: :width 700px :float nil:
+#+caption: Paul Davies, North Yorkshire Moors
+[[../img/moors.jpg]]
 
-- [ ] *Tests*: Former rule (50% after the deadline) reinstalled (because
+** Agenda
+
+- [X] *Tests*: Former rule (50% after the deadline) reinstalled (because
   there aren't enough days left in the term for the other rule :-) But
   you can complete the tests now at any time for 50% of the points
   until May 2nd (term ends May 9th).
 
-- [ ] *Test 5* is live: 50 questions on projects & fake publications &
+- [X] *Test 5* is live: 50 questions on projects & fake publications &
   knn. Uses lectures and review sessions (available in GitHub) as
   usual. Deadline March 21 (2 weeks).
 
-- [ ] *DataCamp assignments:* Extended deadlines for "Logistic
+- [X] *DataCamp assignments:* Extended deadlines for "Logistic
   Regression" (March 21) and "Classification Trees" (April 4) -
   because of spring break (March 22-March 30).
 
-- [ ] *kNN bonus exercises:* Two bonus exercies explore normalization
+- [X] *kNN bonus exercises:* Two bonus exercises explore normalization
   and choice of k-value for kNN algorithms in the context of the
   breast cancer data. You get my sample solutions upon submission.
 
-- [ ] *New bonus kNN exercises*: I posted two new (bonus) exercises for
+- [X] *New bonus kNN exercises*: I posted two new (bonus) exercises for
   kNN both about the "curse of dimensionality", a major issue with kNN
   in higher-dimensional feature spaces. Sample solutions available.
 
-- [ ] *Curse of dimensionality*: New PDF posted in chat - read before
+- [X] *Curse of dimensionality*: New PDF posted in chat - read before
   attempting the bonus exercises.
 
-- [ ] *Outlook:*
+- [X] *Outlook:*
   1) Naive Bayes (w9-w10)
   2) Regression analysis (w11-w12)
   3) k-means clustering (w13-w14)
   4) Projects (w15-w16)
 
-- [ ] *kNN case study*: code along! This time, your brain won't hurt
+- [X] *kNN case study*: code along! This time, your brain won't hurt
   because it's hard but because we keep going at it again and again...
-  
+
 - *Lesson for life:* You learn something only when you make yourself
   solve a problem even though your brain hurts (BSc). You build a
   skill only by going over the same terrain again and again (different
   pain) until you know it like the back of your hand (PhD).
+
+** Review
+
+1) Come up with one question about kNN.
+2) Ask your neighbor.
+3) Discuss the answer.
+
+-----
+Questions:
+
+** Finish the case study
+
+- To run all of your code blocks: =M-x org-babel-execute-buffer=
+
+- Check that your last output looks like this:
+  #+begin_example
+    #+RESULTS:
+  : [1] 0.00 0.25 0.50 0.75 1.00
+  : [1] 0.00 0.25 0.50 0.75 1.00
+  #+end_example
+
+- Code along!
+
+- Summary:
+  #+begin_quote
+  1. Case study demonstrating kNN application
+  2. Data cleaning: Handling missing values
+  3. Feature scaling: Normalization or standardization
+  4. kNN steps: Load data, split data, fit model, predict outcomes
+  5. Metrics: Accuracy, precision, recall, or mean squared error
+  6. Scatter plots of data points
+  7. Decision boundaries to show class separation
+  8. Sensitivity to *k* value, Optimization via cross-validation
+  9. Impact of noisy data or irrelevant features
+  10. kNN strengths/limitations: Simplicity, no training/size-limit
+  #+end_quote
+  
+
+

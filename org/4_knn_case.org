@@ -185,7 +185,7 @@ Overhead scales different for fixed vs. variable costs:
   (which you really should)? Without downloading (or trying to browse)
   the entire dataset?
   #+begin_quote
-  In both R and Python you can also read the data line by line.  
+  In both R and Python you can also read the data line by line.
   #+end_quote
 
 - More efficient in R:
@@ -223,7 +223,7 @@ Overhead scales different for fixed vs. variable costs:
             print(",".join(row))  # Print each row as a comma-separated string
   #+end_src
 
-- Alternatively: The command-line is your friend! 
+- Alternatively: The command-line is your friend!
   #+begin_src bash :results output :exports both
     url="https://raw.githubusercontent.com/birkenkrahe/ml/main/data/wisc_bc_data.csv"
     curl -s $url | head -n 5 # fetch first 5 lines
@@ -277,8 +277,8 @@ Overhead scales different for fixed vs. variable costs:
   #+end_src
 
   #+RESULTS:
-  : 
-  :   B   M 
+  :
+  :   B   M
   : 357 212
 
 - kNN like many other ML classifiers require the target feature (aka
@@ -325,8 +325,8 @@ Overhead scales different for fixed vs. variable costs:
   #+RESULTS:
   : Relative percentages of breast cancer
   : masses in the Wisconsin data set:
-  : 
-  :    Benign Malignant 
+  :
+  :    Benign Malignant
   :      62.7      37.3
 
 * Exploring the predictors
@@ -371,23 +371,6 @@ Overhead scales different for fixed vs. variable costs:
   #+RESULTS:
   : [1]  143.5 2501.0
   : [1] 0.05263 0.16340
-
-* Intermission - Review from Thu 23-Feb-23
-
-- Run the code from the last session so that you're caught up:
-  #+name: restart
-  #+begin_src R
-    ## get the Wisconsin breast cancer data as data frame:
-    wbcd <- read.csv(file="http://bit.ly/3khqmkp")
-    ## drop the first (ID) column:
-    wbcd <- wbcd[-1]
-    ## recode target class as labeled 2-level factor
-    wbcd$diagnosis |> factor(c("B","M"),c("Benign","Malignant")) -> wbcd$diagnosis
-    wbcd$diagnosis |>  str()
-  #+end_src
-
-  #+RESULTS: restart
-  :  Factor w/ 2 levels "Benign","Malignant": 1 1 1 1 1 1 1 2 1 1 ...
 
 * Interlude: ~function~
 
@@ -449,27 +432,27 @@ Overhead scales different for fixed vs. variable costs:
 - The ~lapply~ function takes a list and applies an argument to each
   list element and returns a list. A data frame is a list:
   #+begin_src R
-    is.list(wbcd)
-    args(lapply)
+    is.list(wbcd) # `wbcd` is a list
+    args(lapply)  # `lapply` function arguments
   #+end_src
 
   #+RESULTS:
   : [1] TRUE
-  : function (X, FUN, ...) 
+  : function (X, FUN, ...)
   : NULL
 
 - Example: What are the mean values of the variables in the ~airquality~
   data frame?
   #+begin_src R
-    str(airquality)
-    lapply(X=airquality[1:4],
-           FUN=mean,
-           na.rm=TRUE)
+    str(airquality)  # structure of the `airquality` data.frame
+    lapply(X=airquality[1:4],  # target = values of four column vectors
+           FUN=mean,           # function = arithmetic verage
+           na.rm=TRUE)         # remove NAs
   #+end_src
 
   #+RESULTS:
   #+begin_example
-  'data.frame':	153 obs. of  6 variables:
+  'data.frame': 153 obs. of  6 variables:
    $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
    $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
    $ Wind   : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
@@ -501,24 +484,35 @@ Overhead scales different for fixed vs. variable costs:
   #+end_src
 
   #+RESULTS:
-  :    Benign Malignant 
+  :    Benign Malignant
   :  13.37980  21.13481
+
+- Check if these values make sense (look at beginning/end of dataset):
+  #+begin_src R
+    head(wbcd$radius_worst)
+    tail(wbcd$radius_worst)
+  #+end_src
+
+  #+RESULTS:
+  : [1] 13.50 11.88 12.41 11.92 16.20 13.07
+  : [1] 14.04 14.90 10.88 17.80 15.80 22.69
 
 * Applying ~normalize~ to the data frame
 
 - We apply the ~normalize~ function to all elements of ~wbcd~ and convert
   the resulting ~list~ to a data frame ~wcbd_n~ using ~as.data.frame~:
   #+begin_src R
+    ## normalize `wbcd` and convert `list` result to `data.frame`
     wbcd_n <- as.data.frame(lapply(wbcd[2:31],FUN=normalize))
-    ## show the first 3 x 4 results
-    wbcd_n[1:3,2:4]
+    ## show the first 3 x 4 results (rounded to 2nd decimal)
+    round(wbcd_n[1:3,2:4],2)
   #+end_src
 
   #+RESULTS:
-  :   texture_mean perimeter_mean  area_mean
-  : 1    0.0906324      0.2422777 0.13599152
-  : 2    0.3124789      0.1761454 0.08606575
-  : 3    0.2407846      0.1874784 0.09743372
+  :   texture_mean perimeter_mean area_mean
+  : 1         0.09           0.24      0.14
+  : 2         0.31           0.18      0.09
+  : 3         0.24           0.19      0.10
 
 - To confirm that the transformation worked, let's look at the summary
   stats for ~area_mean~ and ~smoothness_mean~ again:
@@ -536,25 +530,25 @@ Overhead scales different for fixed vs. variable costs:
 * Simulating new patient scenario
 
 - All our 569 biopsies are already labelled so we know which are
-  benign or malignant.
+  benign or malignant. There is nothing to do for this dataset.
 
 - Using all data for training leaves us not knowing if the data has
-  been overfitted or how well the generalization to new cases works.
+  been overfitted or how well the *generalization* to new cases works.
 
 - We want to know how our learner performs on *unseen* data: unless you
   have access to new patients, you need to simulate this scenario.
 
-- Simulation means splitting the data randomly in two sets:
+- *Simulation* means splitting the data randomly in two sets:
   1) a *training data* set used to build the k-NN model
   2) a *test data* set used to estimate its predictive accuracy
 
 - We'll use 469 records (82%) for the training dataset and the
-  remaining 100 records (18%) to simulate new patients.
+  remaining 100 records (18%) to simulate new patients (test data).
 
 - For the simulation to work, it is important that each dataset is a
-  *representative subset* of the full set of data.
+  *representative subset* of the full set of real-world data.
 
-- The data would not be representative if it was ordered
+- The data would not be representative if it was *ordered*
   chronologically or grouped by similar values.
 
 * Creating training and test data sets
@@ -642,7 +636,7 @@ Overhead scales different for fixed vs. variable costs:
   ,* DONE (class)
 
   The downloaded source packages are in
-          ‘/tmp/Rtmp9zFrzd/downloaded_packages’
+          ‘/tmp/RtmphfnnXG/downloaded_packages’
    [1] ".GlobalEnv"        "package:class"     "ESSR"              "package:stats"     "package:graphics" 
    [6] "package:grDevices" "package:utils"     "package:datasets"  "package:methods"   "Autoloads"        
   [11] "package:base"
@@ -671,6 +665,31 @@ Overhead scales different for fixed vs. variable costs:
   #+begin_example R
     example(knn)
   #+end_example
+
+- ~class::knn~ function parameters
+  #+begin_quote
+  - ~train~: Matrix or data frame of training data
+    - Rows: observations
+    - Columns: numeric features (predictors)
+  - ~test~: Matrix or data frame of test data
+    - Must match ~train~ in number of columns (features)
+  - ~cl~: Factor or vector of class labels for training data
+    - Specifies true classes for each row in ~train~
+  - ~k~: Number of nearest neighbors to consider
+    - Default: 1
+    - Higher *k* smooths decision boundary
+  - ~l~: Minimum vote threshold for a "definite" decision
+    - Default: 0
+    - If votes for winning class < ~l~, result is a tie (rarely used)
+  - ~prob~: Logical: return proportion of votes for winning class
+    - Default: ~FALSE~
+    - If ~TRUE~, adds confidence as an attribute
+  - ~use.all~: Logical: handle ties in distance
+    - Default: ~TRUE~
+      - Uses all neighbors within *k*-th neighbor’s distance
+    - ~FALSE~: Uses exactly *k* neighbors, breaking ties randomly
+  #+end_quote
+
 * Classification with ~class::knn~
 
 - For each instance/row/record in the test data, ~knn~ will identify the
@@ -689,7 +708,7 @@ Overhead scales different for fixed vs. variable costs:
 
 - The only parameter not discussed or set is ~k~, the number of
   neighbors to include in the vote - a standard initial choice is to
-  take the square root of the training data set size:
+  take the square root of the training data set size[fn:5]:
   #+begin_src R
     as.integer(sqrt(469))
   #+end_src
@@ -709,7 +728,7 @@ Overhead scales different for fixed vs. variable costs:
   #+end_src
 
 - What data structure do you expect as a result, and what will be its
-  size?[fn:5] How can you check?
+  size?[fn:6] How can you check?
   #+begin_src R
     str(wbcd_test_pred)
     str(wbcd_train_labels)
@@ -769,7 +788,7 @@ Overhead scales different for fixed vs. variable costs:
   ,* DONE (gmodels)
 
   The downloaded source packages are in
-          ‘/tmp/Rtmp9zFrzd/downloaded_packages’
+          ‘/tmp/RtmphfnnXG/downloaded_packages’
    [1] ".GlobalEnv"        "package:gmodels"   "package:class"     "ESSR"              "package:stats"    
    [6] "package:graphics"  "package:grDevices" "package:utils"     "package:datasets"  "package:methods"  
   [11] "Autoloads"         "package:base"
@@ -789,7 +808,7 @@ Overhead scales different for fixed vs. variable costs:
   : NULL
 
 - Fortunately, we only need two arguments (x,y). We also exclude the
-  chi-square values from the output to make it more readable:
+  chi-square values from the output to make it more readable[fn:7]:
   1) x is the set of test data set labels used for classification
   2) y is the data set of predicted labels by ~knn~
   #+begin_src R
@@ -862,9 +881,9 @@ What do these results mean?
 2) "True positive" means that the patient had a tumor and the model
    recognized this.
 3) "False negative" means that the patient had a tumor but the model
-   did not recognize it.
+   did not recognize it - not good!
 4) "False positive" means that the patient had no tumor but the model
-   found one.
+   found one - further diagnosis.
 #+end_notes
 
 * Computing accuracy as an average
@@ -886,23 +905,18 @@ What do these results mean?
   #+end_src
 
   #+RESULTS:
-  :   [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-  :  [17]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
-  :  [33]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-  :  [49]  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-  :  [65]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-  :  [81]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
-  :  [97]  TRUE  TRUE  TRUE  TRUE
+  :   [1]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+  :  [19]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE
+  :  [37]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
+  :  [55]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+  :  [73]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+  :  [91]  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
 
 * Improving model performance
 
 - Perform an alternative rescaling of numeric features (z-score)
 
 - Run the model for different ~k~ values to find the optium value
-
-* [[https://lyon.instructure.com/courses/1021/assignments/8758][Upload the completed practice file to Canvas]]
-#+attr_latex: :width 400px
-[[../img/5_upload.png]]
 
 * Bonus exercises - improve the model performance
 
@@ -921,9 +935,6 @@ You find these exercises in GitHub as ~4_knn_exercise_1.org~ and
    #+caption: Sample results - kNN On wbcd for different k
    [[../img/5_k_exercise.png]]
 
-* Upload the completed exercise files to Canvas
-#+attr_latex: :width 400px
-[[../img/5_bonus.png]]
 * References
 
 - Image: Ductal carcinoma in situ (URL: [[https://pathology.jhu.edu/breast/types-of-breast-cancer][pathology.jhu.edu]])
@@ -1025,6 +1036,15 @@ this is overfitting.
 dominate the distance calculation and could confuse our classifier. We
 need to rescale, normalize or standardize the values.
 
-[fn:5] A ~factor~ vector, of course: one entry for each of the 100
+[fn:5]The square root scales with the dataset size, is large enough to
+capture local patterns, and small enough to include too many
+irrelevant neighbors.
+
+[fn:6] A ~factor~ vector, of course: one entry for each of the 100
 values of the test data set, classified according to one of the
 levels/labels.
+
+[fn:7]The statistical tests are useful when statistical assocations
+need to be validated. In the case of kNN, distances between features
+are computed, so not directly applicable. Could be useful to test
+feature-label relationships (for dimensionality reduction).
