@@ -25,29 +25,31 @@
 - R packages for text mining & visualization
 - Application: SMS junk message filter
 
-#+begin_notes
+#+begin_quote
 A little bit of math in here, but nothing more than basic
 arithmetic. The main complexity is to understand the relationship
 between features, class, and probability measures, which are our
 "similarity" measure for this type of classifier.
-#+end_notes
+#+end_quote
 
 * Probabilistic methods
 #+attr_latex: :width 400px
 [[../img/5_weather.png]]
+
 #+begin_example
 - Probabilistic methods describe uncertainty
 - They use data on past events to extrapolate future events
 - Such predictions are subject to many assumptions
 #+end_example
-#+begin_notes
+
+#+begin_quote
 - The chance of rain for example describes the proportion of prior
   days with similar atmospheric conditions in which in rained.
 - A 70 percent chance of rain implies that in 7 out of 10 past cases
   with similar conditions, it rained somewhere in the area.
 - The Naive Bayes algorithm uses probabilities in a similar way to a
   weather forecast.
-#+end_notes
+#+end_quote
 
 * Probability
 #+attr_html: :width 400px
@@ -78,7 +80,7 @@ between features, class, and probability measures, which are our
 - Anomaly detection in computer networks
 - Diagnosing medical conditions
 
-#+begin_notes
+#+begin_quote
 - Best for problems where information from numerous attributes should
   be considered simultaneously to estimate overall probability of an
   outcome.
@@ -87,7 +89,7 @@ between features, class, and probability measures, which are our
   to make predictions.
 - Even if a large number of features have minor effects, their
   combined impact in a Bayesian model could have a major impact.
-#+end_notes
+#+end_quote
 
 * Basic idea
 #+attr_html: :width 500px
@@ -97,7 +99,7 @@ The estimated likelihood of an *event* or potential outcome is based on
 the evidence from multiple *trials* or opportunities for the event to
 occur.
 
-#+begin_notes
+#+begin_quote
 The more trials the better for the accuracy of the estimate - by way
 of the *law of large numbers*: if you repeat an experiment independently
 a large number of times and average the result, your result is close to
@@ -109,7 +111,7 @@ the expected value (the arithmetic mean):
 - Large number of lottery tickets - certain win
 
 But: real events are never mathematically independent.
-#+end_notes
+#+end_quote
 
 * Spam vs. Ham
 #+attr_html: :width 600px
@@ -118,7 +120,7 @@ But: real events are never mathematically independent.
 In email trials, spam and ham are mutually exclusive and exhaustive
 events.
 
-#+begin_notes
+#+begin_quote
 - P(event) = no. of occurrences / no. of trials
 - Rain on 3/10 days w/similar conditions: 30% prob today
 - Adding all P => 100% of the data or \sum P(event)=1 because a trial
@@ -128,7 +130,7 @@ events.
 - An alternative way of saying this uses a table of records: if you
   record many, many instances, say 1000, you have 200 lines marked as
   'spam' and 800 lines marked as 'ham'.
-#+end_notes
+#+end_quote
 * Joint probability
 #+attr_html: :width 600px
 [[../img/5_joint.png]]
@@ -142,7 +144,7 @@ larger than its overlap with 'ham'.
 
 Calculating P(spam \cap Viagra) depends on the joint probabilities of the
 two events, on their *dependency*. 
-#+begin_notes
+#+begin_quote
 - The Venn diagram illustrates instances that are only spam, only
   Viagra but not spam and spam with Viagra messages.
 - Named after 19th century mathematician John Venn
@@ -155,7 +157,7 @@ two events, on their *dependency*.
 - *Dependent events are the basis of predictive modeling.*
 - The appearance of clouds is predictive of rain, the appearance of
   the word 'Viagra' is predictive of spam.
-#+end_notes
+#+end_quote
 * Bayes' theorem
 #+attr_html: :width 250px
 [[../img/5_bayes_simple.png]]
@@ -166,7 +168,7 @@ two events, on their *dependency*.
 #+attr_html: :width 400px
 [[../img/5_bayes.png]]
 
-#+begin_notes
+#+begin_quote
 - Recall: we're trying to predict the chance that a message that
   contains the word 'Viagra' (B) is spam (A).
 - The formula states that the best estimate of P(A|B) is the
@@ -177,7 +179,7 @@ two events, on their *dependency*.
 - If A and B occur together very often, P(A|B) will be high regardless
   of P(B).
 - If Viagra and spam were independent, P(A \cap B) = 0.05 * 0.20 = 0.01
-#+end_notes
+#+end_quote
 * Bayesian spam filter
 #+attr_html: :width 600px
 [[../img/5_bayes_spam_ham.png]]
@@ -186,14 +188,14 @@ To calculate the components, construct a frequency table that records
 how often 'Viagra' appeared in 'spam' and 'ham' messages.
 #+attr_html: :width 600px
 [[../img/5_frequency.png]]
-#+begin_notes
+#+begin_quote
 - Without knowing anything about an incoming messages, our best
   estimate would be P(spam) - the *prior probability* (20%)
 - The chance of having any 'Viagra' in a spam message is the *marginal
   likelihood* - having any 'Viagra' at all is the *marginal likelihood*
 - What we're after is a computation of the *posterior probability*
   (i.e. *after* applying the condition 'Viagra').
-#+end_notes
+#+end_quote
 * Likelihood table
 #+attr_html: :width 600px
 [[../img/5_likelihood.png]]
@@ -205,7 +207,7 @@ P(Viagra = Yes | spam) = 4/20 = 0.20
 P(spam & Viagra) = P(Viagra|spam) * P(spam) = (4/20)*(20/100) = 0.04
 P(spam|Viagra) = (4/20) * (20/100) / (5/100) = 0.80
 #+end_example
-#+begin_notes
+#+begin_quote
 - The computed chance of getting spam AND Viagra is FOUR times as
   large as the chance when independence was assumed
   (P(Viagra)*P(spam)=0.01)
@@ -217,7 +219,7 @@ P(spam|Viagra) = (4/20) * (20/100) / (5/100) = 0.80
 - The Naive Bayes algorithm accounts for these additional
   difficulties. It also relies on careful text pre-processing of the
   message data.
-#+end_notes
+#+end_quote
 
 * Naïvety of the algorithm
 #+attr_html: :width 400px
@@ -227,7 +229,7 @@ P(spam|Viagra) = (4/20) * (20/100) / (5/100) = 0.80
 - Is this justified in real datasets?
 - Examples: spam / sentiment analysis
 
-  #+begin_notes
+  #+begin_quote
   The question is always what we want to classify: if we're after
   spam, some features are more *important* than others, e.g. the email
   sender or the subject line. Words in the message body are not
@@ -243,7 +245,7 @@ P(spam|Viagra) = (4/20) * (20/100) / (5/100) = 0.80
   NB performs well even when these assumptions are violated, even if
   there are strong feature dependencies, especially with smaller
   datasets. The exact reason for this success is not known.
-  #+end_notes
+  #+end_quote
 * Adding more features
 #+attr_html: :width 800px
 [[../img/5_features.png]]
@@ -257,7 +259,7 @@ Is the message spam given that it contains the terms "Viagra" and
 Cp. "[[https://blog.hubspot.com/blog/tabid/6307/bid/30684/the-ultimate-list-of-email-spam-trigger-words.aspx][The Ultimate List of 394 Email Spam Trigger Words to Avoid in
 2023]]"
 
-#+begin_notes
+#+begin_quote
 As new messages are received, we need to calculate the posterior
 probability to determine whether they are more likely spam or ham,
 given the likelihood of the words being found in the message text.
@@ -265,7 +267,7 @@ given the likelihood of the words being found in the message text.
 Computational complexity is enormous: probabilities for possible
 intersecting events need to be stored. Imagine the Venn diagram of
 four overlapping circles - in reality, we have hundreds of features.
-#+end_notes
+#+end_quote
 
 * Core assumptions
 - Class-conditional independence
@@ -275,7 +277,7 @@ four overlapping circles - in reality, we have hundreds of features.
 #+attr_html: :width 800px
 [[../img/5_hamshort.png]]
 
-#+begin_notes
+#+begin_quote
 - Events are *independent* as long as they are conditioned on the same
   class value: for example, "Money" and "Unsubscribe" are considered
   independent when found in a spam message. Reduces the numerator term
@@ -286,7 +288,7 @@ four overlapping circles - in reality, we have hundreds of features.
 - To convert the likelihoods to probabilities, the denominator needs
   to be re-introduced (rescale likelihood of each outcome by total
   likelihood across all possible outcomes).
-#+end_notes
+#+end_quote
 * Formula
 #+attr_html: :width 600px
 [[../img/5_formula.png]]
@@ -295,9 +297,9 @@ four overlapping circles - in reality, we have hundreds of features.
 - Features $F$ (e.g. "Money", "Urgent")
 - Scaling factor $Z$
 
-#+begin_notes
+#+begin_quote
 Z converts the likelihood values to probabilities.
-#+end_notes
+#+end_quote
 
 * Workflow
 #+attr_html: :width 300px
@@ -308,14 +310,14 @@ Z converts the likelihood values to probabilities.
 3) multiply probabilities "naively"
 4) rescale likelihood to probability
 
-#+begin_notes
+#+begin_quote
 Process:
 1) frequency table,
 2) likelihood table,
 3) multiply conditional probabilities with "naive" assumption of independence,
 4) divide by total likelihood to transform each class likelihood to a
    probability.
-#+end_notes
+#+end_quote
 * Laplace correction
 #+attr_html: :width 300px
 [[../img/5_laplace.jpg]]
@@ -324,7 +326,7 @@ Process:
 - Joint probability P(spam|groceries) = 0%
 - Laplace estimator adds small number to counts
 
-#+begin_notes
+#+begin_quote
 - If an event (e.g. "groceries") has never before occurred in a spam
   message, the likelihood P(groceries|spam) = 0 and the chain product
   to compute the posterior probability P(spam|....) is zero if
@@ -340,14 +342,14 @@ Process:
 - Note that the prior probabilities P(spam) and P(ham) are not
   affected or corrected because this is our best estimate for the
   observations.
-#+end_notes  
+#+end_quote  
   
 * Numeric features
 #+attr_html: :width 600px
 
 [[../img/5_numbers.png]]
 
-#+begin_notes
+#+begin_quote
 - Frequency tables require the features to be categorical
 - Numeric features do not have categories of values
 - The algorithm will not directly work with numeric data
@@ -361,7 +363,7 @@ Process:
   obscure trends (e.g. in the diagram: 2 bins), too many increases
   the sensitivity to noisy data - that's naive Bayes "underfitting"
   and "overfitting".
-#+end_notes
+#+end_quote
 
 * Strength and Weaknesses
 #+begin_example
@@ -373,7 +375,7 @@ Process:
 | Easy to obtain probability    |                                    |
 #+end_example
 
-#+begin_notes
+#+begin_quote
 | Strengths:                                |
 |-------------------------------------------+
 | Simple, fast, effective                   |
@@ -386,7 +388,7 @@ Process:
 | Relies on feature independence and equity              |
 | Not ideal for data with many numeric features          |
 | Estimated probabilities less reliable than predictions |
-#+end_notes
+#+end_quote
 
 * Summary
 
