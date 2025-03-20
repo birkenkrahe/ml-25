@@ -1049,7 +1049,7 @@ influences the prediction? Can the prediction be validated, and how?
     patterns (example of "bias-variance tradeoff").
     #+end_quote
 
-* Week 9: kNN case study - breast cancer diagnosis
+* DONE Week 9: kNN case study - breast cancer diagnosis
 #+attr_html: :width 700px :float nil:
 #+caption: Paul Davies, North Yorkshire Moors
 [[../img/moors.jpg]]
@@ -1115,6 +1115,287 @@ Questions:
   #+end_example
 
 - Code along!
-  
 
 
+
+
+* Week 10: Naive Bayes
+#+attr_html: :width 400px :float nil:
+#+caption: Salvador Dali, The Elephants (1948)
+[[../img/dali.jpg]]
+
+- [X] DataCamp review: Naive Bayes
+- [X] Lecture: Naive Bayes
+- [ ] Case study: Spam filter
+
+** DONE DataCamp review: Naive Bayes
+
+1. *What is the core idea behind Bayesian methods in classification?*
+   #+begin_quote
+   Using probabilities to predict outcomes based on prior knowledge.
+   #+end_quote
+
+2. *How is the probability of an event denoted in probability notation?*
+   #+begin_quote
+   P(A) - purely conventional but broadly used
+   #+end_quote
+
+3. *What is the formula for calculating joint probability of two events?*
+   #+begin_quote
+   P(A AND B) or ~P (A \cap B)~
+   #+end_quote
+
+4. *How is conditional probability defined mathematically?*
+   #+begin_quote
+   "P(A|B) = P(A AND B) / P(B)" or ~P(A|B) = P(A \cap B) / P(B)~
+   #+end_quote
+
+5. *What R function is commonly used to make predictions with a trained
+   model? What kind of function is it?*
+   #+begin_quote
+   ~predict~
+   #+end_quote
+   #+begin_src R :session *R* :results output :exports both
+     args(predict)
+     methods(predict)
+   #+end_src
+
+   #+RESULTS:
+   : function (object, ...)
+   : NULL
+   : [1] predict.ar*                predict.Arima*             predict.arima0*            predict.glm
+   :  [5] predict.HoltWinters*       predict.lm                 predict.loess*             predict.mlm*
+   :  [9] predict.nls*               predict.poly*              predict.ppr*               predict.prcomp*
+   : [13] predict.princomp*          predict.smooth.spline*     predict.smooth.spline.fit* predict.StructTS*
+   : see '?methods' for accessing help and source code
+
+6. *What assumption does Naive Bayes make about predictors?*
+   #+begin_quote
+   Predictors are independent of each other.
+   #+end_quote
+
+7. *What issue arises when an event has a zero probability, and how is
+   it typically addressed?*
+   #+begin_quote
+   Zero probabilities can skew results; the Laplace correction adds a
+   small value to avoid this.
+   #+end_quote
+
+8. *How can numeric data be prepared for use in Naive Bayes?*
+   #+begin_quote
+   By binning it into discrete categories.
+   #+end_quote
+
+9. *What is the "bag of words" approach used for in classification?*
+   #+begin_quote
+   Converting text data into a format suitable for modeling.
+   #+end_quote
+
+10. *Why is Naive Bayes considered a "naive" approach?*
+    #+begin_quote
+    It simplifies complex relationships by assuming independence.
+    #+end_quote
+
+** DONE Lecture: Naive Bayes + code along case
+
+*Objectives:*
+- Classification using Naive Bayes
+- Bayes' theorem and naive assumptions
+- Text classification use case
+- R packages for text mining & visualization
+- Application: SMS junk message filter
+
+*Codealong file*: tinyurl.com/naive-bayes-org
+
+** TODO Review: Naive Bayes (lecture)
+
+1. *What is the main purpose of using probabilistic methods in
+   classification?*
+   #+begin_quote
+   To estimate the likelihood (chance) of an outcome based on past
+   (prior) data and uncertainty (not knowing the future).
+   #+end_quote
+
+2. *How does Bayes’ theorem help in building a classifier?*
+   #+begin_quote
+   It updates the probability of a class (e.g. =spam=) based on new
+   evidence from features (e.g. =Viagra=).
+   #+end_quote
+
+3. *Why are joint probabilities of independent events multiplied
+   instead of added?*
+   #+begin_quote
+   Because independence means the occurrence of one event doesn’t
+   affect the other, so their combined chance is the product of
+   individual probabilities.
+
+   Example: Suppose the chance of rain in the morning is 30% and the
+   chance of wind in the afternoon is 40%, and these are independent
+   (assuming morning rain doesn’t affect afternoon wind). The joint
+   probability of both is =P(rain and wind) = P(rain) * P(wind) = 0.3 *
+   0.4 = 0.12= or 12%.
+   #+end_quote
+
+4. *Why are probabilities of mutually exclusive events added instead of
+   multiplied?*
+   #+begin_quote
+   Because mutually exclusive events cannot occur together, so their
+   combined chance (one or the other) is the sum of their individual
+   probabilities.
+
+   Example: Suppose the chance of rain in the morning is 30% and the
+   chance of snow in the morning is 20%, and these are mutually
+   exclusive (assuming it can’t rain and snow at the same time). The
+   probability of either is =P(rain or snow) = P(rain) + P(snow) =
+   0.3 + 0.2 = 0.5= or 50%."
+   #+end_quote
+
+5. *What does "mutually exclusive events" mean for rain and snow in the
+   morning?*
+   #+begin_quote
+   Mutually exclusive events cannot happen at the same time in the
+   same place during the specified time period - here the morning.
+
+   If prior/historical data show that out of 100 mornings, 30 had rain
+   and 20 had snow (with no mornings having both), the probability of
+   either is 50% - the event outcomes don't overlap in a single
+   observation.
+   #+end_quote
+
+6. *What's "joint probability" of two events "morning rain" and
+   "afternoon wind"?*
+   #+begin_quote
+   The example assumes independence across time periods - it's the
+   probability of a single day having both morning rain and afternoon
+   wind, based on past days with those combined conditions.
+
+   It's a joint event for that day's record.
+   #+end_quote
+
+7. *How is "joint probability" (chance of two events A, B occurring
+   together) expressed abstractly? What if they're independent?*
+   #+begin_quote
+   =P(A \cap B)=. If  independent, =P(A) * P(B)=.
+   #+end_quote
+
+8. *How is "mutual exclusiveness" of two events A, B (events cannot*
+   *occur together) expressed abstractly? What's the chance of either
+   to occur?*
+   #+begin_quote
+   =P(A \cap B) = 0=, and =P(A \cup B) = P(A) + P(B)=
+   #+end_quote
+
+9. *What does the 'naive' assumption in Naive Bayes imply about
+   features like =Viagra= for =spam= identification?*
+   #+begin_quote
+   It assumes all features are independent and equally important in
+   predicting the class. This is clearly not usually true.
+   #+end_quote
+
+10. If Naive Bayes is so "naive", why does it still work?
+    #+begin_quote
+    Nobody really knows. But examples may help to illustrate it: In
+    text classification (like =spam= identification), words may be
+    correlated (like =free= and =cash=) but if their combined presence
+    points strongly to one class (like =spam=), the correlation
+    reinforces the classification rather than derail it.
+
+    However: See the "frequentist" objection against Bayes below.
+    #+end_quote
+
+11. *How does the "law of large numbers" relate to improving
+    probability estimates?*
+    #+begin_quote
+    It suggests that with more trials, the average outcome approaches
+    the "true" probability (that would be found based on all available
+    prior events).
+    #+end_quote
+
+12. *What is the difference between prior and posterior probabilities
+    in Bayesian methods?*
+    #+begin_quote
+    Prior is the initial probability before evidence (can be
+    computed); posterior is the updated probability after considering
+    evidence (can be predicted)."
+    #+end_quote
+
+13. *What do we want to compute using Bayes' formula?*
+    #+attr_html: :width 600px
+    [[../img/5_bayes_spam_ham.png]]
+    #+begin_quote
+    Given known (labeled) datasets with known frequencies of =spam=
+    vs. =ham= and =spam= / =ham= with or without the term =Viagra=, we want to
+    build a model that classifies new messages as =spam= or =ham= depending
+    on the presence or absence of the term =Viagra= as our only predictor
+    (for now).
+    #+end_quote
+
+15. Why is =P(Spam|Viagra)= not equal to =P(Viagra|Spam)=? And how does it
+    relate to "time" (not philosophically, though perhaps that, too)?
+    #+begin_quote
+    1) They measure different things: =P(Spam|Viagra)=, the *posterior*, is
+       the probability a message is classified as =spam= given it contains
+       the term =Viagra=, while =P(Viagra|Spam)=, the *likelihood*, is the
+       probability that the term =Viagra= appears in a =spam= message.
+
+    2) Bayes' theorem can be flipped algebraically (formally) to
+       express P(V|S)=P(S|V)*P(V)/P(S).  But =P(Viagra|Spam)= is
+       computed directly from data as a conditional frequency within
+       =spam=, and not via =P(V)=.
+
+    3) Put differently yet again: P(S|V) normalizes by P(V) - it
+       conditions on V being present ("What's the chance of V given
+       S"), while P(V|S) normalizes by P(S) - it conditions on S being
+       present ("What's the chance of S given V"). When P(S)=P(V), the
+       order of conditioning does not matter algebraically but it
+       still matters in time.
+
+    4) Identify of these would mean that =spam= messages are exactly as
+       common as =Viagra= appearances in =spam=: e.g. if 100 emails contain
+       20 spam messages, 20 emails contain the word "Viagra", and 10
+       emails are both spam and contain "Viagra":
+       - P(Spam) = 20/100 = 0.2
+       - P(Viagra) = 20/100 = 0.2
+       - P(Viagra|Spam) = 10/20 = 0.5
+       - P(Spam|Viagra) = 10/20 = 0.5
+    #+end_quote
+
+    #+begin_quote
+    Henri Bergson (1859-1941) viewed time as "duration" (durée), a
+    continuous flow of experience distinct from the spatialized time
+    of science. He argued that clock time misrepresents reality -
+    rather, past, present and future blend in consciousness, not a
+    series of static points. The scientific world-view imposes an
+    artificial lattice or grid imposed on the flux of life.
+
+    In Bergson's view, probability reduces time to a tool for
+    counting. It aligns a bit more with Bayesian than with Frequentist
+    terms. But both frame time quantitatively. Bergson would say that
+    probability captures patterns within a simplified version of time,
+    not its lived reality, and it therefore can not represent truth.
+
+    Bergson's books are beautifully written (as a young man, I was a
+    great fan of his): He received the Nobel Prize for Literature
+    (1927/28).
+    #+end_quote
+
+16. *Bonus:* What is Frequentist vs. Bayesian Thinking? (Extension)
+    #+begin_quote
+    - *Frequentist* thinking views probability as the long-run frequency
+      of events, using fixed parameters (e.g., a coin’s heads
+      probability is 0.5) and relying on sample data *without prior
+      beliefs*.
+
+    - *Bayesian* thinking treats *probability as a measure of belief*,
+      updating prior probabilities (e.g., initial guess of 0.6 for
+      heads) with new data via Bayes’ theorem to get a posterior,
+      allowing subjective input.
+
+    - *Example:* You flip a coin 100 times and get 52 heads. The
+      Frequentist estimate is P(heads) = 52/100 = 0.52, based purely on
+      the data, with no prior assumptions. The Bayesian view starts
+      with a prior belief that P(heads) = 0.6 for a coin. After
+      flipping it 100 times and getting 52 heads, Bayes’ theorem
+      updates your belief to a posterior, say P(heads) ≈ 0.53, blending
+      your prior with the data.
+    #+end_quote
