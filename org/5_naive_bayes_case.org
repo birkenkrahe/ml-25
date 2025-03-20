@@ -17,6 +17,7 @@
 
 - To code along with the lecture, download the practice file from
   GitHub, complete the file and upload it to Canvas:
+  [[https://tinyurl.com/naive-bayes-case][tinyurl.com/naive-bayes-case]]
 
 - Exercises for extra credit will be provided, as well as a graded
   test.

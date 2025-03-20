@@ -1399,3 +1399,9 @@ Questions:
       updates your belief to a posterior, say P(heads) ≈ 0.53, blending
       your prior with the data.
     #+end_quote
+
+** TODO Case study
+
+- To code along with the lecture, download the practice file from
+  GitHub, complete the file and upload it to Canvas:
+  [[https://tinyurl.com/naive-bayes-case][tinyurl.com/naive-bayes-case]]
