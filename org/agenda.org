@@ -1118,8 +1118,7 @@ Questions:
 
 
 
-
-* Week 10: Naive Bayes
+* DONE Week 10: Naive Bayes
 #+attr_html: :width 400px :float nil:
 #+caption: Salvador Dali, The Elephants (1948)
 [[../img/dali.jpg]]
@@ -1128,7 +1127,7 @@ Questions:
 - [X] Lecture: Naive Bayes
 - [ ] Case study: Spam filter
 
-** DONE DataCamp review: Naive Bayes
+** DataCamp review: Naive Bayes
 
 1. *What is the core idea behind Bayesian methods in classification?*
    #+begin_quote
@@ -1196,7 +1195,7 @@ Questions:
     It simplifies complex relationships by assuming independence.
     #+end_quote
 
-** DONE Lecture: Naive Bayes + code along case
+** Lecture: Naive Bayes + code along case
 
 *Objectives:*
 - Classification using Naive Bayes
@@ -1207,7 +1206,7 @@ Questions:
 
 *Codealong file*: tinyurl.com/naive-bayes-org
 
-** TODO Review: Naive Bayes (lecture)
+** Review: Naive Bayes (lecture)
 
 1. *What is the main purpose of using probabilistic methods in
    classification?*
@@ -1219,7 +1218,7 @@ Questions:
 2. *How does Bayes’ theorem help in building a classifier?*
    #+begin_quote
    It updates the probability of a class (e.g. =spam=) based on new
-   evidence from features (e.g. =Viagra=).
+   evidence from features (e.g. =Viagra=) or predictors.
    #+end_quote
 
 3. *Why are joint probabilities of independent events multiplied
@@ -1398,9 +1397,38 @@ Questions:
       flipping it 100 times and getting 52 heads, Bayes’ theorem
       updates your belief to a posterior, say P(heads) ≈ 0.53, blending
       your prior with the data.
+
+    See also: [[https://medium.com/data-science/statistics-are-you-bayesian-or-frequentist-4943f953f21b][Bayesian vs. Frequentist by Cassie Kozyrkov (Google)]].
     #+end_quote
 
 ** TODO Case study
+
+- To code along with the lecture, download the practice file from
+  GitHub, complete the file and upload it to Canvas:
+  [[https://tinyurl.com/naive-bayes-case][tinyurl.com/naive-bayes-case]]
+  
+* Week 11: Naive Bayes case study with text mining
+#+attr_html: :width 300px :float nil:
+[[../img/naive1.png]] 
+
+** NEXT 2nd sprint review feedback
+
+- [[https://drive.google.com/file/d/15vyt1mPuFFcBGosxAv1oxM3SwqUipFqS/view?usp=drive_link][Discuss Matthew's literature review]]. Usually, a review is focused on
+  one research question, or a group of strongly correlated
+  questions. Its only purpose is to lay out the available literature,
+  in order to estimate the state of the art with regard to pursuits of
+  that research question. A literature review section in a paper does
+  the same thing. This paper is a valid attempt, too, but a different
+  beast altogether. Its main issue is the missing methodology.
+
+- [[https://docs.google.com/document/d/1u1AFSUufeJvga0rQ7XqkSsYPChKuNfKf/edit?usp=sharing&ouid=102963037093118135110&rtpof=true&sd=true][Cristian's literature review is also very good]]. It's more
+  traditional. Inline references should not be numbers, however (so
+  that one does not have to continously go back and forth to the
+  reference section). The review ties nicely into his project.
+
+** TODO Case study
+#+attr_html: :width 300px :float nil: 
+[[../img/naive3.png]] 
 
 - To code along with the lecture, download the practice file from
   GitHub, complete the file and upload it to Canvas:
