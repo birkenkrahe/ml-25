@@ -1426,10 +1426,166 @@ Questions:
   that one does not have to continously go back and forth to the
   reference section). The review ties nicely into his project.
 
-** TODO Case study
+
+** IN_PROGRESS Case study
 #+attr_html: :width 300px :float nil: 
 [[../img/naive3.png]] 
 
 - To code along with the lecture, download the practice file from
   GitHub, complete the file and upload it to Canvas:
   [[https://tinyurl.com/naive-bayes-case][tinyurl.com/naive-bayes-case]]
+
+** TODO Text mining review
+
+Challenge: Do what we've done so far in a one-liner.
+
+1) Remove all objects from current session
+2) Load ~tm~
+3) Read CSV source from ~file~ (URL: bit.ly/sms_spam_csv)
+4) VectorSource
+5) VCorpus
+6) 
+
+Solution:
+#+begin_src R :session *R* :results output :exports both
+  rm(list=ls())
+  library(tm)
+  read.csv(file="https://bit.ly/sms_spam_csv") |>
+    VectorSource() |>
+    VCorpus() |>
+    tm_map(FUN=removeNumbers) -> x
+    
+#+end_src
+
+#+RESULTS:
+
+#+begin_src R :session *R* :results output :exports both
+    x[[1]][25]
+#+end_src
+
+#+RESULTS:
+: $<NA>
+: NULL
+
+** TODO Bayesian Statistics Rapid Review - Deriving Bayes' Formula
+
+1) We have a dataset with 100 emails, 20 of which are spam. What's the
+   probability of spam, and what's it called?
+   #+begin_quote
+   The *prior* probability of spam, P(spam), is 20/100 = 0.2
+   #+end_quote
+
+2) In this case, what's the probability of ham (the complement of spam)?
+   #+begin_quote
+   The *prior* probability of ham, P(ham), is 80/100 = 1 - P(spam) = 0.8
+   #+end_quote
+
+3) The word "lottery" appears in 15 spam, and in 5 ham emails. What's
+   the probability than an email containing "lottery" is spam?
+   #+begin_quote
+   The (conditional) *posterior* probability that an email with
+   "lottery" is spam, P(spam|lottery), is 15/20 = 3/4 = 0.75.
+   #+end_quote
+
+4) How could you visualize this scenario?
+   #+attr_html: :width 600px :float nil:
+   #+caption: Source: Grokking Machine Learning, Serrano (Manning, 2021)
+   [[../img/lottery.png]]
+
+5) In this scenario, what is "lottery"?
+   #+begin_quote
+   The word "lottery" is the *event* that helps us make a better
+   estimate of the probability.
+   #+end_quote
+
+6) How could you visualize the scenario diagrammatically?
+   #+attr_html: :width 600px :float nil:
+   [[../img/state_space.jpg]]
+
+7) In this diagram, what does the term "state space" refer to?
+   #+begin_quote
+   The term "state space" refers to the states of the system:
+   1. Before (prior to) the event ("lottery").
+   2. After (posterior to) the event ("lottery").
+   #+end_quote
+
+8) What is =P(spam) \cap P(ham)=?
+   #+begin_quote
+   Spam and ham are mutually exclusive events:
+   + =P(spam) \cap P(ham) = 0= (intersection)
+   + =P(spam) \cup P(ham) = 1= (union)
+   #+end_quote
+
+9) How could you visualize all the possibilities of this state space?
+   #+attr_html: :width 600px :float nil:
+   #+caption: Source: Grokking Machine Learning, Serrano (Manning, 2021)
+   [[../img/lottery1.png]]
+
+10) How could you express the possibilities algebraically?[fn:1]
+    #+begin_example
+
+                     *-----------------*--> P("lottery" | spam) = 0.15
+                 *-->| P(Spam)=1/5=0.2 |
+                 |   *-----------------*--> P(no "lottery | spam) = 0.05
+                 |
+   P(msg) = 1 -->*
+                 |
+                 |   *-----------------*--> P("lottery" | ham) = 0.05
+                 *-->| P(Ham)=4/5=0.8  |
+                     *-----------------*--> P(no "lottery | spam) = 0.75
+    #+end_example
+
+11) How do you express the possibilities of two events happening at
+    the same time?[fn:2]
+    #+begin_example
+                                            P("lottery" \cap spam) =
+                     *-----------------*--> P("lottery" | spam) \cap P(spam)
+                 *-->| P(Spam)=1/5=0.2 |
+                 |   *-----------------*--> P(\not "lottery" \cap spam) =
+                 |                          P(no "lottery | spam) \cap P(spam)
+   P(msg) = 1 -->*
+                 |                          P("lottery" \cap ham) =
+                 |   *-----------------*--> P("lottery" | ham) \cap P(ham)
+                 *-->| P(Ham)=4/5=0.8  |
+                     *-----------------*--> P(\not "lottery" \cap spam) =
+                                            P(no "lottery | spam) \cap P(spam)
+
+    #+end_example
+
+    The same tree with probabilities[fn:3]:
+    #+attr_html: :width 600px :float nil:
+    #+caption: Source: Grokking Machine Learning, Serrano (Manning, 2021)
+    [[../img/lottery2.png]]
+
+12) Of these four events, how many do we need to compute the posterior
+    probability =P(spam|"lottery")=?
+    #+begin_quote
+    We only need to consider those events where the word "lottery"
+    appears - the two two branches.
+    #+end_quote
+    #+attr_html: :width 600px :float nil:
+    #+caption: Source: Grokking Machine Learning, Serrano (Manning, 2021)
+    [[../img/lottery3.png]]
+
+13) The probabilities no longer add up to one. What to do?
+    #+begin_quote
+    We need two numbers that are in the same relative ratio as 3/20
+    and 1/20 but that add to one. That's the sum of each divided by
+    their sum: (1/20 + 3/20) / (1/20+3/20) = 1. After some algebra,
+    this leads straight to Bayes' formula.
+    #+end_quote
+
+
+* Footnotes
+
+[fn:1] These are conditional probabilities computed on the whole
+dataset. We're for example computing the probability that a given spam
+message out of 100 messages contains the word "lottery" as
+=P("lottery"|spam)=.
+
+[fn:2] For example, the probability that an email is spam and contains
+the word "lottery" - that's the intersection of two events,
+=P("lottery" \cap spam)=. To compute, use the product rule: =P(A \cap B)=P(A|B) \cap P(B)=.
+
+[fn:3] The values are obtained by product, e.g. for the top leaf,
+=P("lottery"|spam) = 3/4 * 1/5 = 3/20 = 0.15
