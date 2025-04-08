@@ -1117,7 +1117,6 @@ Questions:
 - Code along!
 
 
-
 * DONE Week 10: Naive Bayes
 #+attr_html: :width 400px :float nil:
 #+caption: Salvador Dali, The Elephants (1948)
@@ -1407,11 +1406,11 @@ Questions:
   GitHub, complete the file and upload it to Canvas:
   [[https://tinyurl.com/naive-bayes-case][tinyurl.com/naive-bayes-case]]
   
-* Week 11: Naive Bayes case study with text mining
+* DONE Week 11: Naive Bayes case study with text mining
 #+attr_html: :width 300px :float nil:
 [[../img/naive1.png]] 
 
-** NEXT 2nd sprint review feedback
+** 2nd sprint review feedback
 
 - [[https://drive.google.com/file/d/15vyt1mPuFFcBGosxAv1oxM3SwqUipFqS/view?usp=drive_link][Discuss Matthew's literature review]]. Usually, a review is focused on
   one research question, or a group of strongly correlated
@@ -1427,7 +1426,7 @@ Questions:
   reference section). The review ties nicely into his project.
 
 
-** IN_PROGRESS Case study
+** Case study
 #+attr_html: :width 300px :float nil: 
 [[../img/naive3.png]] 
 
@@ -1435,37 +1434,22 @@ Questions:
   GitHub, complete the file and upload it to Canvas:
   [[https://tinyurl.com/naive-bayes-case][tinyurl.com/naive-bayes-case]]
 
-** TODO Text mining review
+** Text mining pipeline challenge
 
-Challenge: Do what we've done so far in a one-liner.
+Do what we did in class as a pipeline. Details in Canvas.
 
-1) Remove all objects from current session
-2) Load ~tm~
-3) Read CSV source from ~file~ (URL: bit.ly/sms_spam_csv)
-4) VectorSource
-5) VCorpus
-6) 
 
-Solution:
-#+begin_src R :session *R* :results output :exports both
-  rm(list=ls())
-  library(tm)
-  read.csv(file="https://bit.ly/sms_spam_csv") |>
-    VectorSource() |>
-    VCorpus() |>
-    tm_map(FUN=removeNumbers) -> x
-    
-#+end_src
+* Week 12: Finish Naive Bayes Case and ... Regression (perhaps)
+#+attr_html: :width 600px :float nil:
+[[../img/regression.png]]
 
-#+RESULTS:
+- [ ] *New test*: Naive Bayes (by Friday, April 11) - 4 more
+- [ ] *DataCamp lesson*: Last of "Supervised Learning" (Apr 11) - 4 more
+- [ ] *Solution* of the text mining challenge - did you manage?
+- [ ] *Bayesian Stats Rapid Review* - preview for this week's test
+- [ ] *Lecture/practice:* Regression methods 
 
-#+begin_src R :session *R* :results output :exports both
-    x[[1]][25]
-#+end_src
-
-#+RESULTS:
-: $<NA>
-: NULL
+** TODO Solution: Text mining challenge
 
 ** TODO Bayesian Statistics Rapid Review - Deriving Bayes' Formula
 
@@ -1576,6 +1560,9 @@ Solution:
     #+end_quote
 
 
+
+** TODO Finish Naive Bayes SMS Message Spam Case Study
+
 * Footnotes
 
 [fn:1] These are conditional probabilities computed on the whole
@@ -1588,4 +1575,5 @@ the word "lottery" - that's the intersection of two events,
 =P("lottery" \cap spam)=. To compute, use the product rule: =P(A \cap B)=P(A|B) \cap P(B)=.
 
 [fn:3] The values are obtained by product, e.g. for the top leaf,
-=P("lottery"|spam) = 3/4 * 1/5 = 3/20 = 0.15
+=P("lottery"|spam) = 3/4 * 1/5 = 3/20 = 0.15=
+
