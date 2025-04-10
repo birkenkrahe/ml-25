@@ -764,7 +764,7 @@
 - This illustrates an important text mining principle: the order of
   operations matters!
 
-* TODO Intermission: Saving and loading an R session image
+* Intermission: Saving and loading an R session image
 
 - If you work over a longer period, you may want to save a session
   image (not just the ~.Rhistory~ file of interactive commands).
@@ -1151,6 +1151,39 @@
 
 * Reducing training features with ~findFreqTerms~
 
+- Load last session image:
+  #+begin_src R :session *R* :results output :exports both
+    load(file="bayesCase2.RData",verbose=TRUE)
+    search()
+    ls()
+  #+end_src
+
+  #+RESULTS:
+  #+begin_example
+  Loading objects:
+    sms_dtm2
+    sms_train_labels
+    sms_test_labels
+    sms_corpus
+    ham
+    sms_dtm_test
+    sms_raw
+    .Random.seed
+    sms_dtm_train
+    spam
+    sms_corpus_clean
+    sms_dtm
+    string
+  Loading required package: NLP
+  [1] ".GlobalEnv"        "package:tm"        "package:NLP"       "ESSR"              "package:stats"    
+   [6] "package:graphics"  "package:grDevices" "package:utils"     "package:datasets"  "package:methods"  
+  [11] "Autoloads"         "package:base"
+  [1] "bar"              "foo"              "ham"              "i"                "loaded"          
+   [6] "sms_corpus"       "sms_corpus_clean" "sms_dtm"          "sms_dtm_test"     "sms_dtm_train"   
+  [11] "sms_dtm2"         "sms_raw"          "sms_test_labels"  "sms_train_labels" "spam"            
+  [16] "string"           "text"             "text2"
+  #+end_example
+
 - The sparse matrix currently contains over 6,500 features - one
   feature for every word that appears in at least one SMS message:
   #+begin_src R
@@ -1189,7 +1222,7 @@
   #+end_src
 
   #+RESULTS:
-  :  chr [1:1137] "£wk" "abiola" "abl" "abt" "accept" "access" "account" "across" "act" "activ" ...
+  :  chr [1:1137] "£wk" "abiola" "abl" "abt" "accept" "access" "account" "across" "act" "activ" "actual" ...
 
 - There are 1,137 words appearing in at least 5 SMS messages - we've
   reduced the dimension of our features by 83%.
@@ -1198,8 +1231,37 @@
   re-completion ("abl"), and not having removed abbreviations and
   symbols ("£wk")[fn:8].
 
+- Instead of ~qdap~, try installing the package ~sentimentr~, then run
+  ~library("sentimentr")~ and ~ls("package:sentimentr")~ to see the functions.
+  #+begin_src R :session *R* :results output :exports both
+    library("sentimentr")
+    ls("package:sentimentr")
+  #+end_src
+
+  #+RESULTS:
+  #+begin_example
+  [1] "as_key"                           "available_data"                   "average_downweighted_zero"       
+   [4] "average_mean"                     "average_weighted_mixed_sentiment" "combine_data"                    
+   [7] "course_evaluations"               "crowdflower_deflategate"          "crowdflower_products"            
+  [10] "crowdflower_self_driving_cars"    "crowdflower_weather"              "emotion"                         
+  [13] "emotion_by"                       "extract_emotion_terms"            "extract_profanity_terms"         
+  [16] "extract_sentiment_terms"          "general_rescale"                  "get_sentences"                   
+  [19] "get_sentences2"                   "highlight"                        "hotel_reviews"                   
+  [22] "hu_liu_apex_reviews"              "hu_liu_cannon_reviews"            "hu_liu_jukebox_reviews"          
+  [25] "hu_liu_nikon_reviews"             "hu_liu_nokia_reviews"             "is_key"                          
+  [28] "kaggle_movie_reviews"             "kotzias_reviews_amazon_cells"     "kotzias_reviews_imdb"            
+  [31] "kotzias_reviews_yelp"             "nyt_articles"                     "presidential_debates_2012"       
+  [34] "profanity"                        "profanity_by"                     "replace_emoji"                   
+  [37] "replace_emoji_identifier"         "replace_emoticon"                 "replace_grade"                   
+  [40] "replace_internet_slang"           "replace_rating"                   "replace_word_elongation"         
+  [43] "sam_i_am"                         "sentiment"                        "sentiment_attributes"            
+  [46] "sentiment_by"                     "sentimentr_data"                  "uncombine"                       
+  [49] "update_key"                       "update_polarity_table"            "update_valence_shifter_table"    
+  [52] "validate_sentiment"
+  #+end_example
+
 - We narrow our training and test features already stored using
-  ~sms_freq_words~: we use the column index to include all rows:
+  ~sms_freq_words~ - overwriting training and test data set:
   #+begin_src R :results silent
     sms_dtm_freq_train <- sms_dtm_train[ ,sms_freq_words]
     sms_dtm_freq_test <- sms_dtm_test[ ,sms_freq_words]
@@ -1217,15 +1279,31 @@
 - We convert the counts to "Yes" or "No" strings with a simple
   function, and apply the function to the whole matrix with ~apply~.
 
+- Why?
+  #+begin_quote
+  Some ML algorithms treat factors differently than numeric variables:
+  For numeric predictors, the model assumes a Gaussian distribution,
+  and for categorical predictors, it uses the conditional
+  probabilities from the frequency tables (which works better).
+  #+end_quote
+
 - The conversion function uses ~ifelse~ as a way of testing a condition
-  (~x > 0~) for all elements of a vector:
+  (~x > 0~) for all elements of a vector[fn:10]:
   #+name: convert_counts
-  #+begin_src R :results silent
+  #+begin_src R :results output
     ## function definition
     convert_counts <- function (x) { x <- ifelse(test = (x > 0),
                                                  yes = "Yes",
                                                  no = "No") }
+    ls()
   #+end_src
+
+  #+RESULTS: convert_counts
+  : [1] "bar"                "convert_counts"     "foo"                "ham"                "i"                 
+  :  [6] "loaded"             "sms_corpus"         "sms_corpus_clean"   "sms_dtm"            "sms_dtm_freq_test" 
+  : [11] "sms_dtm_freq_train" "sms_dtm_test"       "sms_dtm_train"      "sms_dtm2"           "sms_freq_words"    
+  : [16] "sms_raw"            "sms_test_labels"    "sms_train_labels"   "spam"               "string"            
+  : [21] "text"               "text2"
 
 - The ~apply~ function applies its function argument ~FUN~ to all elements
   of an array by row (~MARGIN=1~) or by column (~MARGIN=2~) - here, we're
@@ -1245,6 +1323,8 @@
     dim(sms_test)
     sms_train[2:3,2:3]  # head of the training data matrix
     sms_test[100:102,1135:1137]  # tail of the test data matrix
+    any(sms_train=="Yes")
+    any(sms_test=="Yes")    
   #+end_src
 
   #+RESULTS:
@@ -1260,6 +1340,8 @@
     4269 "No" "No" "No"
     4270 "No" "No" "No"
     4271 "No" "No" "No"
+  [1] TRUE
+  [1] TRUE
   #+end_example
 
 - Taking stock! The ~ls()~ function has a pattern argument. Use it to
@@ -1270,10 +1352,9 @@
   #+end_src
 
   #+RESULTS:
-  :  [1] "sms_corpus"         "sms_corpus_clean"   "sms_dtm"            "sms_dtm_freq_test" 
-  :  [5] "sms_dtm_freq_train" "sms_dtm_test"       "sms_dtm_train"      "sms_dtm2"          
-  :  [9] "sms_freq_words"     "sms_raw"            "sms_test"           "sms_test_labels"   
-  : [13] "sms_train"          "sms_train_labels"
+  :  [1] "sms_corpus"         "sms_corpus_clean"   "sms_dtm"            "sms_dtm_freq_test"  "sms_dtm_freq_train"
+  :  [6] "sms_dtm_test"       "sms_dtm_train"      "sms_dtm2"           "sms_freq_words"     "sms_raw"           
+  : [11] "sms_test"           "sms_test_labels"    "sms_train"          "sms_train_labels"
 
 * Training a classifier on the data
 
@@ -1282,6 +1363,9 @@
 
 - The Naive Bayes algorithm uses the presence or absence of words to
   estimate the probability that a given SMS message is spam.
+
+- *If you get a weird Emacs minibuffer error message below:* Run ~M-x
+  org-reload~ and it should work.
 
 - We use the algorithm implemented in the imaginatively named ~e1071~
   package from the TU Wien[fn:9]:
@@ -1301,84 +1385,9 @@
   #+RESULTS:
   #+begin_example
   [1] "https://mirrors.nics.utk.edu/cran/"
-  Installing package into ‘/home/aletheia/R/x86_64-pc-linux-gnu-library/4.1’
-  (as ‘lib’ is unspecified)
-  also installing the dependency ‘proxy’
-
-  trying URL 'https://mirrors.nics.utk.edu/cran/src/contrib/proxy_0.4-27.tar.gz'
-  Content type 'application/x-gzip' length 74622 bytes (72 KB)
-  ==================================================
-  downloaded 72 KB
-
-  trying URL 'https://mirrors.nics.utk.edu/cran/src/contrib/e1071_1.7-16.tar.gz'
-  Content type 'application/x-gzip' length 326734 bytes (319 KB)
-  ==================================================
-  downloaded 319 KB
-
-  ,*** Loaded .Rprofile ***
-  ,* installing *source* package ‘proxy’ ...
-  ,** package ‘proxy’ successfully unpacked and MD5 sums checked
-  ,** using staged installation
-  ,** libs
-  gcc -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c apply.c -o apply.o
-  gcc -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c arrayIndex.c -o arrayIndex.o
-  gcc -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c distance.c -o distance.o
-  gcc -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c dll.c -o dll.o
-  gcc -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c util.c -o util.o
-  gcc -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o proxy.so apply.o arrayIndex.o distance.o dll.o util.o -L/usr/lib/R/lib -lR
-  installing to /home/aletheia/R/x86_64-pc-linux-gnu-library/4.1/00LOCK-proxy/00new/proxy/libs
-  ,** R
-  ,** inst
-  ,** byte-compile and prepare package for lazy loading
-  ,*** Loaded .Rprofile ***
-  ,** help
-  ,*** installing help indices
-  ,** building package indices
-  ,*** Loaded .Rprofile ***
-  ,** installing vignettes
-  ,** testing if installed package can be loaded from temporary location
-  ,*** Loaded .Rprofile ***
-  ,** checking absolute paths in shared objects and dynamic libraries
-  ,** testing if installed package can be loaded from final location
-  ,*** Loaded .Rprofile ***
-  ,** testing if installed package keeps a record of temporary installation path
-  ,* DONE (proxy)
-  ,*** Loaded .Rprofile ***
-  ,* installing *source* package ‘e1071’ ...
-  ,** package ‘e1071’ successfully unpacked and MD5 sums checked
-  ,** using staged installation
-  ,** libs
-  gcc -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c Rsvm.c -o Rsvm.o
-  gcc -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c cmeans.c -o cmeans.o
-  gcc -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c cshell.c -o cshell.o
-  gcc -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c floyd.c -o floyd.o
-  gcc -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c init.c -o init.o
-  g++ -std=gnu++14 -I"/usr/share/R/include" -DNDEBUG      -fpic  -g -O2 -ffile-prefix-map=/build/r-base-4A2Reg/r-base-4.1.2=. -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2 -g  -c svm.cpp -o svm.o
-  g++ -std=gnu++14 -shared -L/usr/lib/R/lib -Wl,-Bsymbolic-functions -flto=auto -ffat-lto-objects -flto=auto -Wl,-z,relro -o e1071.so Rsvm.o cmeans.o cshell.o floyd.o init.o svm.o -L/usr/lib/R/lib -lR
-  installing to /home/aletheia/R/x86_64-pc-linux-gnu-library/4.1/00LOCK-e1071/00new/e1071/libs
-  ,** R
-  ,** inst
-  ,** byte-compile and prepare package for lazy loading
-  ,*** Loaded .Rprofile ***
-  ,** help
-  ,*** installing help indices
-  ,** building package indices
-  ,*** Loaded .Rprofile ***
-  ,** installing vignettes
-  ,** testing if installed package can be loaded from temporary location
-  ,*** Loaded .Rprofile ***
-  ,** checking absolute paths in shared objects and dynamic libraries
-  ,** testing if installed package can be loaded from final location
-  ,*** Loaded .Rprofile ***
-  ,** testing if installed package keeps a record of temporary installation path
-  ,* DONE (e1071)
-
-  The downloaded source packages are in
-          ‘/tmp/RtmpwZ6Eih/downloaded_packages’
-  [1] ".GlobalEnv"           "package:e1071"        "package:tm"           "package:NLP"         
-   [5] "package:wordcloud"    "package:RColorBrewer" "ESSR"                 "package:stats"       
-   [9] "package:graphics"     "package:grDevices"    "package:utils"        "package:datasets"    
-  [13] "package:methods"      "Autoloads"            "package:base"
+  [1] ".GlobalEnv"         "package:e1071"      "package:sentimentr" "package:tm"         "package:NLP"       
+   [6] "ESSR"               "package:stats"      "package:graphics"   "package:grDevices"  "package:utils"     
+  [11] "package:datasets"   "package:methods"    "Autoloads"          "package:base"
   [1] "allShortestPaths"      "bclust"                "best.gknn"             "best.nnet"            
    [5] "best.randomForest"     "best.rpart"            "best.svm"              "best.tune"            
    [9] "bincombinations"       "bootstrap.lca"         "centers.bclust"        "classAgreement"       
@@ -1456,6 +1465,7 @@
   #+end_src
 
   #+RESULTS:
+  : Loading required package: MASS
   : var
   : grouping         No        Yes
   :     ham  0.98751734 0.01248266
@@ -2000,6 +2010,8 @@ crude                   20 Exemplary News Articles from the
   Tools for Model Fitting. URL: [[https://cran.r-project.org/web/packages/gmodels/gmodels.pdf][cran.r-project.org]].
 
 * Footnotes
+[fn:10]There is an efficient ~convert_counts~ function in ~qdap~ but we
+don't have it so we have to rebuild it here as good as we can.
 
 [fn:1]The spam collection used here was modified by Lantz (2019). The
 original is from Gomez (2012) - the URL is no longer accessible, and I
@@ -2030,7 +2042,8 @@ or reduce the font size with ~scale=c(font,cex)~.
 
 [fn:8]The ~qdap~ text cleaning package contains plenty of functions for
 additional corpus cleaning. In a real scenario, we'd run those
-functions on our corpus, too.
+functions on our corpus, too. Alas, ~qdap~ is old. Could use ~sentimentr~
+instead.
 
 [fn:9] An almost identical alternative is the ~NaiveBayes~ function in
 the ~klaR~ package from the [[https://cran.r-project.org/web/packages/klaR/index.html][TU Dortmund]], Germany. Both are well

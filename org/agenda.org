@@ -1116,7 +1116,6 @@ Questions:
 
 - Code along!
 
-
 * DONE Week 10: Naive Bayes
 #+attr_html: :width 400px :float nil:
 #+caption: Salvador Dali, The Elephants (1948)
@@ -1438,20 +1437,19 @@ Questions:
 
 Do what we did in class as a pipeline. Details in Canvas.
 
-
 * Week 12: Finish Naive Bayes Case and ... Regression (perhaps)
 #+attr_html: :width 600px :float nil:
 [[../img/regression.png]]
 
-- [ ] *New test*: Naive Bayes (by Friday, April 11) - 4 more
-- [ ] *DataCamp lesson*: Last of "Supervised Learning" (Apr 11) - 4 more
+- [X] *New test*: Naive Bayes (by Friday, April 11) - 4 more
+- [X] *DataCamp lesson*: Last of "Supervised Learning" (Apr 11) - 4 more
 - [ ] *Solution* of the text mining challenge - did you manage?
 - [ ] *Bayesian Stats Rapid Review* - preview for this week's test
 - [ ] *Lecture/practice:* Regression methods 
 
-** TODO Solution: Text mining challenge
+** DONE Solution: Text mining challenge
 
-** TODO Bayesian Statistics Rapid Review - Deriving Bayes' Formula
+** DONE Bayesian Statistics Rapid Review - Deriving Bayes' Formula
 
 1) We have a dataset with 100 emails, 20 of which are spam. What's the
    probability of spam, and what's it called?
@@ -1468,7 +1466,7 @@ Do what we did in class as a pipeline. Details in Canvas.
    the probability than an email containing "lottery" is spam?
    #+begin_quote
    The (conditional) *posterior* probability that an email with
-   "lottery" is spam, P(spam|lottery), is 15/20 = 3/4 = 0.75.
+   "lottery" is spam, P(spam|"lottery"), is 15/20 = 3/4 = 0.75.
    #+end_quote
 
 4) How could you visualize this scenario?
@@ -1561,7 +1559,42 @@ Do what we did in class as a pipeline. Details in Canvas.
 
 
 
+** TODO My apologies - the price of research
+#+attr_html: :width 400px :float nil:
+[[../img/colloq.png]]
+
+Every 2 years or so I give a faculty colloquium that absorbs
+approx. 50% of my energy in the 2 weeks before the event.
+
+You can help me by sending me (written) accounts of how you are using
+AI for research purposes (to any extent: search, structure, writing).
+
+You'll pay a price because I'll be uncharacteristically scattered,
+and/or less prepared (most of the material at the end of term is new).
+
+
+** TODO Project update - how is it going?
+#+attr_html: :width 400px :float nil:
+[[../img/leonardosprint.png]]
+
+- What percentage of your project have you got finished?
+
+- If you used AI at all, please drop me a note on how!
+
 ** TODO Finish Naive Bayes SMS Message Spam Case Study
+
+- [X] Saving and loading a session image
+- [X] Visualizing text mining results as word clouds
+- [ ] Preparing the data for model building
+- [ ] Making the prediction
+- [ ] Evaluating and improving the model
+
+Make sure you can work with ~tm~ - we still need ~tm::findFreqTerms~ to
+reduce the dimensions of our ~DocumentTermMatrix~ object.
+
+Get [[https://tinyurl.com/bayescase2][tinyurl.com/bayescase2]] (raw RData file) and upload it to your
+platform if you use DataLab or Colab. Then continue to code along.
+
 
 * Footnotes
 
