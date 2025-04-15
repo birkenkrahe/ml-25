@@ -1,0 +1,250 @@
+#+TITLE: Regression - Overview
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: Supervised regression methods
+#+STARTUP: overview hideblocks indent inlineimages
+#+OPTIONS: toc:nil num:nil ^:nil
+#+PROPERTY: header-args:R :session *R* :results output :exports both :noweb yes
+:REVEAL_PROPERTIES:
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_REVEAL_JS_VERSION: 4
+#+REVEAL_INIT_OPTIONS: transition: 'cube'
+#+REVEAL_THEME: black
+:END:
+* README
+
+Overview and case study of regression methods:
+- [ ] Regression models are everywhere
+- [ ] Linear vs. nonlinear regression
+- [ ] Simple vs. multiple linear regression
+- [ ] Pearson's correlation coefficient \rho
+- [ ] Case study: Challenger catastrophe 1986
+
+* Regression analysis
+#+attr_latex: :width 400px
+#+caption: 23 space shuttle O-ring distress events vs. launch temperature
+[[../img/6_regression1.png]]
+
+- Regression[fn:1] Techniques model size and strength of numeric
+  relationships:
+  1. Body weight is a function of calorie intake: weight = f(calories)
+  2. Income is a function of job experience: income = f(experience)
+  3. Poll numbers help to estimate election chances: election = f(polls)
+
+- The dependent (unknown, predicted) variables are: weight, income,
+  election. The independent (known, given, predictor) variables are
+  calories, experience, polls.
+
+- All ML methods are /regression methods/ because they use the data to
+  estimate regression functions, e.g. k-NN uses location data to
+  estimate a distance function, naive Bayes uses event data to
+  estimate a stochastic function, and so on.
+
+- I like to think of data as trajectory of a spacecraft or a moving
+  particle[fn:2].
+
+* Use cases
+#+attr_latex: :width 600px
+#+caption: OLS estimate modeling distress events vs. launch temperature
+[[../img/6_regression2.png]]
+
+- Regression analysis is the most common ML method, for example to:
+
+  1. Examine how populations and individuals vary by their measured
+     characteristics in economics, sociology, psychology, ecology.
+
+  2. Quantify causal relationships between an event and its response
+     in clinical drug trials, engineering safety, marketing research.
+
+  3. Identify patterns to forecast future behavior given known
+     criteria like predicting insurance claims, disaster damage,
+     election results.
+
+* Understanding regression
+#+attr_latex: :width 600px
+#+caption: Predictions differ from actuals by a residual (error)
+[[../img/6_regression.png]]
+
+- The prediction line follows a linear equation y = a + bx and is
+  determined by intercept and slope.
+
+- The shown OLS (Ordinary Least Square) regression is based on
+  minimizing this equation for the error e between actual and
+  predicted y values:
+  #+attr_latex: :width 200px
+  #+caption: OLS error
+  [[../img/6_ols.png]]
+
+- Using calculus[fn:3], you can show that the value of b that results
+  in the minimum squared error is:
+  #+attr_latex: :width 200px
+  #+caption: Slope solution for minimum squared error
+  [[../img/6_min.png]]
+
+- This value is easy to calculate as a function of covariance and
+  variance of x and y values:
+  #+attr_latex: :width 150px
+  #+caption: Slope as a function of covariance and variance
+  [[../img/6_cov_var.png]]
+
+* Example: Challenger O-rings I
+
+- For example, for the Challenger distress vs. launch temperature data[fn:4]:
+  #+begin_src R
+
+  #+end_src
+
+- We can compute b with R stats functions ~cov~ and ~var~ and a = y-bx:
+  #+name: a_b
+  #+begin_src R
+    
+  #+end_src
+
+- Plot the manually computed regression model over the data:
+  #+begin_src R :results graphics file :file ../img/challenger.png
+    <<a_b>>
+
+  #+end_src
+
+* Correlations
+
+- Variable relationships are usually expressed in terms of their
+  /correlation/ or their tendency to grow or fall together.
+
+- Without qualification, correlation refers to the /Pearson correlation
+  coefficient/ \rho_{x,y} of two vectors x and y where \sigma denotes the
+  standard deviation (a measure of spread of x and y that is
+  outlier-resilient):
+  #+attr_latex: :width 300px
+  #+caption: Definition of Pearson's correlation coefficient
+  [[../img/6_corr.png]]
+
+- Correlation ranges between -1 and +1 with 0 indicating absence of a
+  linear relationship:
+  #+attr_latex: :width 400px
+  #+caption: Examples of Pearson coefficients for different datasets
+  [[../img/6_corexample.png]]
+
+- There are some subtleties here: note how "no linear relationship" in
+  the graphs of the last row reveals nothing about the observable
+  patterns!
+
+* Example: Challenger O-rings II
+
+- We compute the correlation between launch temperature and number
+  of O-ring distress events first manually using the formula and
+  then using R's ~cor~ function:
+  #+begin_src R
+  #+end_src
+
+- The value of ~r~ suggests that increases in temperature are related to
+  decreases in the number of distressed O-rings.
+
+- The value of ~r~ suggests a moderately strong negative linear
+  correlation.
+
+* Multiple linear regression
+
+- Most real world problems present more than one independent variable,
+  leading to multiple linear regression.
+  #+attr_latex: :width 700px
+  #+caption: Strengths and weaknesses of multiple linear regression analysis
+  [[../img/6_mult.png]]
+
+- The modified modeling equation for multiple independent variables
+  with regression coefficients \beta_{i}
+  #+attr_latex: :width 400px
+  #+caption: 
+  [[../img/6_mult1.png]]
+
+- We can represent the setup of a multiple regression task:
+  #+attr_latex: :width 400px
+  #+caption: Multiple regression finds the \beta values that relate the X values to Y while minimizing \epsilon
+  [[../img/6_mult2.png]]
+
+- In matrix notation, the formula above is Y = \beta X + \epsilon, with the
+  matrix X of independent variables, and the best estimate of the
+  vector \beta is given by:
+  #+attr_latex: :width 200px
+  #+caption: Linear regression coefficients for independent X and dependent Y
+  [[../img/6_mult3.png]]
+
+- We can use R's built-in matrix operations to create a function ~reg~
+  that takes x and y and returns a vector of \beta coefficient estimates:
+  #+name: regression
+  #+begin_src R :results silent
+  
+  #+end_src
+
+- Earlier we manually computed a (= \beta_{0}) = 3.7 and b = -0.048 from
+  averages for the simple linear regression case. With ~reg~:
+  #+begin_src R
+    <<regression>>
+    
+    #+end_src
+
+  #+begin_src R
+
+  #+end_src
+
+- If we add the other independent variables:
+  #+begin_src R
+    <<regression>>
+
+  #+end_src
+
+- The observed coefficient stability is not guaranteed!
+  
+* Summary
+
+- Linear regression, by far the most common modeling approach for
+  numeric data, involves fitting straight lines to data.
+- We looked at a historical, simple, Ordinary-Least-Squares (OLS)
+  linear regression case (Challenger Space Shuttle disaster).
+- Correlation is usually measured with the Pearson correlation
+  coefficient \rho, the tendency of two variables to grow and fall
+  together. \rho=0 can hide non-linear patterns.
+- For multiple linear regression, the \beta_{i} coefficients can be found
+  using a matrix operation.
+
+* Glossary of code
+
+| COMMAND  | MEANING                 |
+|----------+-------------------------|
+| ~cov(x,y)~ | Statistical covariance  |
+| ~sd(x,y)~  | Standard deviation      |
+| ~var(x,y)~ | Variance                |
+| ~cor(x,y)~ | Correlation coefficient |
+
+* Further study
+
+DataCamp courses (remember you have access until July):
+- [[https://app.datacamp.com/learn/courses/introduction-to-regression-in-r][Introduction to regression in R (DataCamp)]]
+- [[https://app.datacamp.com/learn/courses/supervised-learning-in-r-regression][Supervised learning: regression (DataCamp)]]
+
+* References
+
+- Dalal et al (1989). Risk analysis of the Space Shuttle. In:
+  J. Am. Stat. Ass. 84:945-957.
+- Lantz (2019). Machine Learning with R (3e). Packt.
+
+* Footnotes
+
+[fn:1]The origin of the term "regression" is Galton's discovery that
+fathers who were extremely short or tall tended to have sons whose
+heights were closer to the average height, which he called "regression
+to the mean" (from Latin 're-gredere', grow back)
+
+[fn:2]A spacecraft is subject to gravitational forces of the
+surrounding bodies of mass. Every mass exerts a force and changes the
+path of the vehicle or projectile.
+
+[fn:3]You minimize the sum of squared residuals by treating it as a
+function of two variables (slope and intercept), taking the partial
+derivatives with respect to each, minimize the respective functions,
+and solve the resulting linear system to obtain the slope.
+
+[fn:4]The data refer to the January 28, 1986 destruction of the US
+space shuttle Challenger when a rocket booster failed due to the
+failure of rubber O-rings responsible for sealing the rocket joints,
+which had never been tested below 40 degrees Fahrenheit (Dalal et al,
+1989).
