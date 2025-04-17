@@ -1654,8 +1654,8 @@ platform if you use DataLab or Colab. Then continue to code along.
 - *Question:* How can I stay organized and make sure nothing gets
   forgotten?
 
-- *Answer:* 
-
+- *Answer:*
+  
   1. I realized I needed a system to keep track of my tasks reliably.
 
   2. I chose a simple to-do list app that works on my phone.
