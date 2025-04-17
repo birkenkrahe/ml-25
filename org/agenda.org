@@ -1437,19 +1437,18 @@ Questions:
 
 Do what we did in class as a pipeline. Details in Canvas.
 
-* Week 12: Finish Naive Bayes Case and ... Regression (perhaps)
-#+attr_html: :width 600px :float nil:
-[[../img/regression.png]]
+* DONE Week 12: Finish Naive Bayes Case
 
 - [X] *New test*: Naive Bayes (by Friday, April 11) - 4 more
 - [X] *DataCamp lesson*: Last of "Supervised Learning" (Apr 11) - 4 more
-- [ ] *Solution* of the text mining challenge - did you manage?
-- [ ] *Bayesian Stats Rapid Review* - preview for this week's test
-- [ ] *Lecture/practice:* Regression methods 
+- [X] *Solution* of the text mining challenge - did you manage?
+- [X] *Bayesian Stats Rapid Review* - preview for this week's test
+- [ ] *Lecture/practice:* Regression methods
+- [ ] *DataCamp Course*: Complete "Unsupervised Learning in R" by May 9
 
-** DONE Solution: Text mining challenge
+** Solution: Text mining challenge
 
-** DONE Bayesian Statistics Rapid Review - Deriving Bayes' Formula
+** Bayesian Statistics Rapid Review - Deriving Bayes' Formula
 
 1) We have a dataset with 100 emails, 20 of which are spam. What's the
    probability of spam, and what's it called?
@@ -1558,8 +1557,7 @@ Do what we did in class as a pipeline. Details in Canvas.
     #+end_quote
 
 
-
-** TODO My apologies - the price of research
+** My apologies - the price of research
 #+attr_html: :width 400px :float nil:
 [[../img/colloq.png]]
 
@@ -1572,28 +1570,156 @@ AI for research purposes (to any extent: search, structure, writing).
 You'll pay a price because I'll be uncharacteristically scattered,
 and/or less prepared (most of the material at the end of term is new).
 
-
-** TODO Project update - how is it going?
+** Project update - how is it going?
 #+attr_html: :width 400px :float nil:
 [[../img/leonardosprint.png]]
 
 - What percentage of your project have you got finished?
+  #+begin_src R :session *R* :results output :exports both :noweb yes
+    completion <- c(80,40,70,50,40,20,40,40,95)
+  #+end_src
 
 - If you used AI at all, please drop me a note on how!
 
-** TODO Finish Naive Bayes SMS Message Spam Case Study
+** Finish Naive Bayes SMS Message Spam Case Study
 
 - [X] Saving and loading a session image
 - [X] Visualizing text mining results as word clouds
-- [ ] Preparing the data for model building
-- [ ] Making the prediction
-- [ ] Evaluating and improving the model
+- [X] Preparing the data for model building
+- [X] Making the prediction
+- [X] Evaluating and improving the model
 
 Make sure you can work with ~tm~ - we still need ~tm::findFreqTerms~ to
 reduce the dimensions of our ~DocumentTermMatrix~ object.
 
 Get [[https://tinyurl.com/bayescase2][tinyurl.com/bayescase2]] (raw RData file) and upload it to your
 platform if you use DataLab or Colab. Then continue to code along.
+
+* Week 13: Regression methods
+#+attr_html: :width 400px :float nil:
+[[../img/challenger.jpg]]
+
+- [X] *DataCamp Course*: Complete "Unsupervised Learning in R" by May 9
+- [ ] *Lecture/practice:* Regression methods
+- [ ] *Logistic regression* - Challenger catastrophe use case
+- [ ] *Project review* with Minto's SCQA method.
+
+** DONE Using GAI when doing research (help me help you)
+#+attr_html: :width 600px :float nil:
+[[../img/muse_or_tool.png]]
+
+- Please take 30 minutes to fill in my short *anonymous* survey:
+  [[https://tinyurl.com/ai-muse-or-tool-students][tinyurl.com/ai-muse-or-tool-students]]
+
+  1. *How are you using AI in your coursework?*
+
+  2. *Do you consider AI more of a muse or more of a tool?*
+
+  3. *What would you like to hear in my presentation?*
+
+- Please write as much as you can. We'll look at the results later.
+
+
+** TODO Project review (3rd sprint - abstract)
+
+- Demo film: "[[https://vimeo.com/305393045][Thank You Barbara Minto]]" (3 min) [[https://tinyurl.com/minto-scqa][tinyurl.com/minto-scqa]]
+
+- Write this right now without using any sources other that what's
+  in your head right now:
+
+  1. *Situation:* Everything knows it, and it motivates you (and your
+     listeners) to be interested in this research.
+
+  2. *Complication*: The problem that specifically caused you to
+     undertake this project.
+
+  3. *Question*: Your central research question - the one that you think
+     you will answer with your upcoming presentation.
+
+  4. *Answer*: Your results so far in logical order.
+
+- Put your answer in this Google Docs file (find your project name):
+  [[https://tinyurl.com/dsc305-project-abstract][tinyurl.com/dsc305-project-abstract]]
+
+*** *SCQA Example: Why I Started Using a To-Do List App*
+
+- *Situation:* I used to keep all my tasks in my head or scribbled on
+  sticky notes.  Most days, I had a general idea of what I needed to
+  do.
+
+- *Complication:* But I kept forgetting important deadlines and small
+  tasks slipped through the cracks.  It was stressful and things
+  started piling up.
+
+- *Question:* How can I stay organized and make sure nothing gets
+  forgotten?
+
+- *Answer:* 
+
+  1. I realized I needed a system to keep track of my tasks reliably.
+
+  2. I chose a simple to-do list app that works on my phone.
+
+  3. I started writing down every task as soon as I think of it.
+
+  4. I check the app each day to review and plan my work.
+
+  5. As a result, I stay organized, feel less stressed, and don’t
+     forget things anymore.
+
+** SCQA for my faculty colloquium "AI - Muse or Tool"
+
+- *Situation:*  
+
+- *Complication:*  
+
+- *Question:*  
+
+- *Answer:*  
+
+
+** TODO Review: Regression methods
+
+1. What does "correlation does not imply causation" mean? Example?
+   #+begin_quote
+   Just because two variables are statistically related (they move
+   together) does not mean that one causes the other.
+
+   For example, ice cream sales and drowning incidents both increase
+   in summer - but eating ice cream does not cause drowning (except in
+   very rare cases - it can never be excluded).
+
+   In this example, there is a third factor, the hot weather,
+   influencing both. Temperature is a *confounding* variable, creating a
+   misleading association between ice cream sales and death by
+   drowning data.
+   #+end_quote
+
+2. If you assume causation but you're not sure, what could you do?
+   #+begin_quote
+   - Control for confounding variables: Apply multiple regression and
+     see if the correlation still holds: hold the confounder
+     (e.g. temperature) constant and check the correlation between ice
+     cream sales and death by drowning (it should disappear).
+   - Conduct controlled experiments to directly test
+     causation. Confounders are removed by random treatments.
+   - Apply causal inference frameworks (e.g. directed acyclic graphs,
+     or do-calculus invented by Pearl) to model & test causality.
+   - Replicate the finding across different datasets, populations,
+     conditions. Consistency providers stronger evidence.
+   #+end_quote
+
+3. Name at least one weakness of linear regression analysis?
+   #+begin_quote
+   - Strong assumptions about the causal relationship of data.
+   - Does not handle missing data well (scrubbing required).
+   - Only works with numeric data.
+   - Requires knowledge of statistics (the more the better).
+   #+end_quote
+
+4. After computing the trendline for a single dependent variable, you
+   add a couple more variables and calculate a multiple regression
+   line.
 
 
 * Footnotes
