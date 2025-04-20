@@ -1404,10 +1404,10 @@ Questions:
 - To code along with the lecture, download the practice file from
   GitHub, complete the file and upload it to Canvas:
   [[https://tinyurl.com/naive-bayes-case][tinyurl.com/naive-bayes-case]]
-  
+
 * DONE Week 11: Naive Bayes case study with text mining
 #+attr_html: :width 300px :float nil:
-[[../img/naive1.png]] 
+[[../img/naive1.png]]
 
 ** 2nd sprint review feedback
 
@@ -1426,8 +1426,8 @@ Questions:
 
 
 ** Case study
-#+attr_html: :width 300px :float nil: 
-[[../img/naive3.png]] 
+#+attr_html: :width 300px :float nil:
+[[../img/naive3.png]]
 
 - To code along with the lecture, download the practice file from
   GitHub, complete the file and upload it to Canvas:
@@ -1595,16 +1595,16 @@ reduce the dimensions of our ~DocumentTermMatrix~ object.
 Get [[https://tinyurl.com/bayescase2][tinyurl.com/bayescase2]] (raw RData file) and upload it to your
 platform if you use DataLab or Colab. Then continue to code along.
 
-* Week 13: Regression methods
+* DONE Week 13: Regression methods
 #+attr_html: :width 400px :float nil:
 [[../img/challenger.jpg]]
 
 - [X] *DataCamp Course*: Complete "Unsupervised Learning in R" by May 9
+- [X] *Project review* with Minto's SCQA method.
 - [ ] *Lecture/practice:* Regression methods
 - [ ] *Logistic regression* - Challenger catastrophe use case
-- [ ] *Project review* with Minto's SCQA method.
 
-** DONE Using GAI when doing research (help me help you)
+** Using GAI when doing research (help me help you)
 #+attr_html: :width 600px :float nil:
 [[../img/muse_or_tool.png]]
 
@@ -1620,7 +1620,7 @@ platform if you use DataLab or Colab. Then continue to code along.
 - Please write as much as you can. We'll look at the results later.
 
 
-** TODO Project review (3rd sprint - abstract)
+** Project review (3rd sprint - abstract)
 
 - Demo film: "[[https://vimeo.com/305393045][Thank You Barbara Minto]]" (3 min) [[https://tinyurl.com/minto-scqa][tinyurl.com/minto-scqa]]
 
@@ -1655,7 +1655,7 @@ platform if you use DataLab or Colab. Then continue to code along.
   forgotten?
 
 - *Answer:*
-  
+
   1. I realized I needed a system to keep track of my tasks reliably.
 
   2. I chose a simple to-do list app that works on my phone.
@@ -1667,16 +1667,22 @@ platform if you use DataLab or Colab. Then continue to code along.
   5. As a result, I stay organized, feel less stressed, and don’t
      forget things anymore.
 
+
 ** SCQA for my faculty colloquium "AI - Muse or Tool"
 
-- *Situation:*  
+- *Situation:*
 
-- *Complication:*  
+- *Complication:*
 
-- *Question:*  
+- *Question:*
 
-- *Answer:*  
+- *Answer:*
 
+* Week 14: Regression case study
+
+- [ ] *Review:* Regression methods
+- [ ] *Logistic regression* - Challenger catastrophe use case
+- [ ] Regression case study (insurance data)
 
 ** TODO Review: Regression methods
 
@@ -1719,9 +1725,65 @@ platform if you use DataLab or Colab. Then continue to code along.
 
 4. After computing the trendline for a single dependent variable, you
    add a couple more variables and calculate a multiple regression
-   line.
+   line. You notice that your trendline (intercept and slope) have not
+   shifted at all. What can you conclude?
+   #+begin_quote
+   That the variables you added are statistically independent from the
+   single variable used in the first place. The new variable(s) are
+   orthogonal to the original variable - meaning that there is no
+   pattern of correlated (synchronized growth) at all.
+   #+end_quote
 
+   #+begin_src R :session *R* :results output :exports both
+     set.seed(42)
+     n <- 100
+     x1 <- seq(0, 10, length.out = n)
+     y <- 2 * x1 + 1 + rnorm(n)  ## y = 2*x1 + 1 + noise
 
+     ## Generate x2 to be orthogonal (uncorrelated) with x1
+     x2 <- rnorm(n)
+
+     ## Pearson correlation coefficient for x1,x2
+     cor(x1,x2)
+   #+end_src
+
+   #+RESULTS:
+   : [1] 0.06930378
+
+   #+begin_src R :file plot2.png :session *R* :results graphics output file :exports both
+     plot(x1, x2, main = "Scatterplot of x1 vs x2", xlab = "x1", ylab = "x2")
+     abline(lm(x2 ~ x1), col = "red")  # should be nearly flat
+   #+end_src
+
+   #+RESULTS:
+   [[file:plot2.png]]
+
+5. How would the trendlines for the single and the multiple regression
+   in this last case look like?
+   #+begin_src R :file plot.png :session *R* :results graphics output file :exports both
+     ## Simple linear regression
+     model1 <- lm(y ~ x1)
+
+     ## Multiple linear regression
+     model2 <- lm(y ~ x1 + x2)
+
+     ## Plot
+     plot(x1, y,
+          pch = 19, col = rgb(0, 0, 0, 0.5),
+          main = "Effect of Adding Orthogonal Variable",
+          xlab = "x1", ylab = "y")
+     abline(model1, col = "blue", lwd = 2, lty = 1)
+     abline(a = coef(model2)[1],
+            b = coef(model2)["x1"],
+            col = "red", lwd = 2, lty = 2)
+     legend("topleft",
+            legend = c("Simple Regression", "Multiple Regression"),
+            col = c("blue", "red"), lty = c(1, 2), lwd = 2)
+   #+end_src
+
+   #+RESULTS:
+   [[file:plot.png]]
+   
 * Footnotes
 
 [fn:1] These are conditional probabilities computed on the whole
@@ -1735,4 +1797,3 @@ the word "lottery" - that's the intersection of two events,
 
 [fn:3] The values are obtained by product, e.g. for the top leaf,
 =P("lottery"|spam) = 3/4 * 1/5 = 3/20 = 0.15=
-
