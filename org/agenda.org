@@ -1670,6 +1670,7 @@ platform if you use DataLab or Colab. Then continue to code along.
 
 ** SCQA for my faculty colloquium "AI - Muse or Tool"
 
+<<<<<<< HEAD
 - *Situation:*
 
 - *Complication:*
@@ -1683,6 +1684,39 @@ platform if you use DataLab or Colab. Then continue to code along.
 - [ ] *Review:* Regression methods
 - [ ] *Logistic regression* - Challenger catastrophe use case
 - [ ] Regression case study (insurance data)
+=======
+*** *Situation:*
+
+Professionals in small, underresourced settings - e.g. teachers in
+small liberal arts colleges, or residents in small rural hospitals,
+often find it difficult to both get their work done and publish. But
+in the teacher/scholar model, and in the dominant career model for
+doctors, they must publish.
+
+Fortunately, Generative AI is a potentially powerful research
+assistant, and can make publishing for professionals much more
+efficient.
+
+*** *Complication:*
+
+Unfortunately, Generative AI is given to hallucinations, i.e. it is
+not reliable or truthful. Even worse, nobody knows why, or when
+hallucinations occur.
+
+*** *Question:*
+
+How can Generative AI despite this serious limitation be used for
+research?
+
+*** *Answer:*
+
+1. Answer: Generative AI can be used as a research assistant.
+
+2. Argument: You have to know when to use it in the research workflow
+   and how to validate the results.
+
+3. Evidence: Literature, personal experiments, student experiences.
+>>>>>>> cb430b0437e67cd190e952a363817cb5219b807d
 
 ** TODO Review: Regression methods
 
