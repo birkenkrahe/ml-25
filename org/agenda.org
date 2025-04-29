@@ -1670,46 +1670,21 @@ platform if you use DataLab or Colab. Then continue to code along.
 
 ** SCQA for my faculty colloquium "AI - Muse or Tool"
 
-*** *Situation:*
+- *Situation:*
 
-Professionals in small, underresourced settings - e.g. teachers in
-small liberal arts colleges, or residents in small rural hospitals,
-often find it difficult to both get their work done and publish. But
-in the teacher/scholar model, and in the dominant career model for
-doctors, they must publish.
+- *Complication:*
 
-Fortunately, Generative AI is a potentially powerful research
-assistant, and can make publishing for professionals much more
-efficient.
+- *Question:*
 
-*** *Complication:*
+- *Answer:*
 
-Unfortunately, Generative AI is given to hallucinations, i.e. it is
-not reliable or truthful. Even worse, nobody knows why, or when
-hallucinations occur.
+* DONE Week 14: Review regression / Colloquium talk
 
-*** *Question:*
-
-How can Generative AI despite this serious limitation be used for
-research?
-
-*** *Answer:*
-
-1. Answer: Generative AI can be used as a research assistant. Three
-   different scenarios.
-
-2. Argument: You have to know when to use it in the research workflow
-   and how to validate the results.
-
-3. Evidence: Literature, personal experiments, student experiences.
-
-* Week 14: Regression case study
-
-- [ ] *Review:* Regression methods
-- [ ] *Logistic regression* - Challenger catastrophe use case
+- [X] *Review:* Regression methods
+- [X] *Logistic regression* - Challenger catastrophe use case
 - [ ] Regression case study (insurance data)
 
-** TODO Review: Regression methods
+** Review (ungraded popquiz): Regression methods
 
 1. What does "correlation does not imply causation" mean? Example?
    #+begin_quote
@@ -1738,12 +1713,16 @@ research?
      or do-calculus invented by Pearl) to model & test causality.
    - Replicate the finding across different datasets, populations,
      conditions. Consistency providers stronger evidence.
+   - Apply statistical tests designed to uncover correlations: however,
+     in order to dis/prove causation, statisticians use many, many
+     different tests at once.
    #+end_quote
 
 3. Name at least one weakness of linear regression analysis?
    #+begin_quote
    - Strong assumptions about the causal relationship of data.
    - Does not handle missing data well (scrubbing required).
+   - Linearity including outliers can be ignored.
    - Only works with numeric data.
    - Requires knowledge of statistics (the more the better).
    #+end_quote
@@ -1785,6 +1764,7 @@ research?
 
 5. How would the trendlines for the single and the multiple regression
    in this last case look like?
+   
    #+begin_src R :file plot.png :session *R* :results graphics output file :exports both
      ## Simple linear regression
      model1 <- lm(y ~ x1)
@@ -1808,7 +1788,88 @@ research?
 
    #+RESULTS:
    [[file:plot.png]]
-   
+
+** Generalized linear models and logistic regression
+
+- Not every problem is suited to being modeled by a line.
+  #+begin_quote
+  However, exponential growth can be modeled after a logarithmic
+  transformation - to model population growth, compound interest,
+  radioactive decay etc.
+  #+end_quote
+
+- The statistical assumptions are often violated in the real world.
+  #+begin_quote
+1. Linearity: Predictors and response variable are related
+   linearly. There needs to be a linear equation that governs them.
+2. Errors: The residuals are statistically independent of one
+   another. For example time-series data are often correlated over
+   time - GDP shocks in an economic model can be
+   autocorrelated. Clustered data (e.g. students in the same school)
+   are often correlated.
+  #+end_quote
+
+- How can you check for these conditions?
+  #+begin_quote
+  1. Visualize effects of one predictor while controlling for others.
+  2. Create partial regression plots (~car~ package in R).
+  3. Plot errors over time or across space to look for patterns.
+  4. Durbin-Watson test (autocorrelation in time-series).
+  #+end_quote
+
+- The Generalized Linear Models (GLM) loosense the assumptions:
+
+  1. The target variable can be non-normally distributed,
+     non-continuous (to model categorical data).
+
+  2. The Variance of the target can be be related to its mean
+     (allowing the model to fit where predictors relate to predictions
+     in a non-linear way).
+
+- Most popular: Logistic regression, adapted to binary classification
+  tasks.
+
+
+* Week 15: Regression case study
+#+attr_html: :width 400px :float nil:
+[[../img/wrap.png]]
+
+- [ ] *Course evaluation:* Take 10 minutes to evaluate this course!
+- [ ] *DataCamp*: Unsupervised learning course due Friday May 9th.
+- [ ] *Test 7*: Due Tuesday, 6th May (linear regression).
+- [ ] *Test 8:* Due Friday, 9th May (unsupervised learning).
+- [ ] *Final presentation*: Book your slot & complete the checklist.
+- [ ] *Wait!* What about unsupervised learning?
+- [ ] *Code along*: Regression case study (insurance data).
+  + Tuesday: Workflow, getting and exploring the data, training model
+  + Thursday: Evaluating and improving the model, adding interaction
+    
+** TODO Wait! What about unsupervised learning?
+
+- Regression analysis is the gateway into the logic, mathematics, and
+  philosophy of machine learning.
+
+- Easy to understand loss functions (e.g. mean squared error), model
+  fitting, overfitting, and normalization.
+
+- Linear models are well known from all areas of business and science:
+  You've already come across them and their implications in school.
+
+- Most real-world ML applications (spam detection, housing price
+p  prediction, medical diagnosis, etc.) are supervised problems.
+
+- Overview comparison:
+  
+  | Regression Analysis                 | Unsupervised Learning           |
+  |-------------------------------------+---------------------------------|
+  | Clear intro to supervised learning  | Broad applicability to raw data |
+  | Familiar, builds on prior knowledge | Reveals hidden structures       |
+  | Focused on goal-driven tasks        | Encourages exploration          |
+  | Teaches evaluation and metrics      | Core for feature learning       |
+  | Strong industry relevance           | Critical for modern ML systems  |
+
+* Week 16: Final presentations
+
 * Footnotes
 
 [fn:1] These are conditional probabilities computed on the whole

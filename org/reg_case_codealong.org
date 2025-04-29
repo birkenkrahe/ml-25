@@ -1,0 +1,267 @@
+#+TITLE: Multiple linear regression - Case study
+#+AUTHOR: Marcus Birkenkrahe
+#+SUBTITLE: Case Study - Predicting medical expenses
+#+STARTUP: overview hideblocks indent inlineimages
+#+OPTIONS: toc:nil num:nil ^:nil
+#+PROPERTY: header-args:R :session *R* :results output :exports both :noweb yes
+* Rationale
+
+- Health insurance companies only make money if they collect more in
+  fees than they spend on medical care to its beneficiaries.
+
+- What do you think are profit margins in other industries?
+  #+begin_quote
+
+  #+end_quote
+
+- Medical expenses are difficult to estimate because the conditions
+  that are the most costly to treat are rare and seem random.
+
+- Analysis goal: use patient data to forecast average medical expense
+  for at-risk segments of the population (like smokers or obese).
+
+- Image source: [[https://content.naic.org/sites/default/files/2021-Annual-Health-Insurance-Industry-Analysis-Report.pdf][US Health Insurance Industry Analysis Report 2021]]
+
+* ML workflow
+
+1) 
+2) 
+3) 
+4) 
+5) 
+
+* Getting the data
+
+- Fun fact: the firm that designed the USCB HQ also designed the Burj
+  Khalifa (Dubai), the Sears Tower (Chicago) and One World Trade
+  Center (NYC)
+
+- The dataset contains 1,338 examples of beneficiaries enrolled in an
+  insurance plan with patient features and total medical expenses
+  charged to the insurance plan for the calendar year:
+  1) ~age~: An integer indicating the age of the primary beneficiary
+     (excluding those above 64 years, as they are generally covered by
+     the government).
+  2) ~sex~: The policy holder's gender: either ~male~ or ~female~.
+  3) ~bmi~: The body mass index (BMI), which provides a sense of how over
+     or underweight a person is relative to their height. BMI is equal
+     to weight (in kilograms) divided by height (in meters) squared. An
+     ideal BMI is within the range of 18.5 to 24.9.
+  4) ~children~: An integer indicating the number of children/dependents
+     covered by the insurance plan.
+  5) ~smoker~: A "yes" or "no" categorical variable that indicates
+     whether the insured regularly smokes tobacco.
+  6) ~region~: The beneficiary's place of residence in the US, divided
+     into four geographic regions: ~northeast~, ~southeast~, ~southwest~, or
+     ~northwest~.
+
+- Import the data from ~insurance.csv~ after checking the file online in
+  GitHub: [[https://bit.ly/ml_insurance][bit.ly/ml_insurance]]:
+
+  #+begin_example bash
+
+  #+end_example
+
+- Import the data with ~read.csv~ and save them to ~insurance~:
+  #+begin_src R :results silent
+
+  #+end_src
+
+* Exploring the data: variables and distribution
+
+- Exploring the data follows the old adage: data structure,
+  statistical summary, overview visualization (numeric data),
+  frequency check (categorical data).
+
+- But this exploration is not an activity for its own sake: especially
+  in the case of linear regression we need to check if the data
+  conform to the minimum criteria (or else we can stop):
+  
+  1) 
+  2) 
+  3) 
+
+- Display the ~data.frame~ structure:
+  #+begin_src R
+
+  #+end_src
+
+- What is the model's dependent variable?
+  #+begin_quote
+
+  #+end_quote
+
+- Linear regression does not require a normally distributed dependent
+  variable but the model often fits better when this is true (why?[fn:1])
+
+- To check distribution qualities quickly, we can summarize the stats:
+  #+begin_src R
+
+  #+end_src
+
+- What do you observe?
+  #+begin_quote
+
+  #+end_quote
+
+- We visualize the distribution (what's the best graph for that?):
+  #+begin_src R :results graphics file :file ../img/6_hist.png
+  
+  #+end_src
+
+- The graph shows that the majority of people have annual medical
+  expenses below US$15,000. Knowing the graphs structural weakness
+  ahead of time will help us improve the linear model later on.
+
+* Exploring the data: correlation matrix
+
+- The *correlation matrix* gives an overview of how the variables relate
+  to one another: given a set of variables, it provides a correlation
+  for each pairwise relationship.
+
+- To create a correlation matrix, use the ~cor~ command - take a look at
+  its arguments first:
+  #+begin_src R
+
+  #+end_src
+
+- Let's build this up slowly: the default for ~y~ is only relevant if ~x~
+  is a matrix: how is the dependent variable correlated *with itself*?
+  #+begin_src R
+    ## Just the dependent variable - formatted as matrix
+
+  #+end_src
+
+- This makes sense because:
+  #+begin_src R
+
+  #+end_src
+
+- Now for all ~numeric~ variables:
+  #+begin_src R
+
+  #+end_src
+
+- What do we learn?
+  #+begin_quote
+
+  #+end_quote
+
+* Exploring the data: scatterplot matrix
+
+- A /scatterplot matrix/ or /pair plot/ shows the relationship of each
+  variable with every other as a graph.
+
+- You can feed the whole dataframe into the generic ~plot~ function:
+  #+begin_src R :results graphics file :file ../img/6_plot.png
+
+  #+end_src
+
+- However, ~plot~ does not distinguish between numeric and categorical
+  variables, and a scatterplot is meaningless for the latter.
+
+- An alternative is ~graphics::pairs~[fn:3]:
+  #+begin_src R :results graphics file :file ../img/6_pairs.png
+
+  #+end_src
+
+- The intersection of each row and column holds the scatterplot of the
+  variables indicated by the row and column pair: e.g. the plot in the
+  2nd row and 2nd column shows ~age ~ bmi~ or "age" as a function of
+  "bmi" - its transpose value shows ~bmi ~ age~.
+
+- Do you notice any patterns in these plots?
+  #+begin_quote
+
+  #+end_quote
+
+- The ~pairs.panels~ function in the ~psych~ package contains more
+  information (you need to install ~psych~):
+  #+begin_src R :results graphics file :file ../img/pairs_panels.png
+
+  #+end_src
+
+- What do you see?
+  #+begin_quote
+
+  #+end_quote
+
+* Training a model on the data
+
+- We use the generic ~lm~ function from ~stats~- check arguments:
+  #+begin_src R
+
+  #+end_src
+
+- We use the "formula" syntax - the independent variables can *all* be
+  included with the ~.~ operator: ~lm(dep ~ ., data)~ or individually with
+  the ~+~ operator.
+
+- Just like seen in the ~glm~ example (logistic regression), you can
+  include /interactions/ between independent variables with the ~*~
+  operator to model the combined effect of two or more features.
+
+- The following model relates the six independent variables to the
+  total medical ~expenses~:
+  #+name: insurance_model
+  #+begin_src R :results silent
+
+  #+end_src
+
+- To see the estimated \beta coefficients, print the model:
+  #+begin_src R
+
+  #+end_src
+
+- The ~Intercept~ is the predicted value when the independent variables
+  are zero (not realistic since living persons have BMI > 0, age > 0).
+
+- The \beta coefficients indicate the estimated increase (slope) in
+  expenses for an increase of one unit in each of the features,
+  assuming all other values are held /constant/.
+
+- For example: for each additional year of ~age~, we expect an average
+  of ~256.8~ expense increase per year.
+
+- The ~lm~ function automatically dummy-codes each ~factor~ type variable
+  included, like ~sex~, ~smoker~ and ~region~ (split in four dummy variables).
+
+- When adding dummy variables, one category is always left out as a
+  reference category (e.g. ~sex=female~, ~region=northeast~): e.g. males
+  have ~$131.4~ less medical expenses than females per year relatives to
+  females[fn:4].
+
+- Which ~region~ has the highest medical expenses?
+  #+begin_quote
+
+  #+end_quote
+
+- In summary: old age, smoking and obesity can be linked to additional
+  health issues, and additional family members may result in an
+  increase. But how well is this model fitting the data?
+
+* Evaluating model performance
+
+- Why don't we use a confusion matrix?
+  #+begin_quote
+
+  #+end_quote
+
+- To evaluate model performance, we can use ~summary~:
+  #+begin_src R
+
+  #+end_src
+
+- The /summary/ explained:
+
+  1) 
+
+  2) 
+
+  3) 
+
+  4) 
+
+  5) 
+
+* TO BE CONTINUED
