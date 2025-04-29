@@ -1838,12 +1838,11 @@ platform if you use DataLab or Colab. Then continue to code along.
 - [ ] *DataCamp*: Unsupervised learning course due Friday May 9th.
 - [ ] *Test 7*: Due Tuesday, 6th May (linear regression).
 - [ ] *Test 8:* Due Friday, 9th May (unsupervised learning).
+- [ ] *Grading*: Will drop the worst/missing test/home assignment.
 - [ ] *Final presentation*: Book your slot & complete the checklist.
 - [ ] *Wait!* What about unsupervised learning?
 - [ ] *Code along*: Regression case study (insurance data).
-  + Tuesday: Workflow, getting and exploring the data, training model
-  + Thursday: Evaluating and improving the model, adding interaction
-    
+
 ** TODO Wait! What about unsupervised learning?
 
 - Regression analysis is the gateway into the logic, mathematics, and
@@ -1868,6 +1867,18 @@ p  prediction, medical diagnosis, etc.) are supervised problems.
   | Teaches evaluation and metrics      | Core for feature learning       |
   | Strong industry relevance           | Critical for modern ML systems  |
 
+** TODO Regression case study - code along
+
+*Data*:
+- Get the code along file: [[https://tinyurl.com/reg-case-codealong][tinyurl.com/reg-case-codealong]]
+  #+begin_src bash :results output :exports both
+    wget -O reg-case.org tinyurl.com/reg-case-codealong
+  #+end_src
+
+*Plan:*
+1. Tuesday: Workflow, getting and exploring the data, training model
+2. Thursday: Evaluating and improving the model, adding interaction
+    
 * Week 16: Final presentations
 
 * Footnotes
