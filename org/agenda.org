@@ -1829,33 +1829,33 @@ platform if you use DataLab or Colab. Then continue to code along.
 - Most popular: Logistic regression, adapted to binary classification
   tasks.
 
-
 * Week 15: Regression case study
 #+attr_html: :width 400px :float nil:
 [[../img/wrap.png]]
 
-- [ ] *Course evaluation:* Take 10 minutes to evaluate this course!
-- [ ] *DataCamp*: Unsupervised learning course due Friday May 9th.
-- [ ] *Test 7*: Due Tuesday, 6th May (linear regression).
-- [ ] *Test 8:* Due Friday, 9th May (unsupervised learning).
-- [ ] *Grading*: Will drop the worst/missing test/home assignment.
-- [ ] *Final presentation*: Book your slot & complete the checklist.
-- [ ] *Wait!* What about unsupervised learning?
-- [ ] *Code along*: Regression case study (insurance data).
+- [X] *Course evaluation:* Take 10 minutes to evaluate this course!
+- [X] *DataCamp*: Unsupervised learning course due Friday May 9th.
+- [X] *Test 7*: Due Tuesday, 6th May (linear regression).
+- [X] *Test 8:* Due Friday, 9th May (unsupervised learning).
+- [X] *Grading*: Will drop the worst/missing test/home assignment.
+- [X] *Final exam:* Optional, can only improve your grade.
+- [X] *Final presentation*: Book your slot & complete the checklist.
+- [X] *Wait!* What about unsupervised learning?
+- [X] *Code along*: Regression case study (insurance data).
 
-** TODO Wait! What about unsupervised learning?
+** DONE Wait! What about unsupervised learning?
 
-- Regression analysis is the gateway into the logic, mathematics, and
-  philosophy of machine learning.
+- *Regression analysis* is the gateway into the logic, mathematics, and
+  philosophy of machine learning and data science.
 
-- Easy to understand loss functions (e.g. mean squared error), model
+- Easy to understand *loss functions* (e.g. mean squared error), model
   fitting, overfitting, and normalization.
 
-- Linear models are well known from all areas of business and science:
+- *Linear models* are well known from all areas of business and science:
   You've already come across them and their implications in school.
 
-- Most real-world ML applications (spam detection, housing price
-p  prediction, medical diagnosis, etc.) are supervised problems.
+- Most *real-world ML applications* (spam detection, housing price
+  prediction, medical diagnosis, etc.) are supervised problems.
 
 - Overview comparison:
   
@@ -1867,7 +1867,8 @@ p  prediction, medical diagnosis, etc.) are supervised problems.
   | Teaches evaluation and metrics      | Core for feature learning       |
   | Strong industry relevance           | Critical for modern ML systems  |
 
-** TODO Regression case study - code along
+- Lesson for Lyon: Split the class into supervised/unsupervised ML.
+** TODO Multi-linear Regression case study - code along
 
 *Data*:
 - Get the code along file: [[https://tinyurl.com/reg-case-codealong][tinyurl.com/reg-case-codealong]]
@@ -1876,9 +1877,67 @@ p  prediction, medical diagnosis, etc.) are supervised problems.
   #+end_src
 
 *Plan:*
-1. Tuesday: Workflow, getting and exploring the data, training model
-2. Thursday: Evaluating and improving the model, adding interaction
-    
+1. *Tuesday:* Workflow, getting and exploring the data, training model
+2. *Thursday*: Evaluating and improving the model, adding interaction
+
+** TODO Review: Insurance data regression case study
+
+1. Why is it difficult for health insurance companies to estimate
+   individual medical expenses accurately?
+   #+begin_quote
+   Because the most costly conditions are rare and appear randomly,
+   making them hard to predict.
+   #+end_quote
+
+2. What is the dependent variable in the insurance dataset model, and
+   what does it represent?
+   #+begin_quote
+   ~expenses~; it represents the total medical cost charged to the
+   insurance plan for each individual.
+   #+end_quote
+
+3. List three criteria you should check before applying linear
+   regression to the insurance dataset.
+   #+begin_quote
+   1) Missing data  
+   2) Categorical features  
+   3) Linearity of relationships between variables
+   #+end_quote
+
+4. How can you check linearity of the dataset before applying linear
+   regression?
+   #+begin_quote
+   By visualizing relationships with scatterplots or a correlation
+   matrix to see if variables have a roughly linear trend.
+   #+end_quote
+
+5. Which variables are candidates for a linearity check and why?
+   #+begin_quote
+   Especially =age=, =bmi= and =children= count, because these are
+   continuous numerical features, and it is at least unclear a priori
+   if they fall or grow linearly with the =expenses=.
+   #+end_quote
+
+6. Can you write the code to check these three vs. =expenses= in one
+   window? How do you interpret the results?
+   #+begin_src R :file plot.png :session *R* :results graphics output file :exports both
+
+   #+end_src
+   
+   #+begin_src R :file plot.png :session *R* :results graphics output file :exports both
+     par(mfrow=c(2,2))
+     plot(insurance$expenses ~ insurance$age) # slight nonlinearity visible
+     plot(insurance$expenses ~ insurance$bmi) # on its own non-linear - transform?
+     barplot(table(insurance$children)) # scatterplot useless (categorical)?
+   #+end_src
+
+7. What does the distribution of the ~expenses~ variable suggest about
+   the shape of the data?
+   #+begin_quote
+   The data are right-skewed; most people have expenses below $15,000,
+   but there are some high-cost outliers.
+   #+end_quote
+
 * Week 16: Final presentations
 
 * Footnotes

@@ -247,12 +247,12 @@
 
   #+end_quote
 
-- To evaluate model performance, we can use ~summary~:
+- So which function should we use?
   #+begin_src R
 
   #+end_src
 
-- The /summary/ explained:
+- Explanation:
 
   1) 
 
@@ -264,4 +264,216 @@
 
   5) 
 
-* TO BE CONTINUED
+* Excursion: z value and Pr(>|z|)
+
+- What would be the null hypothesis for our prediction of insurance
+  expenses?
+  #+begin_quote
+
+  #+end_quote
+
+* Adding non-linear relationships
+
+- To account for a non-linear relationship, we can add a higher order
+  term treating the model as a polynomial.
+
+- The additional \beta coefficient will capture the effect of the x^{2} term.
+
+- Looking at the /loess curve/ (in the scatterplot matrix) which
+  revealed non-linearity, ~age~ might be a good candidate for a
+  nonlinear term. It is also already the strongest correlated
+  independent variable so that its correction will be felt more
+  strongly.
+
+- Does this make sense? Consider the health pattern of aging: at the
+  beginning and at the end of life, the need for (expensive) medical
+  attention is greatest (if there's any need at all).
+
+- In R, we simply create a new variable ~age2~ - this will add a feature
+  vector and another column to our \beta coefficients matrix:
+  #+begin_src R
+
+  #+end_src
+
+  #+RESULTS:
+
+- When we build the model, we add both age variables to the formula,
+  as in ~expenses ~ age + age2~, allowing ~lm~ to separate the terms.
+
+* Converting numeric variable to binary indicator
+
+- If a feature is not /cumulative/ but rather has has an effect only
+  above a certain /threshold/, we would want this dynamical behavior to
+  be modeled.
+
+- BMI is such an /indicator/ variable: it is 1 (impactful) if the BMI is
+  at least 30, and 0 (neglectable) if the BMI is less than 30. The
+  associated \beta indicates the average net impact on expenses for
+  individuals with ~bmi >= 30~ relative to those with ~bmi < 30~.
+
+- R's ~ifelse~ function tests a condition for each element in a vector
+  and returns a value accordingly - we use this to add another
+  variable:
+  #+begin_src R
+
+  #+end_src
+
+- In the ~insurance~ model, you can either replace the original ~bmi~ or
+  add it depending on the type of impact of BMI:
+  1) does the effect add to the impact of BMI?
+  2) does the effect replace the impact of BMI?
+
+- What is further statistical evidence if a variable should be
+  included or not?
+  #+begin_quote
+
+  #+end_quote
+
+- A quick check with ~bmi30~ shows that the p-value is still solid:
+  #+begin_src R
+
+  #+end_src
+
+* Adding interaction effects
+
+- Certain features could have a combined impact on the dependent
+  variable - we can model this by their /interaction/.
+
+- Smoking *and* obesity may be harmful separately (~+~) but in combination
+  (~*~) they may be even more harmful: "Overweight smokers are ill more
+  often than slim smokers".
+
+- The ~*~ operator in the formula ~expenses ~ bmi30*smoker~ is shorthand
+  for: ~expenses ~ bmi30 + smokeryes + bmi30:smokeryes~ - it includes
+  the separate effects plus their interaction (~:~).
+
+- The \beta coefficient of the interaction between ~bmi30~ and ~smokeryes~ is
+  the increase of effectiveness of ~bmi30~ for a 1 unit increase in
+  ~smokeryes~ and vice versa.
+
+* The improved regression model
+
+- We added a nonlinear term ~age2~ for ~age~, we created an indicator
+  ~bmi30~ for obesity, and we specified an interaction between obesity
+  and smoking (~bmi30*smoker~).
+
+- We train the model as before with ~lm~ and include the new variables
+  and the interaction term:
+  #+begin_src R :results silent
+
+  #+end_src
+
+- Look at the model:
+  #+begin_src R
+
+  #+end_src
+
+  #+RESULTS:
+
+- Summarize the results:
+  #+begin_src R
+
+  #+end_src
+
+  #+RESULTS:
+
+- Interpret the new result:
+
+  1)
+     
+  2)
+     
+  3) 
+
+- Regression modeling makes strong assumptions on the underlying
+  data. Before making inferences from the \beta coefficients, you need to
+  run diagnostic tests to ensure that these assumptions have not been
+  violated.
+
+- These key assumptions are:
+  1) multivariate normality (central limit theorem for multiple
+     variables)
+  2) little multicollinearity (relationship is not perfect)
+  3) no autocorrelation (no periodicity in time)
+  4) homoscedasticity (homogeneous noise in the relationship between
+     independent and dependent variable)
+
+- These assumptions are not relevant for numeric forecasting (model's
+  worth is not based on truly capturing the underlying process)
+
+* Making predictions with the improved regression model
+
+- We use the model to predict the expenses of future enrollees on the
+  health insurance plan.
+
+- Apply the model to the original training data using ~predict~:
+  #+begin_src R :results silent
+
+  #+end_src
+
+- Compute the correlation between predicted and actual costs:
+  #+begin_src R
+
+  #+end_src
+
+  #+RESULTS:
+
+- The model is highly accurate. Let's visualize this using ~plot~:
+  #+begin_src R :results graphics file :file ../img/ins_mod2.png
+
+  #+end_src
+
+- In the plot, the line y = x shows the points/patients where
+  predictions fall very close to the actual values.
+
+- The points above the line are patients whose actual expenses were
+  greater than expected, those below the line are those less than
+  expected.
+
+- To forecast for a smaller number of enrollees, you can create a
+  dataframe on the fly. For example to estimate the insurance expenses
+  for a 30-year old, overweight, male non-smoker with two children in
+  the Northeast:
+  #+begin_src R
+
+  #+end_src
+
+  #+RESULTS:
+
+- For this beneficiary, the insurance company has to set its prices to
+  no less than $6,000 or $500 per month to break even.
+
+- How does this compare to a female with the same characteristics?
+  #+begin_src R
+
+  #+end_src
+
+  #+RESULTS:
+
+- The difference between these values is ~-496.769~ the estimated \beta for
+  ~sexmale~: all else being equal, males are estimated to have about
+  $500 less in expenses for the plan per year, all else being equal.
+
+- The predicted expenses are a sum of each of the \beta values times their
+  corresponding prediction settings, e.g. for the number of children
+  the \beta is 678.6017. We can predict that reducing the children from 2
+  to 0 (childless female), expenses will drop by 2\beta = 1,357.203:
+  #+begin_src R
+
+  #+end_src
+
+  #+RESULTS:
+
+- What if you have a lot of kids? Check out the result for 7 children:
+  #+begin_src R
+
+  #+end_src
+
+- As a mother of 7, you are predicted to incur ca. $3500 more, and not
+  (7/2)*$6,400=$22,400, so it's "cheap" to have a large family.
+
+- Following similar steps for a number of additional customer
+  segments, the insurance company could develop a profitable pricing
+  structure for various demographics.
+
+
