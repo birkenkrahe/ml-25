@@ -41,7 +41,7 @@ making sense of the world's massive data collections.
 
 #+attr_html: :width 700px
 #+caption: ChatGPT's answer to "Are you intelligent?" (2025)
-[[../img/intelligence.png]]
+[[../img/intelligence26.png]]
 
 * Uses and abuses of ML
 #+attr_html: :width 600px
