@@ -55,10 +55,9 @@ Or if the patient has no fever and no swollen glands for fewer than
 3 days then he is considered to have an acute allergy.
 
 Updated production rules:
-#+begin_example
+#+begin_quote
 ...
-#+end_example
-
+#+end_quote
 * Draw the new decision tree model
 
 *Draw* the new decision tree using =draw.io= or another free drawing
